@@ -1,20 +1,23 @@
 package fr.clivana.lemansnews.controller;
 
-import fr.clivana.lemansnews.dao.EventsDAO;
-import fr.clivana.lemansnews.dao.NewsDAO;
 import android.content.Context;
+import fr.clivana.lemansnews.async.AsyncTaskBDD;
+import fr.clivana.lemansnews.utils.Reseau;
 
 public class SplashController {
 
 	Context ctx;
-	NewsDAO newsDao;
-	EventsDAO eventsDao;
+	AsyncTaskBDD asyncBdd;
 	
 	public SplashController(Context context){
 		ctx = context;
-		newsDao = new NewsDAO(ctx);
-		eventsDao = new EventsDAO(ctx);
+		asyncBdd = new AsyncTaskBDD(ctx);
 	}
 	
+	public void execute(){
+		if (Reseau.verifReseau(ctx)) {
+			asyncBdd.execute();
+		}
+	}
 	
 }

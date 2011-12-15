@@ -4,9 +4,56 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="fill_parent"
+    <include
+        android:id="@+id/include1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        layout="@layout/hautpage" />
+
+    <Gallery
+        android:id="@+id/galleryEvents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp" >
+
+        <TextView
+            android:id="@+id/titreActualite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/actu"
+            android:textColor="#FFFFFF"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/titreActualiteSuite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/recente"
+            android:textColor="#FF0000"
+            android:textSize="22dp" />
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridViewNewsPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:numColumns="2" >
+
+    </GridView>
+
+    <include
+        android:id="@+id/include2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/baspage" />
 
 </LinearLayout>

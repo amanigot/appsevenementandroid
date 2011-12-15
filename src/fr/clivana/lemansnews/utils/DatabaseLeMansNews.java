@@ -76,15 +76,15 @@ public class DatabaseLeMansNews extends SQLiteOpenHelper{
 			+ COLONNE_SELECTED + " boolean"+");";
 	
 	private static final String INSERT_QUERY_ALL = "insert into " + TABLE_CATEGORIES + " (" 
-			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ") values ( 'all', 0, 0 );";
+			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ", "+ COLONNE_SELECTED +") values ( 'all', 0, 0, true);";
 	private static final String INSERT_QUERY_APPLE = "insert into " + TABLE_CATEGORIES + " (" 
-			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ") values ( 'Apple', 0, 0 );";
+			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ", "+ COLONNE_SELECTED +") values ( 'Apple', 0, 0, false );";
 	private static final String INSERT_QUERY_ANDROID = "insert into " + TABLE_CATEGORIES + " (" 
-			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ") values ( 'Android', 0, 0 );";
+			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ", "+ COLONNE_SELECTED +") values ( 'Android', 0, 0, false );";
 	private static final String INSERT_QUERY_EVENTS = "insert into " + TABLE_CATEGORIES + " (" 
-			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ") values ( 'Events', 0, 0 );";
+			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ", "+ COLONNE_SELECTED +") values ( 'Events', 0, 0, false );";
 	private static final String INSERT_QUERY_CLIVANA = "insert into " + TABLE_CATEGORIES + " (" 
-			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ") values ( 'Clivana', 0, 0 );";
+			+ COLONNE_MOTCLEF + ", " + COLONNE_DATE + ", " + COLONNE_COUNT + ", "+ COLONNE_SELECTED +") values ( 'Clivana', 0, 0, false );";
 	
 	public DatabaseLeMansNews(Context context, String name, CursorFactory factory,
 			int version) {

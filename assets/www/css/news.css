@@ -1,0 +1,54 @@
+html{
+	padding: 0;
+	maring: 0;
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	background: black;
+	color: white;
+	font-family: Arial, Verdana, sans-serif;
+	width: 480px;
+}
+
+#container section{
+	overflow: auto;
+}
+
+#container section:nth-child(even){
+	background: #202020;
+}
+
+#container section img{
+	width: 120px;
+	height: 180px;
+	float: left;
+	margin: 0px 15px 0px 0px;
+}
+
+#container section h1{
+	margin: 0px 0px 5px 0px;
+	padding: 10px 0px 0px 0px;
+	font-weight: normal;
+	color: #c3c3c3;
+	font-size: 28px;
+}
+
+#container section p{
+	font-size: 22px;
+	margin: 0px 0px 10px 0px;
+}
+
+#container section footer p{
+	height: 31px;
+	line-height: 31px;
+	background: url(../img/bgDetailsNews.jpg) no-repeat 120px 0px;
+	margin: 0px;
+	font-size: 20px;
+}
+
+#container section footer p span{
+	float: right;
+	margin: 0px 15px 0px 0px;
+}

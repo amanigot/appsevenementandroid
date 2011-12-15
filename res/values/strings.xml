@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World!</string>
     <string name="app_name">LeMansNews</string>
-
+	<string name="actu">L\'ACTUALITE</string>
+	<string name="recente">RECENTE</string>
 </resources>
