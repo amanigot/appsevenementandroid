@@ -1,14 +1,8 @@
 package fr.clivana.lemansnews.dao;
 
-import java.util.ArrayList;
-
-import fr.clivana.lemansnews.entity.Notification;
-import fr.clivana.lemansnews.utils.DatabaseLeMansNews;
-
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import fr.clivana.lemansnews.utils.database.DatabaseLeMansNews;
 
 public class NotificationDAO {
 	private static final int BASE_VERSION = 1;

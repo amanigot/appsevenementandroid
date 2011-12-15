@@ -8,7 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import fr.clivana.lemansnews.entity.Article;
-import fr.clivana.lemansnews.utils.DatabaseLeMansNews;
+import fr.clivana.lemansnews.utils.database.DatabaseLeMansNews;
 
 public class NewsDAO {
 

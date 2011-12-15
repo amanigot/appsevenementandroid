@@ -1,4 +1,4 @@
-package fr.clivana.lemansnews.utils;
+package fr.clivana.lemansnews.utils.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

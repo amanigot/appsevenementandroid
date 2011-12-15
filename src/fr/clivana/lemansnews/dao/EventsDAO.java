@@ -7,7 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import fr.clivana.lemansnews.entity.Evenement;
-import fr.clivana.lemansnews.utils.DatabaseLeMansNews;
+import fr.clivana.lemansnews.utils.database.DatabaseLeMansNews;
 
 public class EventsDAO {
 
@@ -46,14 +46,11 @@ public class EventsDAO {
 	private static final int COLONNE_NOTIFICATION_ID = 13;
 	
 	private SQLiteDatabase dbClivana;
-	
 	private DatabaseLeMansNews dbClivanaHelper;
-	private Context context;
+	
 	public EventsDAO(Context context) {
 		super();
 		dbClivanaHelper = new DatabaseLeMansNews(context, BASE_NOM, null, BASE_VERSION);
-		this.context=context;
-		
 	}
 	
 	public SQLiteDatabase open(){
