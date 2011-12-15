@@ -9,12 +9,9 @@ import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Evenement;
-import fr.clivana.lemansnews.utils.Reseau.Reseau;
 
 public class AsyncTaskBDD extends AsyncTask<Void, Void, Void>{
 	
-	
-
 	private Context context;
 	EventsDAO eventsDao;// = new DatabaseClivanaEventsDAO(context);
 	NewsDAO newsDao;// = new DatabaseClivanaNewsDAO(context);
@@ -24,22 +21,17 @@ public class AsyncTaskBDD extends AsyncTask<Void, Void, Void>{
 	public AsyncTaskBDD(Context context) {
 		super();
 		this.context = context;
-		newsDao = new NewsDAO(context);
-		eventsDao = new EventsDAO(context);
+		newsDao = new NewsDAO(this.context);
+		eventsDao = new EventsDAO(this.context);
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		
 	}
 	
 	@Override
 	protected Void doInBackground(Void... params) {
-		if (Reseau.verifReseau(context)) {
-			
-			if (events == null || events.size() == 0) {
-				events.add(Evenement.noEvents());
-			}
-		} else {
-			events.add(Evenement.noEventFound());
-		}
-		
-		
 		return null;
 	}
 	
@@ -55,7 +47,5 @@ public class AsyncTaskBDD extends AsyncTask<Void, Void, Void>{
 				eventsDao.insertNews(events.get(j));
 			}
 		}
-		
-		
 	}
 }

@@ -1,4 +1,4 @@
-package fr.clivana.lemansnews.utils.Reseau;
+package fr.clivana.lemansnews.utils.reseau;
 
 import java.io.IOException;
 import java.io.InputStream;

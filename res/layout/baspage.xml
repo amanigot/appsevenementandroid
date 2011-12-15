@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/baspage"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bgmenubas"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id/buttonRetour"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/btnmenubasretour"
+        android:gravity="left"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/buttonALaUne"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.33"
+        android:gravity="left"
+		android:paddingLeft="40dp"
+		android:background="@drawable/btnalaunexml" />
+
+    <Button
+        android:id="@+id/buttonNews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.33"
+        android:gravity="left"
+		android:paddingLeft="40dp"
+		android:background="@drawable/btnnewsxml"/>
+    
+    <Button
+        android:id="@+id/buttonEvents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.33"
+        android:gravity="left"
+		android:paddingLeft="40dp"
+		android:background="@drawable/btnleseventsxml"/>
+
+</LinearLayout>
+</merge>
