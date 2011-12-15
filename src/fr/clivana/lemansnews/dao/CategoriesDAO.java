@@ -1,8 +1,9 @@
 package fr.clivana.lemansnews.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import fr.clivana.lemansnews.entity.Notification;
+import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.utils.DatabaseLeMansNews;
 
 import android.content.ContentValues;
@@ -10,7 +11,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class NotificationDAO {
+public class CategoriesDAO {
 	private static final int BASE_VERSION = 1;
 	private static final String BASE_NOM = "dbclivana.db";
 	
@@ -32,7 +33,7 @@ public class NotificationDAO {
 	
 	private DatabaseLeMansNews dbClivanaHelper;
 	private Context context;
-	public NotificationDAO(Context ctx) {
+	public CategoriesDAO(Context ctx) {
 		dbClivanaHelper = new DatabaseLeMansNews(ctx, BASE_NOM, null, BASE_VERSION);
 		context=ctx;
 	}
@@ -48,6 +49,11 @@ public class NotificationDAO {
 	
 	public SQLiteDatabase getBaseDonnees(){
 		return dbClivana;
+	}
+
+	public List<Categorie> getSelectedCategories() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

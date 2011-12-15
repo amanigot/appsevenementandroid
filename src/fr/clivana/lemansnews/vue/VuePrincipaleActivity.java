@@ -26,6 +26,7 @@ public class VuePrincipaleActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
 		controller = new VuePrincipaleController(this);
 		titreApplication =(TextView)findViewById(R.id.textViewTitreApplication);
 		titreActualite = (TextView)findViewById(R.id.titreActualite);

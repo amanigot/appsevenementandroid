@@ -20,7 +20,7 @@ public class VuePrincipaleController implements OnClickListener{
 	EventsDAO eventsDao;
 	NewsDAO newsDao;
 	GalleryAdapter galleryAdapter;
-	NewsAdapter newsAdapter;
+	GridNewsAdapter newsAdapter;
 	List<Evenement> evenements;
 	List<Article> articles;
 	
@@ -36,9 +36,9 @@ public class VuePrincipaleController implements OnClickListener{
 		return galleryAdapter;
 	}
 	
-	public NewsAdapter initNewsAdapter(){
+	public GridNewsAdapter initNewsAdapter(){
 		articles=newsDao.getAllArticle();
-		newsAdapter= new NewsAdapter(ctx, articles);
+		newsAdapter= new GridNewsAdapter(ctx, articles);
 		return newsAdapter;
 	}
 	

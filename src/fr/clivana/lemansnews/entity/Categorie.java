@@ -1,13 +1,20 @@
 package fr.clivana.lemansnews.entity;
 
-public class Notification {
+public class Categorie {
 	
 	private int id;
 	private String motClef;
 	private long date;
 	private int count;
+	private boolean selected;
 	
 	
+	public boolean isSelected() {
+		return selected;
+	}
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 	public int getCount() {
 		return count;
 	}

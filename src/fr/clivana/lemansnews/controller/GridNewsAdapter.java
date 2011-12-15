@@ -15,7 +15,7 @@ import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.entity.Article;
 
 
-public class NewsAdapter extends BaseAdapter {
+public class GridNewsAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
 	List<Article> events;
@@ -24,7 +24,7 @@ public class NewsAdapter extends BaseAdapter {
 	Bitmap bitmap=null;
 	HashMap<Integer, ImageView> views ;
 	
-	public NewsAdapter(Context context, List<Article> events
+	public GridNewsAdapter(Context context, List<Article> events
 			) {
 		this.events = events;
 		this.inflater = LayoutInflater.from(context);
