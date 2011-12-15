@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="UNE APPLICATION"
+            android:text="@string/application"
             android:textSize="20dp" />
 
         <ImageView
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="http://www.clivana.com" />
+            android:text="@string/adresse_web" />
 
         <TextView
             android:id="@+id/textView3"
@@ -50,14 +50,13 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
-            android:text="Le Mans News est une application indé- pendante de la ville du Mans et développée par la société Clivana." />
-
+            android:text="@string/paragraphe1"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="#222936"
         android:orientation="vertical" >
@@ -68,8 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="Elle permet à tous de suivre l&apos;actualité du Mans, mais aussi de l&apos;actualité en général. Elle informe également des différents événements qui auront lieu sur Le Mans et sa périphérie." />
-
+            android:text="@string/paragraphe2"/>
     </LinearLayout>
 
     <include layout="@layout/baspage" />

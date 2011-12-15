@@ -5,4 +5,8 @@
     <string name="app_name">LeMansNews</string>
 	<string name="actu">L\'ACTUALITE</string>
 	<string name="recente">RECENTE</string>
+	<string name="application">UNE APPLICATION</string>
+	<string name="adresse_web">http://www.clivana.com</string>
+	<string name="paragraphe1">Le Mans News est une application indé- pendante de la ville du Mans et développée par la société Clivana.</string>
+	<string name="paragraphe2">Elle permet à tous de suivre l\'actualité du Mans, mais aussi de l\'actualité en général. Elle informe également des différents événements qui auront lieu sur Le Mans et sa périphérie.</string>
 </resources>
