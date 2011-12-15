@@ -1,17 +1,16 @@
 package fr.clivana.lemansnews.vue;
 
-import fr.clivana.lemansnews.dao.CategoriesDAO;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import fr.clivana.lemansnews.controller.CategoriesDialogController;
 
 public class CategoriesDialog extends AlertDialog {
 
 	Context ctx;
 	String title, message, nomPositiveButton, nomNegativeButton;
 	String[] items;
-	DialogInterface.OnClickListener listener;
-	CategoriesDAO categoriesDao;
+	CategoriesDialogController controller;
+	
 	
 	public String getMessage() {
 		return message;
@@ -49,7 +48,7 @@ public class CategoriesDialog extends AlertDialog {
 
 
 	public void initItems() {
-		//this.items=categoriesDao.selectUnselectedCategoriesName();
+		this.items=controller.initItems();
 		
 	}
 

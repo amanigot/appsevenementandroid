@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
@@ -15,6 +16,7 @@ public class AsyncTaskBDD extends AsyncTask<Void, Void, Void>{
 	private Context context;
 	EventsDAO eventsDao;// = new DatabaseClivanaEventsDAO(context);
 	NewsDAO newsDao;// = new DatabaseClivanaNewsDAO(context);
+	CategoriesDAO categoriesDao;
 	List<Article> news = new ArrayList<Article>();
 	List<Evenement> events= new ArrayList<Evenement>();
 	
@@ -23,6 +25,7 @@ public class AsyncTaskBDD extends AsyncTask<Void, Void, Void>{
 		this.context = context;
 		newsDao = new NewsDAO(this.context);
 		eventsDao = new EventsDAO(this.context);
+		categoriesDao = new CategoriesDAO(context);
 	}
 	
 	@Override

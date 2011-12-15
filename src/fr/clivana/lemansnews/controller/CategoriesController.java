@@ -56,10 +56,8 @@ public class CategoriesController implements OnClickListener,
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// Intent intentNews = new Intent(context, GridNewsActivity.class);
-		// intentNews.putExtra("categorie",
-		// categories.get(position).getMotClef());
-		// categoriesDao.updateDate(categories.get(position).getId(), new
-		// Date());
+		// intentNews.putExtra("categorie", categories.get(position).getMotClef());
+		// categoriesDao.updateDate(categories.get(position).getId(), new Date());
 		// context.startActivity(intentNews);
 	}
 
