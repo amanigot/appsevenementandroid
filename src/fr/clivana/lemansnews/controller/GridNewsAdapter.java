@@ -19,10 +19,11 @@ public class GridNewsAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
 	List<Article> events;
-	//ClivanaAndroidVueNewsActivity act;
 	Context ctx;
-	Bitmap bitmap=null;
 	HashMap<Integer, ImageView> views ;
+	View view;
+	ImageView imageNews;
+	TextView titre;
 	
 	public GridNewsAdapter(Context context, List<Article> events
 			) {
@@ -50,13 +51,19 @@ public class GridNewsAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 			
-			View view = inflater.inflate(R.layout.newslist, null);	
-
-			TextView titre = (TextView) view.findViewById(R.id.textNewsCateg);
+			view = inflater.inflate(R.layout.newslist, null);	
+			//view=(View)convertView.findViewById(R.layout.newslist);
+		
+			titre = (TextView) view.findViewById(R.id.textNewsCateg);
+			imageNews = (ImageView) view.findViewById(R.id.imageNewsCateg);
+			
+			
 			titre.setText(events.get(position).getTitre());
-			ImageView imageNews = (ImageView) view.findViewById(R.id.imageNewsCateg);
 			imageNews.setImageResource(R.drawable.illustaucuneimage240);
+			
 			views.put(position, imageNews);
+			
+			
 		return view;
 	}
 	

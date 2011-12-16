@@ -12,6 +12,11 @@ public class CategoriesDialog extends AlertDialog {
 	CategoriesDialogController controller;
 	
 	
+	public CategoriesDialog(Context context) {
+		super(context);
+		
+	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -57,10 +62,7 @@ public class CategoriesDialog extends AlertDialog {
 	
 	
 	
-	public CategoriesDialog(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
-	}
+	
 	
 	
 	public String getTitle() {
