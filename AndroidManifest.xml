@@ -19,5 +19,69 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+     	<activity android:name=".vue.SplashActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+     	<activity android:name=".vue.CategoriesActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+     	
+     	<activity android:name=".vue.GridNewsActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+     	<activity android:name=".vue.DetailNewsActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+     	<activity android:name=".vue.ListeEvenementsActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+     	<activity android:name=".vue.DetailEvenementActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+     	<activity android:name=".vue.InfoActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+     	
 	 </application>
 </manifest>

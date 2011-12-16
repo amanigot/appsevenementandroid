@@ -147,7 +147,7 @@ public class NewsDAO {
 		return retArticle;
 	}
 	
-	public ArrayList<Article> getAllArticle(){
+	public ArrayList<Article> getAllArticles(String categorie){
 		open();
 		Cursor c = dbClivana.query(TABLE_NEWS, new String[]{COLONNE_ID, COLONNE_TITRE, COLONNE_ARTICLE, COLONNE_ACCROCHE, COLONNE_DATE_PARUTION, COLONNE_AUTEUR, COLONNE_URL_ARTICLE, COLONNE_URL_IMAGE, COLONNE_URL_IMAGE_MOBILE, COLONNE_URL_MINIATURE, COLONNE_MOTS_CLEFS, COLONNE_NOTIFICATION}, null, null, null, null, null);
 		return cursorToArticleTab(c);

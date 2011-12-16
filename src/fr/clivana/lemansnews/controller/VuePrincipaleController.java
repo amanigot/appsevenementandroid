@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.controller;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +14,9 @@ import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Evenement;
+import fr.clivana.lemansnews.vue.CategoriesActivity;
+import fr.clivana.lemansnews.vue.InfoActivity;
+import fr.clivana.lemansnews.vue.ListeEvenementsActivity;
 
 public class VuePrincipaleController implements OnClickListener{
 
@@ -37,7 +41,7 @@ public class VuePrincipaleController implements OnClickListener{
 	}
 	
 	public GridNewsAdapter initNewsAdapter(){
-		articles=newsDao.getAllArticle();
+		articles=newsDao.getAllArticles(null);
 		newsAdapter= new GridNewsAdapter(ctx, articles);
 		return newsAdapter;
 	}
@@ -56,16 +60,16 @@ public class VuePrincipaleController implements OnClickListener{
 	public void onClick(View v) {
 		
 		if(v.getId()==R.id.buttonNews){
-			//Intent intentNews = new Intent(ctx, CategoriesActivity.class);
-    		//ctx.startActivity(intentNews);
+			Intent intentNews = new Intent(ctx, CategoriesActivity.class);
+    		ctx.startActivity(intentNews);
 		}
 		if(v.getId()==R.id.buttonEvents){
-			//Intent intentEvents = new Intent(ctx, ListeEvenementActivity.class);
-    		//ctx.startActivity(intentEvents);
+			Intent intentEvents = new Intent(ctx, ListeEvenementsActivity.class);
+    		ctx.startActivity(intentEvents);
 		}
 		if(v.getId()==R.id.buttonInfo){
-			//Intent intentInfo = new Intent(ctx, InfosActivity.class);
-    		//ctx.startActivity(intentInfo);
+			Intent intentInfo = new Intent(ctx, InfoActivity.class);
+    		ctx.startActivity(intentInfo);
 		}
 		if(v.getId()==R.id.buttonActualiser){
 			Toast.makeText(ctx, "actualisation", Toast.LENGTH_SHORT).show();

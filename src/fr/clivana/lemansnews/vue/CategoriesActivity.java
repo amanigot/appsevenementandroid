@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 public class CategoriesActivity extends Activity{
 
@@ -14,6 +15,7 @@ public class CategoriesActivity extends Activity{
 	Button boutonRetour;
 	Button boutonActualiser;
 	GridView categories;
+	TextView titreApplication;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -29,6 +31,8 @@ public class CategoriesActivity extends Activity{
         boutonRetour.setOnClickListener(controller);
         
         categories.setAdapter(controller.initCategorieAdapter());
+        categories.setOnItemClickListener(controller);
+        categories.setOnItemLongClickListener(controller);
 	}
 	
 }
