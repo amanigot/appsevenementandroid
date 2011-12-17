@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListAdapter;
 
 public class GridNewsController implements OnClickListener, OnItemClickListener {
 
@@ -30,7 +29,7 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 	}
 
 	public GridNewsAdapter initGridNewsAdapter() {
-		articles=newsDao.getAllArticles(categorie);
+		articles=newsDao.getArticlesWithMotsclefs(categorie);
 		adapter=new GridNewsAdapter(context, articles);
 		return adapter;
 	}

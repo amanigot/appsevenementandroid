@@ -41,7 +41,7 @@ public class VuePrincipaleController implements OnClickListener{
 	}
 	
 	public GridNewsAdapter initNewsAdapter(){
-		articles=newsDao.getAllArticles(null);
+		articles=newsDao.getAllArticles();
 		newsAdapter= new GridNewsAdapter(ctx, articles);
 		return newsAdapter;
 	}

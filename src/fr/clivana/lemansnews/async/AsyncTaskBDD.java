@@ -10,7 +10,6 @@ import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Evenement;
-import fr.clivana.lemansnews.utils.Reseau;
 
 public class AsyncTaskBDD extends AsyncTask<Void, Void, Void>{
 	
@@ -44,6 +43,5 @@ public class AsyncTaskBDD extends AsyncTask<Void, Void, Void>{
 	
 	@Override
 	protected void onPostExecute(Void params){
-		
 	}
 }
