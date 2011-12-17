@@ -44,7 +44,7 @@ public class AsyncTaskBDD extends AsyncTask<Void, Void, Void>{
 		}
 		if(!events.get(0).equals(Evenement.noEvents())&&!events.get(0).equals(Evenement.noEventFound())){
 			for (int j = 0; j < events.size(); j++) {
-				eventsDao.insertNews(events.get(j));
+				eventsDao.insertEvent(events.get(j));
 			}
 		}
 	}

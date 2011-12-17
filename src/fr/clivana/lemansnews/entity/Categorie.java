@@ -1,6 +1,6 @@
 package fr.clivana.lemansnews.entity;
 
-public class Notification {
+public class Categorie {
 	
 	private int id;
 	private String motClef;
