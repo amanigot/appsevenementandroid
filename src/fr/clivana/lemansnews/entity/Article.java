@@ -16,14 +16,12 @@ public class Article {
 	private String urlMiniature;
 	private String motsClefs;
 	private boolean notification;
-
-	
-	
-	
+	private boolean favoris;
+// ajouter favoris;
 
 	public Article(long id, String titre, String article, String accroche,
 			Date dateParution, String auteur, String urlArticle, String urlImage, String urlImageMobile,
-			String urlMiniature, String motsClefs, boolean notification) {
+			String urlMiniature, String motsClefs, boolean notification, boolean favoris) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -37,6 +35,7 @@ public class Article {
 		this.urlMiniature = urlMiniature;
 		this.motsClefs = motsClefs;
 		this.notification = notification;
+		this.favoris = favoris;
 	}
 	 
 	public static Article noNews(String sujet){
@@ -52,11 +51,10 @@ public class Article {
 				"",
 				"",
 				"noNews",
+				false,
 				false);
 		return noNews;
 	}
-	
-	
 	
 	public static Article noNewsFound(){
 		Article noNewsFound = new Article(
@@ -71,14 +69,10 @@ public class Article {
 				"",
 				"",
 				"noNewsFound",
+				false,
 				false);
 		return noNewsFound;
 	}
-	
-	
-	
-	
-
 	
 	public Article() {
 		super();
@@ -180,7 +174,12 @@ public class Article {
 		this.notification = notification;
 	}
 
+	public boolean isFavoris() {
+		return favoris;
+	}
+
+	public void setFavoris(boolean favoris) {
+		this.favoris = favoris;
+	}
 	
-
-
 }

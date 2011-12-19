@@ -18,6 +18,7 @@ public class Evenement {
 	private String nomImageMiniature;
 	private String motsClefs;
 	private boolean notification;
+	// ajouter favoris
 	
 	public Evenement(long id, String titre, String detailEvenement,
 			String accroche, String auteur, String lieu, String urlEvenement,

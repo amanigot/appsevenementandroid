@@ -92,12 +92,22 @@ public class NewsDAO {
 	
 	public List<Article> getArticlesWithMotsclefs(String motClef){
 		open();
-		Cursor c = dbClivana.query(
-				NomsSQL.TABLE_ARTICLE, 
-				null, 
-				NomsSQL.COLONNE_ARTICLE_MOTSCLEFS + " LIKE %" + motClef + "%", 
-				null, null, null, null, 
-				Params.QTE_MAX_ARTICLES + "");
+		Cursor c;
+		if (motClef.equals("all")){
+			c = dbClivana.query(
+					NomsSQL.TABLE_ARTICLE, 
+					null, 
+					NomsSQL.COLONNE_ARTICLE_MOTSCLEFS + " LIKE %" + motClef + "%", 
+					null, null, null, null, 
+					Params.QTE_MAX_ARTICLES + "");
+		}else{
+			c = dbClivana.query(
+					NomsSQL.TABLE_ARTICLE, 
+					null, 
+					null, 
+					null, null, null, null, 
+					Params.QTE_MAX_ARTICLES + "");
+		}
 		return cursorToArticleTab(c);
 	}
 	
@@ -105,6 +115,18 @@ public class NewsDAO {
 		return getArticlesWithMotsclefs(categorie.getMotClef());
 	}
 
+	public int countArticlesWithMotsClefs(String motClef){
+		open();
+		Cursor c = dbClivana.rawQuery("COUNT FROM "+NomsSQL.TABLE_ARTICLE+" WHERE "+NomsSQL.COLONNE_ARTICLE_MOTSCLEFS+" LIKE ?;", new String[] {motClef});
+		int count = c.getInt(0);
+		close();
+		return count;
+	}
+	
+	public int countArticlesFromCategorie(Categorie categorie){
+		return countArticlesWithMotsClefs(categorie.getMotClef());
+	}
+	
 	public void setArticles(List<Article> articles){
 		Iterator<Article> iter = articles.iterator();
 		Article article;
@@ -118,10 +140,6 @@ public class NewsDAO {
 		}
 	}
 	
-	public int countArticlesFromCategorie(Categorie categorie){
-		
-		return 0;
-	}
 	public List<Article> cursorToArticleTab(Cursor c){
 		List<Article> arrayArticles= new ArrayList<Article>();
 		Article article;
@@ -141,6 +159,7 @@ public class NewsDAO {
 	public Article cursorToArticle(Cursor c){
 		
 		boolean notif = c.getInt(NomsSQL.RANG_ARTICLE_NOTIFICATION) == 1;
+		boolean favoris = c.getInt(NomsSQL.RANG_ARTICLE_FAVORIS) == 1;
 		Article retArticle = new Article(
 				c.getLong(NomsSQL.RANG_ARTICLE_ID), 
 				c.getString(NomsSQL.RANG_ARTICLE_TITRE), 
@@ -153,7 +172,8 @@ public class NewsDAO {
 				c.getString(NomsSQL.RANG_ARTICLE_NOMIMAGEMOBILE), 
 				c.getString(NomsSQL.RANG_ARTICLE_NOMMINIATURE), 
 				c.getString(NomsSQL.RANG_ARTICLE_MOTSCLEFS), 
-				notif);
+				notif,
+				favoris);
 		c.close();
 		close();
 		return retArticle;
@@ -173,6 +193,7 @@ public class NewsDAO {
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_NOMMINIATURE , article.getUrlMiniature());
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_MOTSCLEFS , article.getMotsClefs());
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_NOTIFICATION , article.isNotification());
+		contentValues.put(NomsSQL.COLONNE_ARTICLE_FAVORIS , article.isFavoris());
 		return contentValues;
 	}
 }

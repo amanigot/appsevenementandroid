@@ -7,7 +7,16 @@ public class Categorie {
 	private long date;
 	private int count;
 	private boolean selected;
-	
+	/* identifiant (auto), 
+	motclef (plusieurs séparrés par un espace), 
+	selected(equivalent de favoris), 
+	dateConsultation (date de la dernière consultation par l'utilisateur)
+	count (nombre de nouvelles news non lus dans cette categorie depuis la dernière consultation) 
+	total (nombre de news total)
+	count10j (nombre de news ses 10 derniers jours)
+	count1m (nombre de news depuis 1 mois
+	supprimable (si la categorie peut etre retirée de la grid)
+	position (position dans la grid view, non actif pour le moment) */
 	
 	public boolean isSelected() {
 		return selected;

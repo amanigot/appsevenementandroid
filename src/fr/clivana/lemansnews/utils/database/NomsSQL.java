@@ -13,7 +13,7 @@ public class NomsSQL {
 // structure de la table categorie
 	public static final String COLONNE_CATEGORIE_ID = "id";
 	public static final String COLONNE_CATEGORIE_NOM = "nom";
-	public static final String COLONNE_CATEGORIE_NOMIMAGE = "nomimage";
+	public static final String COLONNE_CATEGORIE_NOMIMAGE = "nom_image";
 	public static final String COLONNE_CATEGORIE_DATEACCES = "date";
 	public static final String COLONNE_CATEGORIE_COUNT = "count";
 	public static final String COLONNE_CATEGORIE_SELECTION = "selection";
@@ -38,6 +38,7 @@ public class NomsSQL {
 	public static final String COLONNE_ARTICLE_NOMMINIATURE = "nom_miniature";
 	public static final String COLONNE_ARTICLE_MOTSCLEFS = "mots_clefs";
 	public static final String COLONNE_ARTICLE_NOTIFICATION = "notification";
+	public static final String COLONNE_ARTICLE_FAVORIS = "favoris";
 
 	public static final int RANG_ARTICLE_ID = 0;
 	public static final int RANG_ARTICLE_TITRE = 1;
@@ -51,6 +52,7 @@ public class NomsSQL {
 	public static final int RANG_ARTICLE_NOMMINIATURE = 9;
 	public static final int RANG_ARTICLE_MOTSCLEFS = 10;
 	public static final int RANG_ARTICLE_NOTIFICATION = 11;
+	public static final int RANG_ARTICLE_FAVORIS = 12;
 	
 // structure de la table evenement
 	public static final String COLONNE_EVENEMENT_ID = "id";
@@ -61,7 +63,7 @@ public class NomsSQL {
 	public static final String COLONNE_EVENEMENT_LIEU = "lieu";
 	public static final String COLONNE_EVENEMENT_URLEVENEMENT = "url_evenement";
 	public static final String COLONNE_EVENEMENT_DATEHEURE = "dateheure";
-	public static final String COLONNE_EVENEMENT_DATEENREGISTREMENT = "dateenregistrement";
+	public static final String COLONNE_EVENEMENT_DATEENREGISTREMENT = "date_enregistrement";
 	public static final String COLONNE_EVENEMENT_NOMIMAGE = "nom_image";
 	public static final String COLONNE_EVENEMENT_NOMIMAGEMOBILE = "nom_image_mobile";
 	public static final String COLONNE_EVENEMENT_NOMMINIATURE = "nom_miniature";
