@@ -19,7 +19,7 @@
         android:id="@+id/buttonALaUne"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.33"
+        android:layout_weight="0.25"
         android:gravity="left"
 		android:paddingLeft="40dp"
 		android:background="@drawable/btnalaunexml" />
@@ -28,7 +28,7 @@
         android:id="@+id/buttonNews"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.33"
+        android:layout_weight="0.25"
         android:gravity="left"
 		android:paddingLeft="40dp"
 		android:background="@drawable/btnnewsxml"/>
@@ -37,10 +37,19 @@
         android:id="@+id/buttonEvents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.33"
+        android:layout_weight="0.25"
         android:gravity="left"
 		android:paddingLeft="40dp"
 		android:background="@drawable/btnleseventsxml"/>
+
+    <Button
+        android:id="@+id/buttonFavoris"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25"
+        android:gravity="left"
+		android:paddingLeft="40dp"
+        android:background="@drawable/btnfavorisxml" />
 
 </LinearLayout>
 </merge>

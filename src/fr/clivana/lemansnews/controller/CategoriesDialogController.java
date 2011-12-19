@@ -27,4 +27,6 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 		return items;
 	}
 
+	
+
 }

@@ -46,15 +46,15 @@ public class CategorieAdapter extends BaseAdapter{
 				tv.setText(notifications.get(position).getMotClef());
 			}
 			ImageView iv = (ImageView)v.findViewById(R.id.icon_image);
-			//iv.setImageResource();
+			iv.setImageResource(R.drawable.illustaucuneimage111);
 			iv.setPadding(4, 4, 4, 4);
 			TextView badge = (TextView)v.findViewById(R.id.badge_notif);
-			int count=notifications.get(position).getCount();
-			if(count==0){
+			//int count=notifications.get(position).getCount();
+			//if(count==0){
 				badge.setVisibility(View.INVISIBLE);
-			}else{
-				badge.setText(String.valueOf(count));
-			}
+			//}else{
+			//	badge.setText(String.valueOf(count));
+			//}
 
 		return v;
 	}

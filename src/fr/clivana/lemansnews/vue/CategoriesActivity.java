@@ -4,6 +4,7 @@ import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.CategoriesController;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -12,8 +13,10 @@ public class CategoriesActivity extends Activity{
 
 	CategoriesController controller;
 	Button ajouterCategorie;
-	Button boutonRetour;
+	Button boutonRetour, boutonNews, boutonEvenement, boutonALaUne;
 	Button boutonActualiser;
+	Button boutonInfo;
+	Button boutonFavoris;
 	GridView categories;
 	TextView titreApplication;
 	
@@ -23,14 +26,29 @@ public class CategoriesActivity extends Activity{
         
         ajouterCategorie=(Button)findViewById(R.id.buttonAjouterCategorie);
         boutonRetour=(Button)findViewById(R.id.buttonRetour);
+        boutonNews=(Button)findViewById(R.id.buttonNews);
+		boutonEvenement=(Button)findViewById(R.id.buttonEvents);
+		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
+		boutonInfo=(Button)findViewById(R.id.buttonInfo);
         boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
         categories=(GridView)findViewById(R.id.gridViewCategorie);
+        boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
         
+        controller=new CategoriesController(this);
+        
+        //ici on gère la visibilité des boutons du menu du bas
+        boutonEvenement.setVisibility(View.GONE);
+		boutonALaUne.setVisibility(View.GONE);
+		boutonInfo.setVisibility(View.GONE);
+		boutonRetour.setVisibility(View.VISIBLE);
+		boutonFavoris.setVisibility(View.GONE);
+		
+		boutonNews.setOnClickListener(controller);
         ajouterCategorie.setOnClickListener(controller);
         boutonActualiser.setOnClickListener(controller);
         boutonRetour.setOnClickListener(controller);
         
-        categories.setAdapter(controller.initCategorieAdapter());
+        //categories.setAdapter(controller.initCategorieAdapter());
         categories.setOnItemClickListener(controller);
         categories.setOnItemLongClickListener(controller);
 	}

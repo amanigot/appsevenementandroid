@@ -17,6 +17,7 @@ import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.vue.CategoriesActivity;
 import fr.clivana.lemansnews.vue.InfoActivity;
 import fr.clivana.lemansnews.vue.ListeEvenementsActivity;
+import fr.clivana.lemansnews.vue.TabNavActivity;
 
 public class VuePrincipaleController implements OnClickListener{
 
@@ -35,13 +36,13 @@ public class VuePrincipaleController implements OnClickListener{
 	}
 	
 	public GalleryAdapter initGalleryAdapter(){
-		evenements=eventsDao.getAllEvents();
+		//evenements=eventsDao.getAllEvents();
 		galleryAdapter=new GalleryAdapter(ctx, evenements);
 		return galleryAdapter;
 	}
 	
 	public GridNewsAdapter initNewsAdapter(){
-		articles=newsDao.getAllArticles();
+		//articles=newsDao.getAllArticles();
 		newsAdapter= new GridNewsAdapter(ctx, articles);
 		return newsAdapter;
 	}
@@ -70,6 +71,10 @@ public class VuePrincipaleController implements OnClickListener{
 		if(v.getId()==R.id.buttonInfo){
 			Intent intentInfo = new Intent(ctx, InfoActivity.class);
     		ctx.startActivity(intentInfo);
+		}
+		if(v.getId() == R.id.buttonFavoris){
+			Intent intentFav = new Intent(ctx, TabNavActivity.class);
+			ctx.startActivity(intentFav);
 		}
 		if(v.getId()==R.id.buttonActualiser){
 			Toast.makeText(ctx, "actualisation", Toast.LENGTH_SHORT).show();

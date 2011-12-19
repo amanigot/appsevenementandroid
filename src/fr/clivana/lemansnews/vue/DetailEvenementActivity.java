@@ -2,6 +2,7 @@ package fr.clivana.lemansnews.vue;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,7 +20,9 @@ public class DetailEvenementActivity extends Activity {
 	ImageView imageEvenement;
 	ImageView partager;
 	WebView detailEvenement;
-	Button boutonRetour;
+	Button boutonRetour, boutonNews, boutonEvenement, boutonALaUne;
+	Button boutonInfo, boutonActualiser;
+	Button boutonFavoris;
 	DetailEventsController detailEventsController;
 	int idEvenement;
 	
@@ -44,6 +47,10 @@ public class DetailEvenementActivity extends Activity {
 		partager=(ImageView)findViewById(R.id.imageViewPartager);
 		detailEvenement=(WebView)findViewById(R.id.descriptionEvents);
 		boutonRetour=(Button)findViewById(R.id.buttonRetour);
+		boutonNews=(Button)findViewById(R.id.buttonNews);
+		boutonEvenement=(Button)findViewById(R.id.buttonEvents);
+		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
+		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		
 		titreApplication.setText(detailEventsController.initTitre());
 		titreEvenement.setText(detailEventsController.getTitreEvenement());
@@ -51,8 +58,15 @@ public class DetailEvenementActivity extends Activity {
 		lieuEvenement.setText(detailEventsController.getLieuEvenement());
 		detailEvenement.loadData(detailEventsController.getDescriptionEvenement(), "text/html", null);
 		
+		 //ici on gère la visibilité des boutons du menu du bas
+		boutonNews.setVisibility(View.GONE);
+		boutonALaUne.setVisibility(View.GONE);
+		boutonFavoris.setVisibility(View.GONE);
+		boutonRetour.setVisibility(View.VISIBLE);
+		
 		partager.setOnClickListener(detailEventsController);
 		boutonRetour.setOnClickListener(detailEventsController);
+		boutonEvenement.setOnClickListener(detailEventsController);
 	}
 	
 }

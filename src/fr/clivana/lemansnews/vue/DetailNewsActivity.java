@@ -2,6 +2,7 @@ package fr.clivana.lemansnews.vue;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,7 +18,9 @@ public class DetailNewsActivity extends Activity{
 	ImageView imageNews;
 	ImageView partager;
 	WebView detailNews;
-	Button boutonRetour;
+	Button boutonRetour, boutonNews, boutonEvenement, boutonALaUne;
+	Button boutonInfo, boutonActualiser;
+	Button boutonFavoris;
 	DetailNewsController detailNewsController;
 	int idArticle;
 	String categorie;
@@ -42,11 +45,23 @@ public class DetailNewsActivity extends Activity{
         detailNews=(WebView)findViewById(R.id.descriptionNews);
         partager=(ImageView)findViewById(R.id.imageViewPartager);
         boutonRetour=(Button)findViewById(R.id.buttonRetour);
-        
+        boutonNews=(Button)findViewById(R.id.buttonNews);
+		boutonEvenement=(Button)findViewById(R.id.buttonEvents);
+		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
+		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
+		
         detailNewsController=new DetailNewsController(this, idArticle, categorie);
         
         partager.setOnClickListener(detailNewsController);
         boutonRetour.setOnClickListener(detailNewsController);
+        boutonNews.setOnClickListener(detailNewsController);
+        
+        boutonEvenement.setVisibility(View.GONE);
+		boutonALaUne.setVisibility(View.GONE);
+		boutonFavoris.setVisibility(View.GONE);
+		boutonRetour.setVisibility(View.VISIBLE);
+		
+		
         titreApplication.setText(detailNewsController.initTitre());
         titreNews.setText(detailNewsController.getTitreNews());
         dateAuteur.setText(detailNewsController.initDateAuteur());

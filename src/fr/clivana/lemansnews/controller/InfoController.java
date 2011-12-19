@@ -18,7 +18,7 @@ public class InfoController implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(v.getId()==R.id.buttonRetour){
+		if(v.getId()==R.id.buttonRetour || v.getId()==R.id.buttonALaUne){
 			((Activity) context).finish();
 		}
 	}

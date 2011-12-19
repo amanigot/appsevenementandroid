@@ -22,6 +22,7 @@ public class VuePrincipaleActivity extends Activity{
 	Button boutonEvents;
 	Button boutonInfo;
 	Button boutonActualiser;
+	Button boutonFavoris;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class VuePrincipaleActivity extends Activity{
 		boutonEvents = (Button)findViewById(R.id.buttonEvents);
 		boutonInfo = (Button)findViewById(R.id.buttonInfo);
 		boutonActualiser = (Button)findViewById(R.id.buttonActualiser);
+		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		
 		controller.miseEnPageRoman(titreApplication);
 		controller.miseEnPageRomanLight(titreActualite);
@@ -53,6 +55,7 @@ public class VuePrincipaleActivity extends Activity{
         boutonActualiser.setOnClickListener(controller);
         boutonEvents.setOnClickListener(controller);
         boutonInfo.setOnClickListener(controller);
+        boutonFavoris.setOnClickListener(controller);
 	}
 	
 	public void onResume(){

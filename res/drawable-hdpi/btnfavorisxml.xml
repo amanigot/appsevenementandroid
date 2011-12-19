@@ -2,8 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
 
     
-        <item android:drawable="@drawable/icomenuvosactusselect"
+        <item android:drawable="@drawable/icomenuvosfavorisselect"
           android:state_pressed="true" />
-    <item android:drawable="@drawable/icomenuvosactus" />
+    <item android:drawable="@drawable/icomenuvosfavoris" />
 
 </selector>

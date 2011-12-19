@@ -5,6 +5,7 @@ import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.GridNewsController;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -12,8 +13,10 @@ import android.widget.TextView;
 public class GridNewsActivity extends Activity{
 	
 	GridNewsController controller;
-	Button boutonRetour;
+	Button boutonRetour, boutonNews, boutonEvenement, boutonALaUne;
 	Button boutonActualiser;
+	Button boutonInfo;
+	Button boutonFavoris;
 	GridView gridViewNews;
 	TextView titreApplication;
 	String bundle;
@@ -33,12 +36,25 @@ public class GridNewsActivity extends Activity{
 		gridViewNews=(GridView)findViewById(R.id.gridViewNews);
 		boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
 		boutonRetour=(Button)findViewById(R.id.buttonRetour);
+		boutonNews=(Button)findViewById(R.id.buttonNews);
+		boutonEvenement=(Button)findViewById(R.id.buttonEvents);
+		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
 		titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
+		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		
 		gridViewNews.setAdapter(controller.initGridNewsAdapter());
+		
 		gridViewNews.setOnItemClickListener(controller);
 		boutonActualiser.setOnClickListener(controller);
+		
+		boutonEvenement.setVisibility(View.GONE);
+		boutonALaUne.setVisibility(View.GONE);
+		boutonFavoris.setVisibility(View.GONE);
+		boutonRetour.setVisibility(View.VISIBLE);
+		
+		boutonNews.setOnClickListener(controller);
 		boutonRetour.setOnClickListener(controller);
+		
 		titreApplication.setText(controller.initTitre());
 	}
 	

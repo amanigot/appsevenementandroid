@@ -4,80 +4,56 @@ import android.app.AlertDialog;
 import android.content.Context;
 import fr.clivana.lemansnews.controller.CategoriesDialogController;
 
-public class CategoriesDialog extends AlertDialog {
+public class CategoriesDialog extends AlertDialog.Builder {
 
-	Context ctx;
-	String title, message, nomPositiveButton, nomNegativeButton;
-	String[] items;
-	CategoriesDialogController controller;
+	private Context ctx;
+	private String title, message, nomPositiveButton, nomNegativeButton;
+	private String[] items;
+	private CategoriesDialogController controller;
 	
 	
-	public CategoriesDialog(Context context) {
+	public CategoriesDialog(Context context, String titre, String message, String posButton, String negButton, String[] objets) {
 		super(context);
 		
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-
-	public String getNomPositiveButton() {
-		return nomPositiveButton;
-	}
-
-
-	public void setNomPositiveButton(String nomPositiveButton) {
-		this.nomPositiveButton = nomPositiveButton;
-	}
-
-
-	public String getNomNegativeButton() {
-		return nomNegativeButton;
-	}
-
-
-	public void setNomNegativeButton(String nomNegativeButton) {
-		this.nomNegativeButton = nomNegativeButton;
-	}
-
-
-	public String[] getItems() {
-		return items;
-	}
-
-
-	public void initItems() {
-		this.items=controller.initItems();
+		this.ctx=context;
+		this.title=titre;
+		this.message=message;
+		this.nomPositiveButton=posButton;
+		this.nomNegativeButton=negButton;
+		this.items=objets;
+		
+		controller = new CategoriesDialogController();
+		
+		
+		if(!titre.equals(null)){
+			
+			setTitle(title);
+		}
+		
+		if(!this.message.equals(null)){
+			
+			setMessage(this.message);
+		}
+		
+		if(!nomPositiveButton.equals(null)){
+			
+			setPositiveButton(nomPositiveButton, controller);
+		}
+		
+		if(!nomNegativeButton.equals(null)){
+			
+			setNegativeButton(nomNegativeButton, controller);
+		}
+		
+		if(!items.equals(null)){
+			
+			setItems(items, controller);
+			
+		}
+		
+		create();
 		
 	}
-
 	
 	
-	
-	
-	
-	
-	
-	
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-
-	
-
-
-	
-
-
 }

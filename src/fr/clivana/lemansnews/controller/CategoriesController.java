@@ -18,6 +18,7 @@ import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.vue.CategoriesActivity;
 import fr.clivana.lemansnews.vue.CategoriesDialog;
 import fr.clivana.lemansnews.vue.VuePrincipaleActivity;
 
@@ -27,8 +28,9 @@ public class CategoriesController implements OnClickListener,
 	CategorieAdapter adapter;
 	Context context;
 	CategoriesDAO categoriesDao;
-	List<Categorie> categories;
-	CategoriesDialog dialog;
+	List<Categorie> categoriesMenu, categoriesAAjouter;
+	String[] categoriesAAjouterTitre;
+	CategoriesDialog categoriesDialog, ajouterCategorie;
 	NewsDAO newsDao;
 	
 	public CategoriesController(Context c) {
@@ -37,11 +39,17 @@ public class CategoriesController implements OnClickListener,
 
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.buttonRetour) {
-			((Activity) context).finish();
+		if (v.getId() == R.id.buttonRetour || v.getId() == R.id.buttonNews) {
+			((Activity)context).finish();
+			
 		}
 		if (v.getId() == R.id.buttonAjouterCategorie) {
-			
+			//catgoriesAAjouter=categoriesDao.getNotSelectedCategories();
+			categoriesAAjouterTitre = new String[categoriesAAjouter.size()];
+			for(int i=0;i<categoriesAAjouter.size();i++){
+				categoriesAAjouterTitre[i]=categoriesAAjouter.get(i).getMotClef();
+			}
+			ajouterCategorie= new CategoriesDialog(context, "Ajouter une catégorie", "Appuyez sur une catégorie pour l'ajouter. Appuyez longuement sur une catégorie du menu pour la supprimer.", null, "Annuler",categoriesAAjouterTitre );
 		}
 		if (v.getId() == R.id.buttonActualiser) {
 
@@ -50,8 +58,8 @@ public class CategoriesController implements OnClickListener,
 	}
 
 	public CategorieAdapter initCategorieAdapter() {
-		categories = categoriesDao.getSelectedCategories();
-		adapter = new CategorieAdapter(context, categories);
+		categoriesMenu = categoriesDao.getSelectedCategories();
+		adapter = new CategorieAdapter(context, categoriesMenu);
 		return adapter;
 	}
 
@@ -72,8 +80,8 @@ public class CategoriesController implements OnClickListener,
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View v,
 			final int position, long id) {
-
-		
+		categoriesDialog = new CategoriesDialog(context, "Supprimer", "Voulez-vous supprimer la catégorie ?", "Supprimer", "Annuler", null);
+		categoriesDialog.show();
 		return false;
 	}
 
