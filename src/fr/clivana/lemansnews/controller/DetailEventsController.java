@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.controller;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.entity.Evenement;
+import fr.clivana.lemansnews.vue.CategoriesDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
@@ -13,6 +14,8 @@ public class DetailEventsController implements OnClickListener {
 	Context context;
 	EventsDAO eventsDao;
 	Evenement evenement;
+	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
+	CategoriesDialog dialog;
 	
 	public DetailEventsController(Context c, int idEvenement) {
 		context=c;
@@ -46,7 +49,8 @@ public class DetailEventsController implements OnClickListener {
 			((Activity) context).finish();
 		}
 		if(v.getId()==R.id.imageViewPartager){
-			
+			dialog=new CategoriesDialog(context, "Partager", null, null, "Annuler", items, -1);
+			dialog.show();
 		}
 	}
 

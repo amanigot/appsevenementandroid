@@ -10,9 +10,9 @@ public class CategoriesDialog extends AlertDialog.Builder {
 	private String title, message, nomPositiveButton, nomNegativeButton;
 	private String[] items;
 	private CategoriesDialogController controller;
+	int pos;
 	
-	
-	public CategoriesDialog(Context context, String titre, String message, String posButton, String negButton, String[] objets) {
+	public CategoriesDialog(Context context, String titre, String message, String posButton, String negButton, String[] objets, int position) {
 		super(context);
 		
 		this.ctx=context;
@@ -21,9 +21,12 @@ public class CategoriesDialog extends AlertDialog.Builder {
 		this.nomPositiveButton=posButton;
 		this.nomNegativeButton=negButton;
 		this.items=objets;
-		
-		controller = new CategoriesDialogController();
-		
+		pos = position;
+		if(pos!=-1){
+			controller = new CategoriesDialogController(ctx, pos);
+		}else{
+			controller = new CategoriesDialogController(ctx);
+		}
 		
 		if(!titre.equals(null)){
 			
