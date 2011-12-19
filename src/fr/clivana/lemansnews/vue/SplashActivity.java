@@ -17,7 +17,15 @@ public class SplashActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-        SplashController controller = new SplashController(this);
+        
+        version = (TextView)findViewById(R.id.textViewVersion);
+        load = (TextView)findViewById(R.id.textViewProgress);
+        progress = (ProgressBar)findViewById(R.id.progressBarSplash);
+        
+        SplashController controller = new SplashController(this, load, progress);
+        
+        version.setText(controller.getVersion());
+        
         controller.execute();
         
 	}
