@@ -3,6 +3,13 @@
     android:id="@android:id/tabhost"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
+    <include
+        android:id="@+id/include1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/hautpage" />
+    
      <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -14,23 +21,19 @@
              android:layout_height="match_parent"
              android:layout_weight="1" >
 
-             <TextView
-                 android:id="@+id/textview1"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:text="this is a tab" />
+             <ListView
+		        android:id="@+id/listViewNews"
+		        android:layout_width="match_parent"
+		        android:layout_height="0dip">
 
-             <TextView
-                 android:id="@+id/textview2"
+    		 </ListView>
+             
+             <ListView
+                 android:id="@+id/listViewEvenementsFav"
                  android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:text="this is another tab" />
-
-             <TextView
-                 android:id="@+id/textview3"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:text="this is a third tab" />
+                 android:layout_height="0dip" >
+		
+		     </ListView>
          </FrameLayout>
 
          <TabWidget
@@ -40,6 +43,14 @@
 
          </TabWidget>
 
-    </LinearLayout>
+         <include
+             android:id="@+id/include2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             layout="@layout/baspage" />
 
-</TabHost>
+      </LinearLayout>
+      
+	  </TabHost>
+     

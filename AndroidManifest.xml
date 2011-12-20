@@ -83,7 +83,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.TabNavActivity" 
+     	<activity android:name=".vue.FavorisActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>

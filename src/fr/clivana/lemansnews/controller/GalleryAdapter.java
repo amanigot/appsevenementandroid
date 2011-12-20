@@ -1,6 +1,5 @@
 package fr.clivana.lemansnews.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
@@ -23,14 +22,13 @@ public class GalleryAdapter extends BaseAdapter {
 	
 	Context context;
 	Bitmap bitmap=null;
-	HashMap<Integer, ImageView> views ;
-
+	
 	public GalleryAdapter(Context context, List<Evenement> events
 			) {
 		this.events = events;
 		this.inflater = LayoutInflater.from(context);
 		this.context=context;
-		views = new HashMap<Integer, ImageView>();
+		
 	}
 
 	@Override
@@ -48,6 +46,8 @@ public class GalleryAdapter extends BaseAdapter {
 		return position;
 	}
 
+	
+	
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		convertView = inflater.inflate(R.layout.eventitem, null);
@@ -56,9 +56,30 @@ public class GalleryAdapter extends BaseAdapter {
 		l1.setVisibility(View.GONE);
 		l2.setVisibility(View.GONE);
 		ImageView image = (ImageView) convertView.findViewById(R.id.imageEventDetail);
-		image.setImageResource(R.drawable.illustaucuneimage480);
-		views.put(position, image);
 		TextView titre = (TextView) convertView.findViewById(R.id.textViewTitreEvent);
+		ImageView suivant = (ImageView)convertView.findViewById(R.id.suivant);
+		ImageView precedant = (ImageView)convertView.findViewById(R.id.precedant);
+		
+		//affichage des fleches du slider : les fleches n'apparaissent que s'il y a plus d'1 image
+		if(getCount()>1){
+			//si ce n'est ni la dernière, ni la première, on affiche les deux flèches
+			if(position!=0 && position!=getCount()-1){
+				suivant.setVisibility(View.VISIBLE);
+				precedant.setVisibility(View.VISIBLE);
+			}
+			//si c'est la première, on affiche la flèche de droite seulement
+			if(position==0){
+				suivant.setVisibility(View.VISIBLE);
+			}
+			//si c'est la dernière, on affiche la flèche de gauche seulement
+			if(position==getCount()-1){
+				precedant.setVisibility(View.VISIBLE);
+			}
+		}
+		
+		image.setImageResource(R.drawable.illustaucuneimage480);
+		
+		
 		titre.setText(events.get(position).getTitre());
 		return convertView;
 	}

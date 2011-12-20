@@ -55,6 +55,9 @@ public class VuePrincipaleActivity extends Activity{
         boutonEvents.setOnClickListener(controller);
         boutonInfo.setOnClickListener(controller);
         boutonFavoris.setOnClickListener(controller);
+        
+        galleryEvents.setOnItemClickListener(controller);
+        gridViewNewsPrincipale.setOnItemClickListener(controller);
 	}
 	
 	public void onResume(){

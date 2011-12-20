@@ -3,11 +3,7 @@ package fr.clivana.lemansnews.controller;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -15,12 +11,12 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskCategories;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Categorie;
-import fr.clivana.lemansnews.vue.CategoriesActivity;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.vue.CategoriesDialog;
-import fr.clivana.lemansnews.vue.VuePrincipaleActivity;
 
 public class CategoriesController implements OnClickListener,
 		OnItemLongClickListener, OnItemClickListener {
@@ -32,9 +28,12 @@ public class CategoriesController implements OnClickListener,
 	String[] categoriesAAjouterTitre;
 	CategoriesDialog categoriesDialog, ajouterCategorie;
 	NewsDAO newsDao;
+	AsyncTaskCategories asyncTask;
 	
 	public CategoriesController(Context c) {
 		context = c;
+		asyncTask=new AsyncTaskCategories(context);
+		newsDao=new NewsDAO(context);
 	}
 
 	@Override
@@ -53,7 +52,11 @@ public class CategoriesController implements OnClickListener,
 			ajouterCategorie.show();
 		}
 		if (v.getId() == R.id.buttonActualiser) {
-			
+			if(Reseau.verifReseau(context)){
+				asyncTask.execute();
+			}else{
+				Toast.makeText(context, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
+			}
 		}
 
 	}

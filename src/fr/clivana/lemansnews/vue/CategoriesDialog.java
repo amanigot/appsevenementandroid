@@ -4,13 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import fr.clivana.lemansnews.controller.CategoriesDialogController;
 
-public class CategoriesDialog extends AlertDialog.Builder {
+public class CategoriesDialog extends AlertDialog {
 
 	private Context ctx;
 	private String title, message, nomPositiveButton, nomNegativeButton;
 	private String[] items;
 	private CategoriesDialogController controller;
 	int pos;
+	Builder builder;
 	
 	public CategoriesDialog(Context context, String titre, String message, String posButton, String negButton, String[] objets, int position) {
 		super(context);
@@ -21,6 +22,7 @@ public class CategoriesDialog extends AlertDialog.Builder {
 		this.nomPositiveButton=posButton;
 		this.nomNegativeButton=negButton;
 		this.items=objets;
+		
 		pos = position;
 		if(pos!=-1){
 			controller = new CategoriesDialogController(ctx, pos);
@@ -40,23 +42,25 @@ public class CategoriesDialog extends AlertDialog.Builder {
 		
 		if(!nomPositiveButton.equals(null)){
 			
-			setPositiveButton(nomPositiveButton, controller);
+			builder.setPositiveButton(nomPositiveButton, controller);
 		}
 		
 		if(!nomNegativeButton.equals(null)){
 			
-			setNegativeButton(nomNegativeButton, controller);
+			builder.setNegativeButton(nomNegativeButton, controller);
 		}
 		
 		if(!items.equals(null)){
 			
-			setItems(items, controller);
+			builder.setItems(items, controller);
 			
 		}
 		
-		create();
+		
+		builder.create();
 		
 	}
+
 	
 	
 }

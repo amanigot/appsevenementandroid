@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import fr.clivana.lemansnews.R;
@@ -17,11 +19,13 @@ import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.vue.CategoriesActivity;
+import fr.clivana.lemansnews.vue.DetailEvenementActivity;
+import fr.clivana.lemansnews.vue.DetailNewsActivity;
 import fr.clivana.lemansnews.vue.InfoActivity;
 import fr.clivana.lemansnews.vue.ListeEvenementsActivity;
-import fr.clivana.lemansnews.vue.TabNavActivity;
+import fr.clivana.lemansnews.vue.FavorisActivity;
 
-public class VuePrincipaleController implements OnClickListener{
+public class VuePrincipaleController implements OnClickListener, OnItemClickListener{
 
 	Context ctx;
 	EventsDAO eventsDao;
@@ -77,7 +81,7 @@ public class VuePrincipaleController implements OnClickListener{
     		ctx.startActivity(intentInfo);
 		}
 		if(v.getId() == R.id.buttonFavoris){
-			Intent intentFav = new Intent(ctx, TabNavActivity.class);
+			Intent intentFav = new Intent(ctx, FavorisActivity.class);
 			ctx.startActivity(intentFav);
 		}
 		if(v.getId()==R.id.buttonActualiser){
@@ -87,6 +91,21 @@ public class VuePrincipaleController implements OnClickListener{
 			}else{
 				Toast.makeText(ctx, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
 			}
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		// TODO Auto-generated method stub
+		if(parent.getId()==R.id.galleryEvents){
+			Intent evenementIntent = new Intent(ctx, DetailEvenementActivity.class);
+			evenementIntent.putExtra("event", evenements.get(position).getId());
+			ctx.startActivity(evenementIntent);
+		}
+		if(parent.getId()==R.id.gridViewNewsPrincipal){
+			Intent intentNews = new Intent(ctx, DetailNewsActivity.class);
+			intentNews.putExtra("article", articles.get(position).getId());
+			ctx.startActivity(intentNews);
 		}
 	}
 	

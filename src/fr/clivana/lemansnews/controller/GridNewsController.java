@@ -3,8 +3,10 @@ package fr.clivana.lemansnews.controller;
 import java.util.List;
 
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskListeEvenements;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.vue.DetailNewsActivity;
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +14,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class GridNewsController implements OnClickListener, OnItemClickListener {
@@ -21,11 +24,13 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 	GridNewsAdapter adapter;
 	Context context;
 	String categorie;
+	AsyncTaskListeEvenements asyncTask;
 	
 	public GridNewsController(Context c, String categorie) {
 		context = c;
 		newsDao = new NewsDAO(context);
 		this.categorie=categorie;
+		asyncTask=new AsyncTaskListeEvenements(context);
 	}
 
 	public GridNewsAdapter initGridNewsAdapter() {
@@ -40,7 +45,11 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 			((Activity) context).finish();
 		}
 		if(v.getId()==R.id.buttonActualiser){
-			
+			if(Reseau.verifReseau(context)){
+				asyncTask.execute();
+			}else{
+				Toast.makeText(context, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
+			}
 		}
 		
 	}
