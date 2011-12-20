@@ -53,7 +53,7 @@ public class CategoriesController implements OnClickListener,
 			ajouterCategorie.show();
 		}
 		if (v.getId() == R.id.buttonActualiser) {
-
+			
 		}
 
 	}

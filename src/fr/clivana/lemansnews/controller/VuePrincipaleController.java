@@ -10,10 +10,12 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskVuePrincipale;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Evenement;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.vue.CategoriesActivity;
 import fr.clivana.lemansnews.vue.InfoActivity;
 import fr.clivana.lemansnews.vue.ListeEvenementsActivity;
@@ -28,11 +30,13 @@ public class VuePrincipaleController implements OnClickListener{
 	GridNewsAdapter newsAdapter;
 	List<Evenement> evenements;
 	List<Article> articles;
+	AsyncTaskVuePrincipale asyncTask;
 	
 	public VuePrincipaleController(Context context){
 		ctx = context;
 		eventsDao = new EventsDAO(ctx);
 		newsDao = new NewsDAO(ctx);
+		asyncTask=new AsyncTaskVuePrincipale(ctx);
 	}
 	
 	public GalleryAdapter initGalleryAdapter(){
@@ -77,7 +81,12 @@ public class VuePrincipaleController implements OnClickListener{
 			ctx.startActivity(intentFav);
 		}
 		if(v.getId()==R.id.buttonActualiser){
-			Toast.makeText(ctx, "actualisation", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(ctx, "actualisation", Toast.LENGTH_SHORT).show();
+			if(Reseau.verifReseau(ctx)){
+				asyncTask.execute();
+			}else{
+				Toast.makeText(ctx, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 	
