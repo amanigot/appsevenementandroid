@@ -41,7 +41,8 @@ public class VuePrincipaleActivity extends Activity{
 		boutonActualiser = (Button)findViewById(R.id.buttonActualiser);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		
-		controller.miseEnPageRoman(titreApplication);
+		titreApplication.setBackgroundResource(R.drawable.titreapplication);
+		
 		controller.miseEnPageRomanLight(titreActualite);
 		controller.miseEnPageRomanLight(titreSuite);
 		

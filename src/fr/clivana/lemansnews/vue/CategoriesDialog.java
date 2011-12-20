@@ -23,6 +23,7 @@ public class CategoriesDialog extends AlertDialog {
 		this.nomNegativeButton=negButton;
 		this.items=objets;
 		
+		//le constructeur utilisant la position n'est utilisé que pour la suppression
 		pos = position;
 		if(pos!=-1){
 			controller = new CategoriesDialogController(ctx, id, pos);
@@ -61,6 +62,7 @@ public class CategoriesDialog extends AlertDialog {
 		
 	}
 
+	//Méthode utilisée pour le dialog de partage
 	public void addInfos(String titre, String details) {
 		controller.setTitre(titre);
 		controller.setDescription(details);

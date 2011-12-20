@@ -21,7 +21,7 @@ public class DatabaseLeMansNews extends SQLiteOpenHelper{
 		db.execSQL(NomsSQL.QUERY_CREATE_TABLE_CATEGORIE);
 		
 // insert des données par défaut
-		db.execSQL(NomsSQL.QUERY_INSERT_CATEGORIE);
+		//db.execSQL(NomsSQL.QUERY_INSERT_CATEGORIE);
 	}
 
 	@Override

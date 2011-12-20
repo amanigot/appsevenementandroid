@@ -4,6 +4,7 @@ package fr.clivana.lemansnews.vue;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.GridNewsController;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +57,8 @@ public class GridNewsActivity extends Activity{
 		boutonRetour.setOnClickListener(controller);
 		
 		titreApplication.setText(controller.initTitre());
+		Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		titreApplication.setTypeface(tfRoman);
 	}
 
 	public void initAdapters() {

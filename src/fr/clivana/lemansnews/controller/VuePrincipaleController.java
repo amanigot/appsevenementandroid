@@ -56,6 +56,7 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	}
 	
 	public void miseEnPageRoman(TextView tv){
+		tv.setText("Le Mans News & Evénements");
 		Typeface tfRoman = Typeface.createFromAsset(ctx.getAssets(), "fonts/helveticaroman.otf");
 		tv.setTypeface(tfRoman);
 	}

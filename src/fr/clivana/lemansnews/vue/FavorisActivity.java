@@ -1,9 +1,11 @@
 package fr.clivana.lemansnews.vue;
 
 import android.app.TabActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.FavorisController;
 
@@ -12,6 +14,7 @@ public class FavorisActivity extends TabActivity {
 	ListView listViewNews, listViewEvents;
 	TabHost mTabHost;
 	FavorisController controller;
+	TextView titreApplication;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,10 @@ public class FavorisActivity extends TabActivity {
 	    listViewEvents=(ListView)findViewById(R.id.listViewEvenementsFav);
 	    listViewNews=(ListView)findViewById(R.id.listViewNews);
 	    controller=new FavorisController(this);
+	    titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
+	    titreApplication.setText(controller.initTitre());
+	    Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		titreApplication.setTypeface(tfRoman);
 	    
 	    initAdapters();
 	    listViewNews.setOnItemClickListener(controller);

@@ -1,6 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -52,7 +53,10 @@ public class DetailEvenementActivity extends Activity {
 		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		
+		//initialise le contenu des vues
 		titreApplication.setText(detailEventsController.initTitre());
+		Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		titreApplication.setTypeface(tfRoman);
 		titreEvenement.setText(detailEventsController.getTitreEvenement());
 		dateEvenement.setText(detailEventsController.getDateEvenement());
 		lieuEvenement.setText(detailEventsController.getLieuEvenement());

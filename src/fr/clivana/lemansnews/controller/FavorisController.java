@@ -59,4 +59,9 @@ public class FavorisController implements OnItemClickListener {
 		}
 	}
 
+	public CharSequence initTitre() {
+		// TODO Auto-generated method stub
+		return "Vos favoris";
+	}
+
 }

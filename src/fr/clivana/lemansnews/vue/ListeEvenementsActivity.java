@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.vue;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.ListeEvenementsController;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,8 @@ public class ListeEvenementsActivity extends Activity{
 		boutonEvenement.setOnClickListener(listeEvenementsController);
 		
 		titreApplication.setText(listeEvenementsController.initTitre());
+		Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		titreApplication.setTypeface(tfRoman);
 		
 		initAdapters();
 		

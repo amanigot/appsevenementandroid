@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.vue;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.CategoriesController;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,12 @@ public class CategoriesActivity extends Activity{
         categories=(GridView)findViewById(R.id.gridViewCategorie);
         boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
         
+        //titre en haut de la page
+        titreApplication.setText(controller.initTitre());
+        Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		titreApplication.setTypeface(tfRoman);
+        
+        //creation du controller
         controller=new CategoriesController(this);
         
         //ici on gère la visibilité des boutons du menu du bas
@@ -43,6 +50,7 @@ public class CategoriesActivity extends Activity{
 		boutonRetour.setVisibility(View.VISIBLE);
 		boutonFavoris.setVisibility(View.GONE);
 		
+		//listeners
 		boutonNews.setOnClickListener(controller);
         ajouterCategorie.setOnClickListener(controller);
         boutonActualiser.setOnClickListener(controller);
@@ -50,12 +58,13 @@ public class CategoriesActivity extends Activity{
         
         initAdapters();
         
+        //listeners de la gridnews
         categories.setOnItemClickListener(controller);
         categories.setOnItemLongClickListener(controller);
 	}
 
 	public void initAdapters() {
-		
+		//Ici sont tous les setAdapter
 		categories.setAdapter(controller.initCategorieAdapter());
 		
 	}

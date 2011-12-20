@@ -91,4 +91,9 @@ public class CategoriesController implements OnClickListener,
 		//}
 	}
 
+	public CharSequence initTitre() {
+		// TODO Auto-generated method stub
+		return "Catégories";
+	}
+
 }

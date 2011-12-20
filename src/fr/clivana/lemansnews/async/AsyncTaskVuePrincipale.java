@@ -17,7 +17,6 @@ public class AsyncTaskVuePrincipale extends AsyncTask<Void, Void, Void> {
 		this.context = context;
 		progress = new ProgressDialog(this.context);
 
-		
 	}
 
 	@Override

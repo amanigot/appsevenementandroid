@@ -1,6 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -63,6 +64,8 @@ public class DetailNewsActivity extends Activity{
 		
 		
         titreApplication.setText(detailNewsController.initTitre());
+        Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		titreApplication.setTypeface(tfRoman);
         titreNews.setText(detailNewsController.getTitreNews());
         dateAuteur.setText(detailNewsController.initDateAuteur());
         detailNews.loadData(detailNewsController.getDescription(), "text/html", null);

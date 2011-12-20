@@ -23,6 +23,8 @@ public class SplashController {
 	public void execute(){
 		if (Reseau.verifReseau(ctx)) {
 			asyncBdd.execute();
+		}else{
+			
 		}
 	}
 	

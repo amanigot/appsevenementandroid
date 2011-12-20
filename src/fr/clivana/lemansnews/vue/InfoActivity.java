@@ -1,6 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,9 +33,12 @@ public class InfoActivity extends Activity {
         boutonNews.setVisibility(View.GONE);
         boutonFavoris.setVisibility(View.GONE);
         boutonRetour.setVisibility(View.VISIBLE);
+        boutonInfo.setVisibility(View.INVISIBLE);
         
         boutonALaUne.setOnClickListener(infoController);
         boutonRetour.setOnClickListener(infoController);
         titreApplication.setText(infoController.initTitre());
+        Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		titreApplication.setTypeface(tfRoman);
 	}
 }
