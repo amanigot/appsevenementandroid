@@ -84,9 +84,11 @@ public class CategoriesController implements OnClickListener,
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View v,
 			final int position, long id) {
-		categoriesDialog = new CategoriesDialog(context, "Supprimer", "Voulez-vous supprimer la catégorie ?", "Supprimer", "Annuler", null, position, 2);
-		categoriesDialog.show();
-		return false;
+		//if(categoriesMenu.get(position).isSupprimable()){
+			categoriesDialog = new CategoriesDialog(context, "Supprimer", "Voulez-vous supprimer la catégorie ?", "Supprimer", "Annuler", null, position, 2);
+			categoriesDialog.show();
+			return false;
+		//}
 	}
 
 }
