@@ -49,7 +49,8 @@ public class DetailEventsController implements OnClickListener {
 			((Activity) context).finish();
 		}
 		if(v.getId()==R.id.imageViewPartager){
-			dialog=new CategoriesDialog(context, "Partager", null, null, "Annuler", items, -1);
+			dialog=new CategoriesDialog(context, "Partager", null, null, "Annuler", items, -1, 3);
+			dialog.addInfos(evenement.getTitre(), evenement.getDetailEvenement());
 			dialog.show();
 		}
 	}

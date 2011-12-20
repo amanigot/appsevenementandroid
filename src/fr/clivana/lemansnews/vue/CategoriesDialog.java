@@ -13,7 +13,7 @@ public class CategoriesDialog extends AlertDialog {
 	int pos;
 	Builder builder;
 	
-	public CategoriesDialog(Context context, String titre, String message, String posButton, String negButton, String[] objets, int position) {
+	public CategoriesDialog(Context context, String titre, String message, String posButton, String negButton, String[] objets, int position, int id) {
 		super(context);
 		
 		this.ctx=context;
@@ -25,9 +25,9 @@ public class CategoriesDialog extends AlertDialog {
 		
 		pos = position;
 		if(pos!=-1){
-			controller = new CategoriesDialogController(ctx, pos);
+			controller = new CategoriesDialogController(ctx, id, pos);
 		}else{
-			controller = new CategoriesDialogController(ctx);
+			controller = new CategoriesDialogController(ctx, id);
 		}
 		
 		if(!titre.equals(null)){
@@ -59,6 +59,11 @@ public class CategoriesDialog extends AlertDialog {
 		
 		builder.create();
 		
+	}
+
+	public void addInfos(String titre, String details) {
+		controller.setTitre(titre);
+		controller.setDescription(details);
 	}
 
 	
