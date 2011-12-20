@@ -58,7 +58,7 @@ public class GalleryAdapter extends BaseAdapter {
 		ImageView image = (ImageView) convertView.findViewById(R.id.imageEventDetail);
 		TextView titre = (TextView) convertView.findViewById(R.id.textViewTitreEvent);
 		ImageView suivant = (ImageView)convertView.findViewById(R.id.suivant);
-		ImageView precedant = (ImageView)convertView.findViewById(R.id.precedant);
+		ImageView precedant = (ImageView)convertView.findViewById(R.id.precedent);
 		
 		//affichage des fleches du slider : les fleches n'apparaissent que s'il y a plus d'1 image
 		if(getCount()>1){
