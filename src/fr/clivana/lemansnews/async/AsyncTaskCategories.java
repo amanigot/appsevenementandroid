@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.vue.CategoriesActivity;
 
 public class AsyncTaskCategories extends AsyncTask<Void, Void, Void> {
 
@@ -18,13 +19,11 @@ public class AsyncTaskCategories extends AsyncTask<Void, Void, Void> {
 	public AsyncTaskCategories(Context context) {
 		super();
 		this.context = context;
-		categoriesDao=new CategoriesDAO(this.context);
 		progress=new ProgressDialog(this.context);
 	}
 
 	@Override
 	protected void onPreExecute() {
-		// TODO Auto-generated method stub
 		super.onPreExecute();
 		progress.show();
 	}
@@ -37,9 +36,8 @@ public class AsyncTaskCategories extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
-		
+		((CategoriesActivity) context).initAdapters();
 		progress.dismiss();
 	}
 }

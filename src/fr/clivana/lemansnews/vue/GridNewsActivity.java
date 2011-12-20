@@ -42,7 +42,7 @@ public class GridNewsActivity extends Activity{
 		titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		
-		gridViewNews.setAdapter(controller.initGridNewsAdapter());
+		initAdapters();
 		
 		gridViewNews.setOnItemClickListener(controller);
 		boutonActualiser.setOnClickListener(controller);
@@ -57,5 +57,12 @@ public class GridNewsActivity extends Activity{
 		
 		titreApplication.setText(controller.initTitre());
 	}
+
+	public void initAdapters() {
+		
+		gridViewNews.setAdapter(controller.initGridNewsAdapter());
+		
+	}
+	
 	
 }

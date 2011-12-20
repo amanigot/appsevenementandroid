@@ -48,9 +48,16 @@ public class CategoriesActivity extends Activity{
         boutonActualiser.setOnClickListener(controller);
         boutonRetour.setOnClickListener(controller);
         
-        //categories.setAdapter(controller.initCategorieAdapter());
+        initAdapters();
+        
         categories.setOnItemClickListener(controller);
         categories.setOnItemLongClickListener(controller);
+	}
+
+	public void initAdapters() {
+		
+		categories.setAdapter(controller.initCategorieAdapter());
+		
 	}
 	
 }

@@ -46,8 +46,16 @@ public class ListeEvenementsActivity extends Activity{
 		boutonEvenement.setOnClickListener(listeEvenementsController);
 		
 		titreApplication.setText(listeEvenementsController.initTitre());
-		listeEvents.setAdapter(listeEvenementsController.initAdapter());
+		
+		initAdapters();
+		
 		listeEvents.setOnItemClickListener(listeEvenementsController);
+	}
+
+	public void initAdapters() {
+		
+		listeEvents.setAdapter(listeEvenementsController.initAdapter());
+		
 	}
 
 }

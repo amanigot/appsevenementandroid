@@ -45,8 +45,7 @@ public class VuePrincipaleActivity extends Activity{
 		controller.miseEnPageRomanLight(titreActualite);
 		controller.miseEnPageRomanLight(titreSuite);
 		
-		//galleryEvents.setAdapter(controller.initGalleryAdapter());
-		//gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
+		initAdapters();
 		
 		boutonALaUne.setPressed(true);
         boutonALaUne.setClickable(false);
@@ -62,5 +61,10 @@ public class VuePrincipaleActivity extends Activity{
 		super.onResume();
 		boutonALaUne.setPressed(true);
         boutonALaUne.setClickable(false);
+	}
+	
+	public void initAdapters(){
+		//galleryEvents.setAdapter(controller.initGalleryAdapter());
+		//gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
 	}
 }
