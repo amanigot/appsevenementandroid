@@ -13,7 +13,11 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
 
+import fr.clivana.lemansnews.dao.CategoriesDAO;
+import fr.clivana.lemansnews.dao.EventsDAO;
+import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
+import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.utils.Params;
 
@@ -25,13 +29,12 @@ import android.util.Log;
 public class Reseau {
 
 	public final static String URL_LIST_NEWS = "/m/news/list/"; // /m/news/{motClef}/{numPage}
-	public final static String URL_COUNT_NEWS = "/m/news/count/"; // /m/news/count/{motClef}/{date}
 	public final static String URL_LIST_EVENTS = "/m/events/list/"; // /m/news/{motClef}/{numPage}
-	public final static String URL_COUNT_EVENTS = "/m/events/count/"; // /m/news/count/{motClef}/{date}
-	public final static String URL_LIST_KEYWORDS = "/m/news/listMotClef";// route OK
-	public final static String URL_COUNT_NEWS_IMAGE = "/m/news/countImage/";// /m/news/countImage/{motclef}
-	public final static String URL_COUNT_EVENTS_IMAGE = "/m/events/countImage/";// /m/events/countImage/{something}
+	public final static String URL_LIST_CATEGORIES = "/m/categories/list"; // pas de parametres
+	public final static String URL_COUNT_CATEGORIES = "/m/categories/count/";// /m/categories/count/{nom}/{date}
+	public final static String URL_IMAGES = "/data/images/"; // /data/images/{nom}
 	
+// verification du reseau
 	public static boolean verifReseau(Context context) {
 		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -41,7 +44,14 @@ public class Reseau {
 		return false;
 	}
 	
-	public static InputStream webService(String url){
+// verification de la qualité du reseau
+	public static boolean isSlow(Context context){
+		/* TODO à implementer*/
+		return false;
+	}
+	
+// requete web
+	public static InputStream requeteWeb(String url){
 		Log.d("Recherche", "debut "+url);
 		HttpParams params = new BasicHttpParams();
 		params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
@@ -61,8 +71,8 @@ public class Reseau {
 		return result;
 	}
 	
-	public static List<Article> listArticlesServeur(String motClef, int numPage, int quantite){
-		
+// recuperation des articles sur le reseau et mise à jour BDD
+	public static void majArticles(Context context, String motClef, int numPage, int quantite){
 		if (quantite == 0 || quantite > Params.QTE_MAX_ARTICLES){
 			quantite = Params.QTE_MAX_ARTICLES;
 		}
@@ -74,23 +84,52 @@ public class Reseau {
 		}
 		String url = Params.BASE_SERVEUR + URL_LIST_NEWS + motClef + "/" + numPage + "/" + quantite;
 		DeSerializer<ListArticles> deserialize = new DeSerializer<ListArticles>();
-		List<Article> listArticle = deserialize.deJson(webService(url));
-		return listArticle;
+		List<Article> listArticle = deserialize.deJson(requeteWeb(url));
+		if (listArticle != null && listArticle.size() != 0){
+			NewsDAO newsDao = new NewsDAO(context);
+			newsDao.setArticles(listArticle);
+		}else{
+			Log.w("Reseau","liste Articles vide pour : " + motClef + " - " + numPage + " - " + quantite);
+		}
 	}
 	
-	public static List<Evenement> listEvenementsServeur(String motClef, int numPage, int quantite){
+// recuperation des evenements sur le reseau et mise à jour BDD
+	public static void majEvenements(Context context, int numPage, int quantite){
 		if (quantite == 0 || quantite > Params.QTE_MAX_EVENEMENTS){
 			quantite = Params.QTE_MAX_EVENEMENTS;
-		}
-		if (motClef.equals("") || motClef.equals(" ")){
-			motClef = "all";
 		}
 		if (numPage == 0){
 			numPage = 1;
 		}
+		String motClef = "all";
 		String url = Params.BASE_SERVEUR + URL_LIST_EVENTS + motClef + "/" + numPage + "/" + quantite;
 		DeSerializer<ListEvents> deserialize = new DeSerializer<ListEvents>();
-		List<Evenement> listEvents = deserialize.deJson(webService(url));
-		return listEvents;
+		List<Evenement> listEvents = deserialize.deJson(requeteWeb(url));
+		if (listEvents != null && listEvents.size() != 0){
+			EventsDAO eventsDao = new EventsDAO(context);
+			eventsDao.setEvents(listEvents);
+		}else{
+			Log.w("Reseau","liste Evenements vide pour : " + motClef + " - " + numPage + " - " + quantite);
+		}
+	}
+	
+// recuperation de toutes les categories
+	public static void majCategories(Context context){
+		String url = Params.BASE_SERVEUR + URL_LIST_CATEGORIES;
+		DeSerializer<ListCategorie> deserialize = new DeSerializer<ListCategorie>();
+		List<Categorie> listCategorie = deserialize.deJson(requeteWeb(url));
+		if (listCategorie != null && listCategorie.size() != 0){
+			CategoriesDAO categorieDao = new CategoriesDAO(context);
+			categorieDao.setCategories(listCategorie);
+		}else{
+			Log.e("Reseau", "la liste des categories n''a pas pu être chargée");
+		}
+	}
+	
+//récuperation d'une categorie avec son comptage
+	public static void countCategorie(Context context, String nomCategorie, long dateDernierClick){
+		if (nomCategorie.equals("")|| nomCategorie.equals(" ")){
+			nomCategorie = "all";
+		}
 	}
 }

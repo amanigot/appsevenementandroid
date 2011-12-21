@@ -47,7 +47,7 @@ public class NewsDAO {
 		open();
 		boolean del = dbClivana.delete(
 				NomsSQL.TABLE_ARTICLE, 
-				NomsSQL.COLONNE_ARTICLE_ID + "= " + article.getId(), 
+				NomsSQL.COLONNE_ARTICLE_ID + " = " + article.getId(), 
 				null) > 0;
 		close();
 		return del;
@@ -55,12 +55,11 @@ public class NewsDAO {
 	
 // update un article
 	public boolean updateNews(Article article){
-		
 		open();
 		boolean upd = dbClivana.update(
 				NomsSQL.TABLE_ARTICLE, 
 				articleToContentValues(article), 
-				NomsSQL.COLONNE_ARTICLE_ID + "= " + article.getId(), 
+				NomsSQL.COLONNE_ARTICLE_ID + " = " + article.getId(), 
 				null) > 0;
 		close();
 		return upd;
@@ -72,74 +71,81 @@ public class NewsDAO {
 		Cursor c = dbClivana.query(
 				NomsSQL.TABLE_ARTICLE, 
 				null, 
-				NomsSQL.COLONNE_ARTICLE_ID + "= " + id, 
+				NomsSQL.COLONNE_ARTICLE_ID + " = " + id, 
 				null, null, null, null);
 		if (c.getCount()==0){
 			return null;
 		}
 		c.moveToFirst();
-		return cursorToArticle(c);
+		Article article = cursorToArticle(c);
+		c.close();
+		close();
+		return article;
 	}
 	
+// récuperation d'un liste d'article triée par date (décroissante) et limitée à Params.QTE_MAX_ARTICLES articles
 	public List<Article> getAllArticles(){
 		open();
 		Cursor c = dbClivana.query(
 				NomsSQL.TABLE_ARTICLE, 
-				null, null, null, null, null, null, 
+				null, null, null, null, null, 
+                NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " DESC", 
 				Params.QTE_MAX_ARTICLES+"");
 		return cursorToArticleTab(c);
 	}
 	
+// récuperation d'un liste d'article selon son mot clé, triée par date (décroissante) et limitée à Params.QTE_MAX_ARTICLES articles
 	public List<Article> getArticlesWithMotsclefs(String motClef){
 		open();
 		Cursor c;
 		if (motClef.equals("all")){
-			c = dbClivana.query(
-					NomsSQL.TABLE_ARTICLE, 
-					null, 
-					NomsSQL.COLONNE_ARTICLE_MOTSCLEFS + " LIKE %" + motClef + "%", 
-					null, null, null, null, 
-					Params.QTE_MAX_ARTICLES + "");
+			return getAllArticles();
 		}else{
 			c = dbClivana.query(
 					NomsSQL.TABLE_ARTICLE, 
 					null, 
-					null, 
-					null, null, null, null, 
+					NomsSQL.COLONNE_ARTICLE_MOTSCLEFS + " LIKE %" + motClef + "%", 
+					null, null, null, NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " DESC", 
 					Params.QTE_MAX_ARTICLES + "");
+			return cursorToArticleTab(c);
 		}
-		return cursorToArticleTab(c);
 	}
 	
+// retourne la liste d'article selon le mot clé de la catégorie
 	public List<Article> getArticlesFromCategorie(Categorie categorie){
-		return getArticlesWithMotsclefs(categorie.getMotClef());
+		return getArticlesWithMotsclefs(categorie.getNom());
 	}
-
-	public int countArticlesWithMotsClefs(String motClef){
+	
+// liste des articles favoris
+	public List<Article> getFavoriteArticles(){
 		open();
-		Cursor c = dbClivana.rawQuery("COUNT FROM "+NomsSQL.TABLE_ARTICLE+" WHERE "+NomsSQL.COLONNE_ARTICLE_MOTSCLEFS+" LIKE ?;", new String[] {motClef});
-		int count = c.getInt(0);
-		close();
-		return count;
+		Cursor c;
+		c = dbClivana.query(
+					NomsSQL.TABLE_ARTICLE, 
+					null, 
+					NomsSQL.COLONNE_ARTICLE_FAVORIS + " = 1", 
+					null, null, null, NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " DESC", 
+					null);
+			return cursorToArticleTab(c);
 	}
 	
-	public int countArticlesFromCategorie(Categorie categorie){
-		return countArticlesWithMotsClefs(categorie.getMotClef());
-	}
-	
+// Mise à jour des articles avec une liste d'articles
 	public void setArticles(List<Article> articles){
 		Iterator<Article> iter = articles.iterator();
 		Article article;
 		while(iter.hasNext()){
 			article = iter.next();
-			if (getArticle(article.getId())!=null){
+			Article oldArticle = getArticle(article.getId());
+			if (oldArticle == null){
 				insertNews(article);
 			}else{
+				article.setFavoris(oldArticle.isFavoris());
 				updateNews(article);
 			}
 		}
 	}
 	
+// conversion du cursor en liste d'articles
 	public List<Article> cursorToArticleTab(Cursor c){
 		List<Article> arrayArticles= new ArrayList<Article>();
 		Article article;
@@ -156,8 +162,8 @@ public class NewsDAO {
 		return arrayArticles;
 	}
 	
+// conversion du cursor en article
 	public Article cursorToArticle(Cursor c){
-		
 		boolean notif = c.getInt(NomsSQL.RANG_ARTICLE_NOTIFICATION) == 1;
 		boolean favoris = c.getInt(NomsSQL.RANG_ARTICLE_FAVORIS) == 1;
 		Article retArticle = new Article(
@@ -174,11 +180,10 @@ public class NewsDAO {
 				c.getString(NomsSQL.RANG_ARTICLE_MOTSCLEFS), 
 				notif,
 				favoris);
-		c.close();
-		close();
 		return retArticle;
 	}
 
+// création d'un contentValues (map clé valeur avec clé = nom de colonne et valeur = attributs de l'article)
 	private ContentValues articleToContentValues(Article article){
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_ID , article.getId());

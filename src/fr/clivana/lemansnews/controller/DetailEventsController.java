@@ -17,7 +17,7 @@ public class DetailEventsController implements OnClickListener {
 	public DetailEventsController(Context c, int idEvenement) {
 		context=c;
 		eventsDao=new EventsDAO(context);
-		evenement=eventsDao.getArticle(idEvenement);
+		evenement=eventsDao.getEvenement(idEvenement);
 	}
 
 	public CharSequence initTitre() {

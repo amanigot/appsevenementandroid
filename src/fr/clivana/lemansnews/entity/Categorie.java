@@ -2,21 +2,22 @@ package fr.clivana.lemansnews.entity;
 
 public class Categorie {
 	
-	private int id;
-	private String motClef;
-	private long date;
+	private long id;
+	private String nom;
+	private String nomImage;
 	private int count;
+	private int total;
+	private boolean supprimable;
 	private boolean selected;
-	/* identifiant (auto), 
-	motclef (plusieurs séparrés par un espace), 
-	selected(equivalent de favoris), 
+	private long dateConsult;
+	
+	/* identifiant (auto),
+	nom = motclef (un seul),
+	selected(equivalent de favoris = categories affichées dans la gridview),
 	dateConsultation (date de la dernière consultation par l'utilisateur)
-	count (nombre de nouvelles news non lus dans cette categorie depuis la dernière consultation) 
+	count (nombre de nouvelles news non lus dans cette categorie depuis la dernière consultation)
 	total (nombre de news total)
-	count10j (nombre de news ses 10 derniers jours)
-	count1m (nombre de news depuis 1 mois
-	supprimable (si la categorie peut etre retirée de la grid)
-	position (position dans la grid view, non actif pour le moment) */
+	supprimable (si la categorie peut etre retirée de la grid)*/
 	
 	public boolean isSelected() {
 		return selected;
@@ -30,23 +31,58 @@ public class Categorie {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
-	public String getMotClef() {
-		return motClef;
+	public String getNom() {
+		return nom;
 	}
-	public void setMotClef(String motClef) {
-		this.motClef = motClef;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
-	public long getDate() {
-		return date;
+	public long getDateConsult() {
+		return dateConsult;
 	}
-	public void setDate(long date) {
-		this.date = date;
+	public void setDateConsult(long dateConsult) {
+		this.dateConsult = dateConsult;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public boolean isSupprimable() {
+		return supprimable;
+	}
+	public void setSupprimable(boolean supprimable) {
+		this.supprimable = supprimable;
+	}
+	
+	public String getNomImage() {
+		return nomImage;
+	}
+	public void setNomImage(String nomImage) {
+		this.nomImage = nomImage;
+	}
+	
+	public Categorie(long id, String nom, String nomImage, int count,
+			int total, boolean supprimable, boolean selected, long dateConsult) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.nomImage = nomImage;
+		this.count = count;
+		this.total = total;
+		this.supprimable = supprimable;
+		this.selected = selected;
+		this.dateConsult = dateConsult;
+	}
+	public Categorie() {
+		super();
 	}
 
 }

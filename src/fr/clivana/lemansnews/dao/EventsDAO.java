@@ -1,6 +1,8 @@
 package fr.clivana.lemansnews.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -8,6 +10,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import fr.clivana.lemansnews.entity.Evenement;
+import fr.clivana.lemansnews.utils.Formatage;
+import fr.clivana.lemansnews.utils.Params;
 import fr.clivana.lemansnews.utils.database.DatabaseLeMansNews;
 import fr.clivana.lemansnews.utils.database.NomsSQL;
 
@@ -16,63 +20,113 @@ public class EventsDAO {
 	
 	private SQLiteDatabase dbClivana;
 	private DatabaseLeMansNews dbClivanaHelper;
-	
+
+// constructeur
 	public EventsDAO(Context context) {
 		super();
 		dbClivanaHelper = new DatabaseLeMansNews(context, NomsSQL.BASE_NOM, null, NomsSQL.BASE_VERSION);
 	}
 	
+// open et close database
 	public SQLiteDatabase open(){
 		dbClivana = dbClivanaHelper.getWritableDatabase();
 		return dbClivana;
 	}
-	
 	public void close(){
 		dbClivana.close();
 	}
 	
-//	public SQLiteDatabase getBaseDonnees(){
-//		return dbClivana;
-//	}
-	
-	public long insertEvent(Evenement event){
+// insertion d'un evenement
+	public void insertEvent(Evenement event){
 		open();
-		long retour = dbClivana.insert(NomsSQL.TABLE_EVENEMENT, null, eventToContentValues(event));
+		dbClivana.insert(NomsSQL.TABLE_EVENEMENT, null, eventToContentValues(event));
 		close();
-		return retour;
 	}
 	
+// suppression
 	public boolean removeEvent(Evenement event){
 		open();
-		boolean del = dbClivana.delete(NomsSQL.TABLE_EVENEMENT, NomsSQL.COLONNE_EVENEMENT_ID + "= " + event.getId(), null) > 0;
+		boolean del = dbClivana.delete(
+				NomsSQL.TABLE_EVENEMENT, 
+				NomsSQL.COLONNE_EVENEMENT_ID + " = " + event.getId(), 
+				null) > 0;
 		close();
 		return del;
 	}
 	
+// update
 	public boolean updateEvent(Evenement event){
 		open();
-		boolean upd = dbClivana.update(NomsSQL.TABLE_EVENEMENT, eventToContentValues(event), NomsSQL.COLONNE_EVENEMENT_ID + "= " + event.getId(), null) > 0;
+		boolean upd = dbClivana.update(
+				NomsSQL.TABLE_EVENEMENT, 
+				eventToContentValues(event), 
+				NomsSQL.COLONNE_EVENEMENT_ID + " = " + event.getId(), 
+				null) > 0;
 		close();
 		return upd;
 	}
 	
-	public Evenement getArticle(long id){
+// recherche event avec son ID
+	public Evenement getEvenement(long id){
 		open();
-		Cursor c = dbClivana.query(NomsSQL.TABLE_EVENEMENT, null, NomsSQL.COLONNE_EVENEMENT_ID + "= " + id, null, null, null, null);
+		Cursor c = dbClivana.query(
+				NomsSQL.TABLE_EVENEMENT, 
+				null, 
+				NomsSQL.COLONNE_EVENEMENT_ID + " = " + id, 
+				null, null, null, null);
 		if (c.getCount()==0){
 			return null;
 		}else{
 			c.moveToFirst();
-			return cursorToEvent(c);
+			Evenement event = cursorToEvent(c);
+			c.close();
+			close();
+			return event;
 		}
 	}
 	
+// liste evenement, tri par date croissante, date >= datejour, limit QTE_MAX_EVENTS
 	public List<Evenement> getAllEvents(){
+		String dateTri = Formatage.datePourTriEvenement(new Date());
 		open();
-		Cursor c = dbClivana.query(NomsSQL.TABLE_EVENEMENT, null, null, null, null, null, null);
+		Cursor c = dbClivana.query(
+				NomsSQL.TABLE_EVENEMENT,
+				null,
+				NomsSQL.COLONNE_EVENEMENT_DATETRI +" >= " + dateTri,
+				null, null, null,
+				NomsSQL.COLONNE_EVENEMENT_DATETRI,
+				Params.QTE_MAX_EVENEMENTS + "");
 		return cursorToEventTab(c);
 	}
 	
+	public List<Evenement> getFavoriteEvents(){
+		String dateTri = Formatage.datePourTriEvenement(new Date());
+		open();
+		Cursor c = dbClivana.query(
+				NomsSQL.TABLE_EVENEMENT,
+				null,
+				NomsSQL.COLONNE_EVENEMENT_DATETRI +" >= " + dateTri + " AND " + NomsSQL.COLONNE_EVENEMENT_FAVORIS + " = 0",
+				null, null, null,
+				NomsSQL.COLONNE_EVENEMENT_DATETRI,
+				Params.QTE_MAX_EVENEMENTS + "");
+		return cursorToEventTab(c);
+	}
+	
+	public void setEvents(List<Evenement> events){
+		Iterator<Evenement> iter = events.iterator();
+		Evenement event;
+		while(iter.hasNext()){
+			event = iter.next();
+			Evenement oldEvent = getEvenement(event.getId());
+			if (oldEvent == null){
+				insertEvent(event);
+			}else{
+				event.setFavoris(oldEvent.isFavoris());
+				updateEvent(event);
+			}
+		}
+
+	}
 	private List<Evenement> cursorToEventTab(Cursor c){
 		List<Evenement> events = new ArrayList<Evenement>();
 		Evenement event;
@@ -91,8 +145,8 @@ public class EventsDAO {
 	}
 	
 	private Evenement cursorToEvent(Cursor c){
-//		c.moveToFirst();
 		boolean notif = c.getInt(NomsSQL.RANG_EVENEMENT_NOTIFICATION) == 1;
+		boolean favoris = c.getInt(NomsSQL.RANG_EVENEMENT_FAVORIS) == 1;
 		Evenement retEvent = new Evenement(
 				c.getLong(NomsSQL.RANG_EVENEMENT_ID), 
 				c.getString(NomsSQL.RANG_EVENEMENT_TITRE), 
@@ -102,14 +156,14 @@ public class EventsDAO {
 				c.getString(NomsSQL.RANG_EVENEMENT_LIEU), 
 				c.getString(NomsSQL.RANG_EVENEMENT_URLEVENEMENT), 
 				c.getString(NomsSQL.RANG_EVENEMENT_DATEHEURE), 
+				c.getString(NomsSQL.RANG_EVENEMENT_DATETRI), 
 				c.getString(NomsSQL.RANG_EVENEMENT_DATEENREGISTREMENT), 
 				c.getString(NomsSQL.RANG_EVENEMENT_NOMIMAGE), 
 				c.getString(NomsSQL.RANG_EVENEMENT_NOMIMAGEMOBILE), 
 				c.getString(NomsSQL.RANG_EVENEMENT_NOMMINIATURE), 
 				c.getString(NomsSQL.RANG_EVENEMENT_MOTSCLEFS), 
-				notif);
-		c.close();
-		close();
+				notif,
+				favoris);
 		return retEvent;
 	}
 	
@@ -123,12 +177,14 @@ public class EventsDAO {
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_LIEU, event.getLieu());
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_URLEVENEMENT , event.getUrlEvenement());
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_DATEHEURE, event.getDateHeureEvenement());
+		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_DATETRI, event.getDateTri());
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_DATEENREGISTREMENT, event.getDateEnregistrement());
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_NOMIMAGE , event.getNomImage());
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_NOMIMAGEMOBILE , event.getNomImageMobile());
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_NOMMINIATURE , event.getNomImageMiniature());
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_MOTSCLEFS , event.getMotsClefs());
 		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_NOTIFICATION , event.isNotification());
+		paramEvent.put(NomsSQL.COLONNE_EVENEMENT_FAVORIS , event.isFavoris());
 		return paramEvent;
 	}
 }

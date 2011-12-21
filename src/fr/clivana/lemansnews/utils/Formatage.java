@@ -14,6 +14,11 @@ public class Formatage {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 		return formatter.format(date);
 	}
+	
+	public static String datePourTriEvenement(Date date) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
+		return formatter.format(date);
+	}
 
 	public static String suppressionHtml(String texte) {
 		texte = replace(texte, "<br>", "\n");
