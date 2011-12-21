@@ -1,5 +1,7 @@
 package fr.clivana.lemansnews.controller;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
@@ -19,6 +21,7 @@ public class DetailNewsController implements OnClickListener {
 	String categorie;
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
 	CategoriesDialog dialog;
+	GoogleAnalyticsTracker tracker;
 	
 	public DetailNewsController(Context c, int idArticle, String categorie) {
 		context=c;
@@ -26,21 +29,25 @@ public class DetailNewsController implements OnClickListener {
 		newsDao=new NewsDAO(context);
 		article=newsDao.getArticle(idArticle);
 		this.categorie= categorie;
+		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.buttonRetour){
+			tracker.trackEvent("Detail d'une news", "clic", "Précédent", 1);
 			((Activity) context).finish();
 		}
 		if(v.getId()==R.id.imageViewPartager){
-			dialog=new CategoriesDialog(context, "Partager", null, null, "Annuler", items, -1, 3);
+			tracker.trackEvent("Detail d'une news", "clic", "Partager-"+article.getId()+"-"+article.getTitre(), 1);
+			dialog=new CategoriesDialog(context, "Partager", "", "", "Annuler", items, -1, 3);
 			dialog.addInfos(article.getTitre(), article.getArticle());
 			dialog.show();
 		}
 		if(v.getId()==R.id.buttonInfo){
-			//article.setFavoris(true);
+			tracker.trackEvent("Detail d'une news", "clic", "Favoris-"+article.getId()+"-"+article.getTitre(), 1);
+			article.setFavoris(true);
 			newsDao.updateNews(article);
 		}
 	}

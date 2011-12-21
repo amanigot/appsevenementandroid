@@ -2,6 +2,8 @@ package fr.clivana.lemansnews.controller;
 
 import java.util.List;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -35,22 +37,24 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	List<Evenement> evenements;
 	List<Article> articles;
 	AsyncTaskVuePrincipale asyncTask;
+	GoogleAnalyticsTracker tracker;
 	
 	public VuePrincipaleController(Context context){
 		ctx = context;
 		eventsDao = new EventsDAO(ctx);
 		newsDao = new NewsDAO(ctx);
 		asyncTask=new AsyncTaskVuePrincipale(ctx);
+		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 	
 	public GalleryAdapter initGalleryAdapter(){
-		//evenements=eventsDao.getAllEvents();
+		evenements=eventsDao.getAllEvents();
 		galleryAdapter=new GalleryAdapter(ctx, evenements);
 		return galleryAdapter;
 	}
 	
 	public GridNewsAdapter initNewsAdapter(){
-		//articles=newsDao.getAllArticles();
+		articles=newsDao.getAllArticles();
 		newsAdapter= new GridNewsAdapter(ctx, articles);
 		return newsAdapter;
 	}
@@ -70,22 +74,27 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	public void onClick(View v) {
 		
 		if(v.getId()==R.id.buttonNews){
+			tracker.trackEvent("Accueil", "clic", "Categories", 1);
 			Intent intentNews = new Intent(ctx, CategoriesActivity.class);
     		ctx.startActivity(intentNews);
 		}
 		if(v.getId()==R.id.buttonEvents){
+			tracker.trackEvent("Accueil", "clic", "Evenements", 1);
 			Intent intentEvents = new Intent(ctx, ListeEvenementsActivity.class);
     		ctx.startActivity(intentEvents);
 		}
 		if(v.getId()==R.id.buttonInfo){
+			tracker.trackEvent("Accueil", "clic", "Infos", 1);
 			Intent intentInfo = new Intent(ctx, InfoActivity.class);
     		ctx.startActivity(intentInfo);
 		}
 		if(v.getId() == R.id.buttonFavoris){
+			tracker.trackEvent("Accueil", "clic", "Favoris", 1);
 			Intent intentFav = new Intent(ctx, FavorisActivity.class);
 			ctx.startActivity(intentFav);
 		}
 		if(v.getId()==R.id.buttonActualiser){
+			tracker.trackEvent("Accueil", "clic", "Actualiser", 1);
 			//Toast.makeText(ctx, "actualisation", Toast.LENGTH_SHORT).show();
 			Actualisation();
 		}
@@ -104,11 +113,13 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		if(parent.getId()==R.id.galleryEvents){
+			tracker.trackEvent("Accueil", "clic", "Evenement-"+evenements.get(position).getId()+"-"+evenements.get(position).getTitre(), 1);
 			Intent evenementIntent = new Intent(ctx, DetailEvenementActivity.class);
 			evenementIntent.putExtra("event", evenements.get(position).getId());
 			ctx.startActivity(evenementIntent);
 		}
 		if(parent.getId()==R.id.gridViewNewsPrincipal){
+			tracker.trackEvent("Accueil", "clic", "Article-"+articles.get(position).getId()+"-"+articles.get(position).getTitre(), 1);
 			Intent intentNews = new Intent(ctx, DetailNewsActivity.class);
 			intentNews.putExtra("article", articles.get(position).getId());
 			ctx.startActivity(intentNews);

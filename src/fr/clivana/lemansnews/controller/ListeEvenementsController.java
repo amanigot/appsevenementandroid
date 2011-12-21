@@ -2,6 +2,8 @@ package fr.clivana.lemansnews.controller;
 
 import java.util.List;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.async.AsyncTaskListeEvenements;
 import fr.clivana.lemansnews.dao.EventsDAO;
@@ -25,18 +27,21 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 	ListEvenementsAdapter adapter;
 	List<Evenement> evenements;
 	AsyncTaskListeEvenements asyncTask;
+	GoogleAnalyticsTracker tracker;
 	
 	public ListeEvenementsController(Context c) {
 		// TODO Auto-generated constructor stub
 		context=c;
 		eventsDao= new EventsDAO(context);
 		asyncTask=new AsyncTaskListeEvenements(context);
+		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.buttonActualiser){
+			tracker.trackEvent("Liste des Evenements", "clic", "actualiser", 1);
 			if(Reseau.verifReseau(context)){
 				asyncTask.execute();
 			}else{
@@ -44,6 +49,7 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 			}
 		}
 		if(v.getId()==R.id.buttonRetour || v.getId()==R.id.buttonEvents){
+			tracker.trackEvent("Liste des Evenements", "clic", "Retour a l'accueil", 1);
 			((Activity) context).finish();
 		}
 	}
@@ -65,6 +71,7 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// TODO Auto-generated method stub
+		tracker.trackEvent("Liste des Evenements", "clic", "evenement-"+evenements.get(position).getId()+"-"+evenements.get(position).getTitre(), 1);
 		Intent evenementIntent = new Intent(context, DetailEvenementActivity.class);
 		evenementIntent.putExtra("event", evenements.get(position).getId());
 		context.startActivity(evenementIntent);

@@ -2,6 +2,8 @@ package fr.clivana.lemansnews.controller;
 
 import java.util.List;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.async.AsyncTaskListeEvenements;
 import fr.clivana.lemansnews.dao.NewsDAO;
@@ -25,12 +27,14 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 	Context context;
 	String categorie;
 	AsyncTaskListeEvenements asyncTask;
+	GoogleAnalyticsTracker tracker;
 	
 	public GridNewsController(Context c, String categorie) {
 		context = c;
 		newsDao = new NewsDAO(context);
 		this.categorie=categorie;
 		asyncTask=new AsyncTaskListeEvenements(context);
+		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
 	public GridNewsAdapter initGridNewsAdapter() {
@@ -42,9 +46,11 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 	@Override
 	public void onClick(View v) {
 		if(v.getId()==R.id.buttonRetour){
+			tracker.trackEvent("Categorie-"+categorie, "clic", "Retour aux Categories", 1);
 			((Activity) context).finish();
 		}
 		if(v.getId()==R.id.buttonActualiser){
+			tracker.trackEvent("Categorie-"+categorie, "clic", "Actualiser", 1);
 			if(Reseau.verifReseau(context)){
 				asyncTask.execute();
 			}else{
@@ -57,6 +63,7 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// TODO Auto-generated method stub
+		tracker.trackEvent("Categorie-"+categorie, "clic", "article-"+articles.get(position).getId()+"-"+articles.get(position).getTitre(), 1);
 		Intent intentNews = new Intent(context, DetailNewsActivity.class);
 		intentNews.putExtra("article", articles.get(position).getId());
 		intentNews.putExtra("categorie", categorie);

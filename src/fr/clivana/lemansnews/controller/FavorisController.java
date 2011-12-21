@@ -2,6 +2,8 @@ package fr.clivana.lemansnews.controller;
 
 import java.util.List;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
@@ -27,21 +29,23 @@ public class FavorisController implements OnItemClickListener, OnClickListener {
 	ListNewsAdapter newsAdapter;
 	List<Article> articles;
 	List<Evenement> evenements;
+	GoogleAnalyticsTracker tracker;
 	
 	public FavorisController(Context c) {
 		context=c;
 		newsDao=new NewsDAO(context);
 		eventsDao=new EventsDAO(context);
+		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
 	public ListNewsAdapter initListNewsAdapter() {
-		articles=newsDao.getAllArticles();
+		articles=newsDao.getFavoriteArticles();
 		newsAdapter=new ListNewsAdapter(context, articles);
 		return newsAdapter;
 	}
 
 	public ListAdapter initListEventsAdapter() {
-		evenements=eventsDao.getAllEvents();
+		evenements=eventsDao.getFavoriteEvents();
 		eventsAdapter=new ListEvenementsAdapter(context, evenements);
 		return eventsAdapter;
 	}
@@ -50,11 +54,13 @@ public class FavorisController implements OnItemClickListener, OnClickListener {
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		if(parent.getId()==R.id.listViewEvenementsFav){
+			tracker.trackEvent("Favoris-Evenement", "clic", "detail-"+evenements.get(position).getId()+"-"+evenements.get(position).getTitre(), 1);
 			Intent evenementIntent = new Intent(context, DetailEvenementActivity.class);
 			evenementIntent.putExtra("event", evenements.get(position).getId());
 			context.startActivity(evenementIntent);
 		}
 		if(parent.getId()==R.id.listViewNews){
+			tracker.trackEvent("Favoris-News", "clic", "detail-"+articles.get(position).getId()+"-"+articles.get(position).getTitre(), 1);
 			Intent intentNews = new Intent(context, DetailNewsActivity.class);
 			intentNews.putExtra("article", articles.get(position).getId());
 			context.startActivity(intentNews);

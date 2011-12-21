@@ -2,6 +2,8 @@ package fr.clivana.lemansnews.vue;
 
 import java.util.Date;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.VuePrincipaleController;
 import fr.clivana.lemansnews.utils.Formatage;
@@ -32,11 +34,15 @@ public class VuePrincipaleActivity extends Activity{
 	Button boutonFavoris;
 	CategoriesDialog dialog;
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
-	
+	GoogleAnalyticsTracker tracker;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		tracker = GoogleAnalyticsTracker.getInstance();
+		tracker.startNewSession("UA-27873084-1",1, this);
+		
 		
 		controller = new VuePrincipaleController(this);
 		titreApplication =(TextView)findViewById(R.id.textViewTitreApplication);
@@ -59,7 +65,7 @@ public class VuePrincipaleActivity extends Activity{
 		
 		derniereMaj.setText(getSharedPreferences("prefs", 0).getString("date", ""));
 		
-		initAdapters();
+		//initAdapters();
 		
 		boutonALaUne.setPressed(true);
         boutonALaUne.setClickable(false);
@@ -81,8 +87,8 @@ public class VuePrincipaleActivity extends Activity{
 	}
 	
 	public void initAdapters(){
-		//galleryEvents.setAdapter(controller.initGalleryAdapter());
-		//gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
+		galleryEvents.setAdapter(controller.initGalleryAdapter());
+		gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
 	}
 	
 	@Override
@@ -98,15 +104,23 @@ public class VuePrincipaleActivity extends Activity{
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()){
 		case R.id.share:
+			tracker.trackEvent("Accueil", "option", "partage application", 1);
 			dialog=new CategoriesDialog(this, "Partager l'application", "", "", "Annuler", items, -1, 3);
 			dialog.addInfos("Application Le Mans News & Evénements","");
 			dialog.getBuilder().show();
 			break;
 			
 		case R.id.actualiseroption:
+			tracker.trackEvent("Accueil", "option", "actualisation", 1);
 			controller.Actualisation();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		tracker.stopSession();
+		super.onDestroy();
 	}
 }

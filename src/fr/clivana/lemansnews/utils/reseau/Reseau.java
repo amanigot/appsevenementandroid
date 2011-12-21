@@ -24,6 +24,7 @@ import fr.clivana.lemansnews.utils.Params;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 public class Reseau {
@@ -46,8 +47,8 @@ public class Reseau {
 	
 // verification de la qualité du reseau
 	public static boolean isSlow(Context context){
-		/* TODO à implementer*/
-		return false;
+		Object manager = context.getSystemService(Context.TELEPHONY_SERVICE);
+		return ((TelephonyManager) manager).getNetworkType() < 3;	
 	}
 	
 // requete web
