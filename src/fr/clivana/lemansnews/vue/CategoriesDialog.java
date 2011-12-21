@@ -52,10 +52,12 @@ public class CategoriesDialog extends AlertDialog {
 			builder.setNegativeButton(nomNegativeButton, controller);
 		}
 		
-		if(items.length>0){
+		if(items.length>0 && !items.equals(null)){
 			
 			builder.setItems(items, controller);
 			
+		}else{
+			builder.setMessage("Aucune nouvelle catégorie n'est disponible pour le moment.");
 		}
 		
 		

@@ -1,13 +1,17 @@
 package fr.clivana.lemansnews.controller;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import fr.clivana.lemansnews.async.AsyncTaskBDD;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
+import fr.clivana.lemansnews.vue.VuePrincipaleActivity;
 
 public class SplashController {
 
@@ -24,7 +28,13 @@ public class SplashController {
 		if (Reseau.verifReseau(ctx)) {
 			asyncBdd.execute();
 		}else{
-			
+			if(ctx.getSharedPreferences("prefs", 0).getBoolean("newuser", true)){
+				Toast.makeText(ctx, "La connexion est introuvable. Pour une première connexion, vous devez vous connecter sur Internet.", Toast.LENGTH_LONG).show();
+			}else{
+				Intent VuePrincipale = new Intent(ctx, VuePrincipaleActivity.class);
+				ctx.startActivity(VuePrincipale);
+				((Activity) ctx).finish();
+			}
 		}
 	}
 	

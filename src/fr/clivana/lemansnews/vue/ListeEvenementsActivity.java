@@ -34,6 +34,7 @@ public class ListeEvenementsActivity extends Activity{
 		boutonEvenement=(Button)findViewById(R.id.buttonEvents);
 		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
+		boutonInfo=(Button)findViewById(R.id.buttonInfo);
 		
 		listeEvenementsController= new ListeEvenementsController(this);
 		
@@ -41,6 +42,7 @@ public class ListeEvenementsActivity extends Activity{
 		boutonALaUne.setVisibility(View.GONE);
 		boutonFavoris.setVisibility(View.GONE);
 		boutonRetour.setVisibility(View.VISIBLE);
+		boutonInfo.setVisibility(View.INVISIBLE);
 		
 		boutonActualiser.setOnClickListener(listeEvenementsController);
 		boutonRetour.setOnClickListener(listeEvenementsController);

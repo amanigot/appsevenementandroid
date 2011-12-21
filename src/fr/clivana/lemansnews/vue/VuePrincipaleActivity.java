@@ -1,7 +1,10 @@
 package fr.clivana.lemansnews.vue;
 
+import java.util.Date;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.VuePrincipaleController;
+import fr.clivana.lemansnews.utils.Formatage;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +21,7 @@ public class VuePrincipaleActivity extends Activity{
 	TextView titreApplication;
 	TextView titreActualite;
 	TextView titreSuite;
+	TextView derniereMaj;
 	Gallery galleryEvents;
 	GridView gridViewNewsPrincipale;
 	Button boutonALaUne;
@@ -38,6 +42,7 @@ public class VuePrincipaleActivity extends Activity{
 		titreApplication =(TextView)findViewById(R.id.textViewTitreApplication);
 		titreActualite = (TextView)findViewById(R.id.titreActualite);
 		titreSuite = (TextView)findViewById(R.id.titreActualiteSuite);
+		derniereMaj = (TextView)findViewById(R.id.textViewDateMAJ);
 		galleryEvents = (Gallery)findViewById(R.id.galleryEvents);
 		gridViewNewsPrincipale = (GridView)findViewById(R.id.gridViewNewsPrincipal);
 		boutonALaUne = (Button)findViewById(R.id.buttonALaUne);
@@ -51,6 +56,8 @@ public class VuePrincipaleActivity extends Activity{
 		
 		controller.miseEnPageRomanLight(titreActualite);
 		controller.miseEnPageRomanLight(titreSuite);
+		
+		derniereMaj.setText(getSharedPreferences("prefs", 0).getString("date", ""));
 		
 		initAdapters();
 		

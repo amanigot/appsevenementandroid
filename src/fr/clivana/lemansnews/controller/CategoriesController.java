@@ -48,7 +48,7 @@ public class CategoriesController implements OnClickListener,
 			//for(int i=0;i<categoriesAAjouter.size();i++){
 			//	categoriesAAjouterTitre[i]=categoriesAAjouter.get(i).getMotClef();
 			//}
-			ajouterCategorie= new CategoriesDialog(context, "Ajouter une catégorie", "Appuyez sur une catégorie pour l'ajouter. Appuyez longuement sur une catégorie du menu pour la supprimer.", null, "Annuler",categoriesAAjouterTitre, -1, 1 );
+			ajouterCategorie= new CategoriesDialog(context, "Ajouter une catégorie", "Appuyez sur une catégorie pour l'ajouter. Appuyez longuement sur une catégorie du menu pour la supprimer.", "", "Annuler",categoriesAAjouterTitre, -1, 1 );
 			ajouterCategorie.getBuilder().show();
 		}
 		if (v.getId() == R.id.buttonActualiser) {
@@ -85,7 +85,7 @@ public class CategoriesController implements OnClickListener,
 	public boolean onItemLongClick(AdapterView<?> parent, View v,
 			final int position, long id) {
 		//if(categoriesMenu.get(position).isSupprimable()){
-			categoriesDialog = new CategoriesDialog(context, "Supprimer", "Voulez-vous supprimer la catégorie ?", "Supprimer", "Annuler", null, position, 2);
+			categoriesDialog = new CategoriesDialog(context, "Supprimer", "Voulez-vous supprimer la catégorie ?", "Supprimer", "Annuler", new String[0], position, 2);
 			categoriesDialog.getBuilder().show();
 			return false;
 		//}
