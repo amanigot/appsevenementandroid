@@ -39,6 +39,10 @@ public class DetailNewsController implements OnClickListener {
 			dialog.addInfos(article.getTitre(), article.getArticle());
 			dialog.show();
 		}
+		if(v.getId()==R.id.buttonInfo){
+			//article.setFavoris(true);
+			newsDao.updateNews(article);
+		}
 	}
 
 	public CharSequence initTitre() {

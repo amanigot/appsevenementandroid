@@ -3,7 +3,7 @@
 
     
         <item android:drawable="@drawable/btnmeseventsselect"
-          android:state_pressed="true" />
+          android:state_selected="true" />
     <item android:drawable="@drawable/btnmesevents" />
 
 </selector>

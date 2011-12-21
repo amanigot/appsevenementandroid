@@ -3,7 +3,7 @@
 
     
         <item android:drawable="@drawable/btnmesactusselect"
-          android:state_pressed="true" />
+          android:state_selected="true" />
     <item android:drawable="@drawable/btnmesactus" />
 
 </selector>

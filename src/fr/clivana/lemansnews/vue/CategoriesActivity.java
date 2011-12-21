@@ -34,19 +34,20 @@ public class CategoriesActivity extends Activity{
         boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
         categories=(GridView)findViewById(R.id.gridViewCategorie);
         boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
+        titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
+        
+        //creation du controller
+        controller=new CategoriesController(this);
         
         //titre en haut de la page
         titreApplication.setText(controller.initTitre());
         Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
 		titreApplication.setTypeface(tfRoman);
-        
-        //creation du controller
-        controller=new CategoriesController(this);
-        
+
         //ici on gère la visibilité des boutons du menu du bas
         boutonEvenement.setVisibility(View.GONE);
 		boutonALaUne.setVisibility(View.GONE);
-		boutonInfo.setVisibility(View.GONE);
+		boutonInfo.setVisibility(View.INVISIBLE);
 		boutonRetour.setVisibility(View.VISIBLE);
 		boutonFavoris.setVisibility(View.GONE);
 		
@@ -56,7 +57,7 @@ public class CategoriesActivity extends Activity{
         boutonActualiser.setOnClickListener(controller);
         boutonRetour.setOnClickListener(controller);
         
-        initAdapters();
+        //initAdapters();
         
         //listeners de la gridnews
         categories.setOnItemClickListener(controller);

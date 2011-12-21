@@ -1,11 +1,15 @@
 package fr.clivana.lemansnews.async;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.vue.VuePrincipaleActivity;
 
 public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
@@ -48,6 +52,11 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 	@Override
 	protected void onPostExecute(Void params){
 
+		Editor editor=context.getSharedPreferences("prefs", 0).edit();
+		editor.putString("date", Formatage.dateEnTexteComplet(new Date()));
+		editor.putBoolean("newuser", false);
+		editor.commit();
+		
 		Intent VuePrincipale = new Intent(context, VuePrincipaleActivity.class);
 		context.startActivity(VuePrincipale);
 		((Activity) context).finish();

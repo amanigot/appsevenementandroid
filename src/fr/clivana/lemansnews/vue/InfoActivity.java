@@ -26,6 +26,8 @@ public class InfoActivity extends Activity {
 		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
         titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
         boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
+        boutonInfo=(Button)findViewById(R.id.buttonInfo);
+        boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
         
         infoController= new InfoController(this);
         
@@ -34,6 +36,7 @@ public class InfoActivity extends Activity {
         boutonFavoris.setVisibility(View.GONE);
         boutonRetour.setVisibility(View.VISIBLE);
         boutonInfo.setVisibility(View.INVISIBLE);
+        boutonActualiser.setVisibility(View.INVISIBLE);
         
         boutonALaUne.setOnClickListener(infoController);
         boutonRetour.setOnClickListener(infoController);

@@ -56,6 +56,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="Date"
             android:textColor="#FF0000" />
 
@@ -63,6 +64,7 @@
             android:id="@+id/textViewDateEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="TextView" />
 
     </LinearLayout>
@@ -76,13 +78,15 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="Lieu"
-            android:textColor="#FF0000"  />
+            android:textColor="#FF0000" />
 
         <TextView
             android:id="@+id/textViewLieuEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="TextView" />
 
     </LinearLayout>

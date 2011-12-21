@@ -53,6 +53,10 @@ public class DetailEventsController implements OnClickListener {
 			dialog.addInfos(evenement.getTitre(), evenement.getDetailEvenement());
 			dialog.show();
 		}
+		if(v.getId()==R.id.buttonInfo){
+			//evenement.setFavoris(true);
+			eventsDao.updateEvent(evenement);
+		}
 	}
 
 	public String getDescriptionEvenement() {
