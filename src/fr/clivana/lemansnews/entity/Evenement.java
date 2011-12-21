@@ -12,19 +12,20 @@ public class Evenement {
 	private String lieu;
 	private String urlEvenement;
 	private String dateHeureEvenement;
+	private String dateTri;
 	private String dateEnregistrement;
 	private String nomImage;
 	private String nomImageMobile;
 	private String nomImageMiniature;
 	private String motsClefs;
 	private boolean notification;
-	// ajouter favoris
+    private boolean favoris;
 	
 	public Evenement(long id, String titre, String detailEvenement,
 			String accroche, String auteur, String lieu, String urlEvenement,
-			String dateHeureEvenement, String dateEnregistrement,
+			String dateHeureEvenement, String dateTri, String dateEnregistrement,
 			String nomImage, String nomImageMobile, String nomImageMiniature,
-			String motsClefs, boolean notification) {
+			String motsClefs, boolean notification, boolean favoris) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -34,12 +35,14 @@ public class Evenement {
 		this.lieu = lieu;
 		this.urlEvenement = urlEvenement;
 		this.dateHeureEvenement = dateHeureEvenement;
+		this.dateTri = dateTri;
 		this.dateEnregistrement = dateEnregistrement;
 		this.nomImage = nomImage;
 		this.nomImageMobile = nomImageMobile;
 		this.nomImageMiniature = nomImageMiniature;
 		this.motsClefs = motsClefs;
 		this.notification = notification;
+		this.favoris = favoris;
 	}
 
 	public Evenement() {
@@ -110,6 +113,14 @@ public class Evenement {
 		this.dateHeureEvenement = dateHeureEvenement;
 	}
 
+	public String getDateTri() {
+		return dateTri;
+	}
+
+	public void setDateTri(String dateTri) {
+		this.dateTri = dateTri;
+	}
+
 	public String getDateEnregistrement() {
 		return dateEnregistrement;
 	}
@@ -158,6 +169,14 @@ public class Evenement {
 		this.notification = notification;
 	}
 	
+	public boolean isFavoris() {
+		return favoris;
+	}
+
+	public void setFavoris(boolean favoris) {
+		this.favoris = favoris;
+	}
+
 	public static Evenement noEvents(){
 		Evenement noNews = new Evenement(
 				(long)0,
@@ -172,7 +191,9 @@ public class Evenement {
 				"",
 				"",
 				"",
+				"",
 				"noNews",
+				false,
 				false);
 		return noNews;
 	}
@@ -191,7 +212,9 @@ public class Evenement {
 				"",
 				"",
 				"",
+				"",
 				"noNewsFound",
+				false,
 				false);
 		return noNewsFound;
 	}

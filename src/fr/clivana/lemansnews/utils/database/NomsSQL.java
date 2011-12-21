@@ -14,16 +14,20 @@ public class NomsSQL {
 	public static final String COLONNE_CATEGORIE_ID = "id";
 	public static final String COLONNE_CATEGORIE_NOM = "nom";
 	public static final String COLONNE_CATEGORIE_NOMIMAGE = "nom_image";
-	public static final String COLONNE_CATEGORIE_DATEACCES = "date";
 	public static final String COLONNE_CATEGORIE_COUNT = "count";
+	public static final String COLONNE_CATEGORIE_TOTAL = "total";
+	public static final String COLONNE_CATEGORIE_SUPPRIMABLE = "supprimable";
 	public static final String COLONNE_CATEGORIE_SELECTION = "selection";
+	public static final String COLONNE_CATEGORIE_DATEACCES = "date";
 	
 	public static final int RANG_CATEGORIE_ID = 0;
 	public static final int RANG_CATEGORIE_NOM = 1;
 	public static final int RANG_CATEGORIE_NOMIMAGE = 2;
-	public static final int RANG_CATEGORIE_DATEACCES = 3;
-	public static final int RANG_CATEGORIE_COUNT = 4;
-	public static final int RANG_CATEGORIE_SELECTION = 5;
+	public static final int RANG_CATEGORIE_COUNT = 3;
+	public static final int RANG_CATEGORIE_TOTAL = 4;
+	public static final int RANG_CATEGORIE_SUPPRIMABLE = 5;
+	public static final int RANG_CATEGORIE_SELECTION = 6;
+	public static final int RANG_CATEGORIE_DATEACCES = 7;
 	
 // structure de la table article
 	public static final String COLONNE_ARTICLE_ID = "id";
@@ -63,12 +67,14 @@ public class NomsSQL {
 	public static final String COLONNE_EVENEMENT_LIEU = "lieu";
 	public static final String COLONNE_EVENEMENT_URLEVENEMENT = "url_evenement";
 	public static final String COLONNE_EVENEMENT_DATEHEURE = "dateheure";
+	public static final String COLONNE_EVENEMENT_DATETRI = "datetri";
 	public static final String COLONNE_EVENEMENT_DATEENREGISTREMENT = "date_enregistrement";
 	public static final String COLONNE_EVENEMENT_NOMIMAGE = "nom_image";
 	public static final String COLONNE_EVENEMENT_NOMIMAGEMOBILE = "nom_image_mobile";
 	public static final String COLONNE_EVENEMENT_NOMMINIATURE = "nom_miniature";
 	public static final String COLONNE_EVENEMENT_MOTSCLEFS = "mots_clefs";
 	public static final String COLONNE_EVENEMENT_NOTIFICATION = "notification";
+    public static final String COLONNE_EVENEMENT_FAVORIS = "favoris";
 
 	public static final int RANG_EVENEMENT_ID = 0;
 	public static final int RANG_EVENEMENT_TITRE = 1;
@@ -78,14 +84,16 @@ public class NomsSQL {
 	public static final int RANG_EVENEMENT_LIEU = 5;
 	public static final int RANG_EVENEMENT_URLEVENEMENT = 6;
 	public static final int RANG_EVENEMENT_DATEHEURE = 7;
-	public static final int RANG_EVENEMENT_DATEENREGISTREMENT = 8;
-	public static final int RANG_EVENEMENT_NOMIMAGE = 9;
-	public static final int RANG_EVENEMENT_NOMIMAGEMOBILE = 10;
-	public static final int RANG_EVENEMENT_NOMMINIATURE = 11;
-	public static final int RANG_EVENEMENT_MOTSCLEFS = 12;
-	public static final int RANG_EVENEMENT_NOTIFICATION = 13;
+	public static final int RANG_EVENEMENT_DATETRI = 8;
+	public static final int RANG_EVENEMENT_DATEENREGISTREMENT = 9;
+	public static final int RANG_EVENEMENT_NOMIMAGE = 10;
+	public static final int RANG_EVENEMENT_NOMIMAGEMOBILE = 11;
+	public static final int RANG_EVENEMENT_NOMMINIATURE = 12;
+	public static final int RANG_EVENEMENT_MOTSCLEFS = 13;
+	public static final int RANG_EVENEMENT_NOTIFICATION = 14;
+    public static final int RANG_EVENEMENT_FAVORIS = 15;
 
-// requetes de créations
+// création table article
 	public static final String QUERY_CREATE_TABLE_ARTICLE = "create table if not exists "
 			+ TABLE_ARTICLE + " (" + COLONNE_ARTICLE_ID + " integer primary key , " 
 								+ COLONNE_ARTICLE_TITRE + " text not null, "
@@ -97,9 +105,11 @@ public class NomsSQL {
 								+ COLONNE_ARTICLE_NOMIMAGE + " text, "
 								+ COLONNE_ARTICLE_NOMIMAGEMOBILE + " text, "
 								+ COLONNE_ARTICLE_NOMMINIATURE + " text, "
-								+ COLONNE_ARTICLE_MOTSCLEFS + " text,"
-								+ COLONNE_ARTICLE_NOTIFICATION + " boolean "+");";
+								+ COLONNE_ARTICLE_MOTSCLEFS + " text, "
+								+ COLONNE_ARTICLE_NOTIFICATION + " boolean, "
+								+ COLONNE_ARTICLE_FAVORIS + " boolean "+");";
 	
+// création table evenement
 	public static final String QUERY_CREATE_TABLE_EVENEMENT = "create table if not exists "
 			+ TABLE_EVENEMENT + " (" + COLONNE_EVENEMENT_ID + " integer primary key , " 
 								+ COLONNE_EVENEMENT_TITRE + " text not null, "
@@ -109,31 +119,26 @@ public class NomsSQL {
 								+ COLONNE_EVENEMENT_LIEU + " text, "
 								+ COLONNE_EVENEMENT_URLEVENEMENT+ " text, "
 								+ COLONNE_EVENEMENT_DATEHEURE + " text, "
+								+ COLONNE_EVENEMENT_DATETRI + " text, "
 								+ COLONNE_EVENEMENT_DATEENREGISTREMENT + " text, "
 								+ COLONNE_EVENEMENT_NOMIMAGE + " text, "
 								+ COLONNE_EVENEMENT_NOMIMAGEMOBILE + " text, "
 								+ COLONNE_EVENEMENT_NOMMINIATURE + " text, "
-								+ COLONNE_EVENEMENT_MOTSCLEFS + " text,"
-								+ COLONNE_EVENEMENT_NOTIFICATION + " boolean "+");";
+								+ COLONNE_EVENEMENT_MOTSCLEFS + " text, "
+								+ COLONNE_EVENEMENT_NOTIFICATION + " boolean, "
+								+ COLONNE_EVENEMENT_FAVORIS + " boolean "+");";
 	
+// création table categorie
 	public static final String QUERY_CREATE_TABLE_CATEGORIE = "create table if not exists "
-			+ TABLE_CATEGORIE + " (" + COLONNE_CATEGORIE_ID + " integer primary key autoincrement, "
+			+ TABLE_CATEGORIE + " (" + COLONNE_CATEGORIE_ID + " integer primary key, "
 			+ COLONNE_CATEGORIE_NOM + " text not null, " 
 			+ COLONNE_CATEGORIE_NOMIMAGE + " text, "
-			+ COLONNE_CATEGORIE_DATEACCES + " long,"
-			+ COLONNE_CATEGORIE_COUNT +" integer,"
-			+ COLONNE_CATEGORIE_SELECTION + " boolean"+");";
-	
-// insert de données par defaut
-	public static final String QUERY_INSERT_CATEGORIE = "insert into " + TABLE_CATEGORIE + " (" 
-			+ COLONNE_CATEGORIE_NOM + ", " 
-			+ COLONNE_CATEGORIE_NOMIMAGE + ", " 
-			+ COLONNE_CATEGORIE_DATEACCES + ", " 
-			+ COLONNE_CATEGORIE_COUNT + ", " 
-			+ COLONNE_CATEGORIE_SELECTION 
-			+") values ( 'all', '', 0, 0, 1 ), "
-			+"('events', '', 0, 0, 1);";
-	
+			+ COLONNE_CATEGORIE_COUNT +" integer, "
+			+ COLONNE_CATEGORIE_TOTAL +" integer, "
+			+ COLONNE_CATEGORIE_SUPPRIMABLE + " boolean, "
+			+ COLONNE_CATEGORIE_SELECTION + " boolean, "
+			+ COLONNE_CATEGORIE_DATEACCES + " long," + ");";
+		
 // requetes de mise à jour V2 
 	public static final String QUERY_ALTERTABLE_V1_V2 = "";
 	

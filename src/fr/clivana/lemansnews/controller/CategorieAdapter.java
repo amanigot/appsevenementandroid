@@ -40,10 +40,10 @@ public class CategorieAdapter extends BaseAdapter{
 			v = li.inflate(R.layout.gridnewsitem, null);
 		
 			TextView tv = (TextView)v.findViewById(R.id.icon_text);
-			if(notifications.get(position).getMotClef().equals("all")){
+			if(notifications.get(position).getNom().equals("all")){
 				tv.setText("Toutes les news");
 			}else{
-				tv.setText(notifications.get(position).getMotClef());
+				tv.setText(notifications.get(position).getNom());
 			}
 			ImageView iv = (ImageView)v.findViewById(R.id.icon_image);
 			iv.setImageResource(R.drawable.illustaucuneimage111);
