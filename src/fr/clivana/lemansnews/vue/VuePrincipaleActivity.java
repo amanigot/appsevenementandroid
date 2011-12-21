@@ -4,6 +4,9 @@ import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.VuePrincipaleController;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.GridView;
@@ -23,6 +26,9 @@ public class VuePrincipaleActivity extends Activity{
 	Button boutonInfo;
 	Button boutonActualiser;
 	Button boutonFavoris;
+	CategoriesDialog dialog;
+	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
+	
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -70,5 +76,30 @@ public class VuePrincipaleActivity extends Activity{
 	public void initAdapters(){
 		//galleryEvents.setAdapter(controller.initGalleryAdapter());
 		//gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		
+		MenuInflater inflater = new MenuInflater(this);
+		inflater.inflate(R.menu.optionmenu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case R.id.share:
+			dialog=new CategoriesDialog(this, "Partager l'application", "", "", "Annuler", items, -1, 3);
+			dialog.addInfos("Application Le Mans News & Evénements","");
+			dialog.getBuilder().show();
+			break;
+			
+		case R.id.actualiseroption:
+			controller.Actualisation();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

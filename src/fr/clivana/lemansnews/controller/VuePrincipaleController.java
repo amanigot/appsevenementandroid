@@ -87,11 +87,16 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 		}
 		if(v.getId()==R.id.buttonActualiser){
 			//Toast.makeText(ctx, "actualisation", Toast.LENGTH_SHORT).show();
-			if(Reseau.verifReseau(ctx)){
-				asyncTask.execute();
-			}else{
-				Toast.makeText(ctx, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
-			}
+			Actualisation();
+		}
+	}
+
+	public void Actualisation() {
+		// TODO Auto-generated method stub
+		if(Reseau.verifReseau(ctx)){
+			asyncTask.execute();
+		}else{
+			Toast.makeText(ctx, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
 		}
 	}
 

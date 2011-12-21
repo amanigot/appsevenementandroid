@@ -22,36 +22,37 @@ public class CategoriesDialog extends AlertDialog {
 		this.nomPositiveButton=posButton;
 		this.nomNegativeButton=negButton;
 		this.items=objets;
+		builder= new Builder(ctx);
 		
 		//le constructeur utilisant la position n'est utilisé que pour la suppression
 		pos = position;
-		if(pos!=-1){
-			controller = new CategoriesDialogController(ctx, id, pos);
-		}else{
+		if(pos==-1){
 			controller = new CategoriesDialogController(ctx, id);
+		}else{
+			controller = new CategoriesDialogController(ctx, id, pos);
 		}
 		
-		if(!titre.equals(null)){
+		if(!titre.equals("")){
 			
-			setTitle(title);
+			builder.setTitle(title);
 		}
 		
-		if(!this.message.equals(null)){
+		if(!this.message.equals("")){
 			
-			setMessage(this.message);
+			builder.setMessage(this.message);
 		}
 		
-		if(!nomPositiveButton.equals(null)){
+		if(!nomPositiveButton.equals("")){
 			
 			builder.setPositiveButton(nomPositiveButton, controller);
 		}
 		
-		if(!nomNegativeButton.equals(null)){
+		if(!nomNegativeButton.equals("")){
 			
 			builder.setNegativeButton(nomNegativeButton, controller);
 		}
 		
-		if(!items.equals(null)){
+		if(items.length>0){
 			
 			builder.setItems(items, controller);
 			
@@ -66,6 +67,14 @@ public class CategoriesDialog extends AlertDialog {
 	public void addInfos(String titre, String details) {
 		controller.setTitre(titre);
 		controller.setDescription(details);
+	}
+
+	public Builder getBuilder() {
+		return builder;
+	}
+
+	public void setBuilder(Builder builder) {
+		this.builder = builder;
 	}
 
 	

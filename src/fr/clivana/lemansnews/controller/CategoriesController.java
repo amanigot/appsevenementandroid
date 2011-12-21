@@ -49,7 +49,7 @@ public class CategoriesController implements OnClickListener,
 			//	categoriesAAjouterTitre[i]=categoriesAAjouter.get(i).getMotClef();
 			//}
 			ajouterCategorie= new CategoriesDialog(context, "Ajouter une catégorie", "Appuyez sur une catégorie pour l'ajouter. Appuyez longuement sur une catégorie du menu pour la supprimer.", null, "Annuler",categoriesAAjouterTitre, -1, 1 );
-			ajouterCategorie.show();
+			ajouterCategorie.getBuilder().show();
 		}
 		if (v.getId() == R.id.buttonActualiser) {
 			if(Reseau.verifReseau(context)){
@@ -86,7 +86,7 @@ public class CategoriesController implements OnClickListener,
 			final int position, long id) {
 		//if(categoriesMenu.get(position).isSupprimable()){
 			categoriesDialog = new CategoriesDialog(context, "Supprimer", "Voulez-vous supprimer la catégorie ?", "Supprimer", "Annuler", null, position, 2);
-			categoriesDialog.show();
+			categoriesDialog.getBuilder().show();
 			return false;
 		//}
 	}
