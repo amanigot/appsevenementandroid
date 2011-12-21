@@ -52,6 +52,8 @@ public class DetailEvenementActivity extends Activity {
 		boutonEvenement=(Button)findViewById(R.id.buttonEvents);
 		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
+		boutonInfo=(Button)findViewById(R.id.buttonInfo);
+		boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
 		
 		//initialise le contenu des vues
 		titreApplication.setText(detailEventsController.initTitre());
@@ -67,6 +69,11 @@ public class DetailEvenementActivity extends Activity {
 		boutonALaUne.setVisibility(View.GONE);
 		boutonFavoris.setVisibility(View.GONE);
 		boutonRetour.setVisibility(View.VISIBLE);
+		boutonActualiser.setVisibility(View.INVISIBLE);
+		
+		//boutonInfo.setBackgroundResource();
+		
+		boutonInfo.setOnClickListener(detailEventsController);
 		
 		partager.setOnClickListener(detailEventsController);
 		boutonRetour.setOnClickListener(detailEventsController);

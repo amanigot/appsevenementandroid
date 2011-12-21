@@ -44,6 +44,9 @@ public class FavorisActivity extends TabActivity {
 	    boutonInfo.setVisibility(View.GONE);
 	    boutonActualiser.setVisibility(View.GONE);
 	    
+	    boutonRetour.setOnClickListener(controller);
+	    boutonFavoris.setOnClickListener(controller);
+	    
 	    titreApplication.setText(controller.initTitre());
 	    Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
 		titreApplication.setTypeface(tfRoman);
@@ -52,8 +55,8 @@ public class FavorisActivity extends TabActivity {
 	    listViewNews.setOnItemClickListener(controller);
 	    listViewEvents.setOnItemClickListener(controller);
 	    
-	    mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("", getResources().getDrawable(R.drawable.btnfavnewsxml)).setContent(R.id.listViewNews));
-	    mTabHost.addTab(mTabHost.newTabSpec("tab_test3").setIndicator("", getResources().getDrawable(R.drawable.btnfaveventsxml)).setContent(R.id.listViewEvenementsFav));
+	    mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator(null, getResources().getDrawable(R.drawable.btnfavnewsxml)).setContent(R.id.listViewNews));
+	    mTabHost.addTab(mTabHost.newTabSpec("tab_test3").setIndicator(null, getResources().getDrawable(R.drawable.btnfaveventsxml)).setContent(R.id.listViewEvenementsFav));
 	    
 	    mTabHost.setCurrentTab(0);
 	}

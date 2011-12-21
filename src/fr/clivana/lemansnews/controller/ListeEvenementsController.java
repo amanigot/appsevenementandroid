@@ -43,7 +43,7 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 				Toast.makeText(context, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
 			}
 		}
-		if(v.getId()==R.id.buttonRetour){
+		if(v.getId()==R.id.buttonRetour || v.getId()==R.id.buttonEvents){
 			((Activity) context).finish();
 		}
 	}

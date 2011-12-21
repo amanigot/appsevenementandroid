@@ -9,14 +9,16 @@ import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.vue.DetailEvenementActivity;
 import fr.clivana.lemansnews.vue.DetailNewsActivity;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 
-public class FavorisController implements OnItemClickListener {
+public class FavorisController implements OnItemClickListener, OnClickListener {
 
 	Context context;
 	NewsDAO newsDao;
@@ -62,6 +64,12 @@ public class FavorisController implements OnItemClickListener {
 	public CharSequence initTitre() {
 		// TODO Auto-generated method stub
 		return "Vos favoris";
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		((Activity)context).finish();
 	}
 
 }
