@@ -19,6 +19,7 @@ import fr.clivana.lemansnews.async.AsyncTaskCategories;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.vue.CategoriesDialog;
 import fr.clivana.lemansnews.vue.GridNewsActivity;
@@ -86,7 +87,7 @@ public class CategoriesController implements OnClickListener,
 				 if(categoriesMenu.get(position).getTotal()>0){
 					Intent intentNews = new Intent(context, GridNewsActivity.class);
 				 	intentNews.putExtra("categorie", categoriesMenu.get(position).getNom());
-				 	categoriesMenu.get(position).setDateConsult(new Date().getTime());
+				 	categoriesMenu.get(position).setDateConsult(Formatage.datePourPlay(new Date().getTime()));
 				 	categoriesDao.updateCategorie(categoriesMenu.get(position) );
 				 	context.startActivity(intentNews);
 				 }else{
