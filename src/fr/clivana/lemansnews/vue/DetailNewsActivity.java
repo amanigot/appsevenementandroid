@@ -73,7 +73,7 @@ public class DetailNewsActivity extends Activity{
 		boutonRetour.setVisibility(View.VISIBLE);
 		boutonActualiser.setVisibility(View.INVISIBLE);
 		
-		//boutonInfo.setBackgroundResource();
+		boutonInfo.setBackgroundResource(R.drawable.btnmenuhautfavoris);
 		
 		
         titreApplication.setText(detailNewsController.initTitre());
