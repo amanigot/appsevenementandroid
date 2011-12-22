@@ -64,7 +64,7 @@ public class CategoriesActivity extends Activity{
         boutonActualiser.setOnClickListener(controller);
         boutonRetour.setOnClickListener(controller);
         
-        //initAdapters();
+        initAdapters();
         
         //listeners de la gridnews
         categories.setOnItemClickListener(controller);

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.vue.CategoriesActivity;
 
 public class AsyncTaskCategories extends AsyncTask<Void, Void, Void> {
@@ -30,7 +31,7 @@ public class AsyncTaskCategories extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... params) {
-		// Reseau.webservice();
+		Reseau.majCategories(context);
 		return null;
 	}
 

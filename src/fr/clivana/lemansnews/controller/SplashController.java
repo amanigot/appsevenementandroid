@@ -27,7 +27,7 @@ public class SplashController {
 	public void execute(){
 		if (Reseau.verifReseau(ctx)) {
 			if(Reseau.isSlow(ctx)){
-				Toast.makeText(ctx, "Attention : en EDGE, le chargement peut durer plus longtemps", Toast.LENGTH_LONG).show();
+				Toast.makeText(ctx, "Attention : en EDGE, le chargement peut durer plus longtemps", 3000).show();
 			}
 			asyncBdd.execute();
 		}else{

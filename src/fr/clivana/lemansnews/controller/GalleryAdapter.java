@@ -27,7 +27,7 @@ public class GalleryAdapter extends BaseAdapter {
 	
 	public GalleryAdapter(Context context, List<Evenement> events
 			) {
-		//this.events = events;
+		this.events = events;
 		this.inflater = LayoutInflater.from(context);
 		this.context=context;
 		

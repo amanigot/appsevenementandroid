@@ -49,12 +49,12 @@ public class CategorieAdapter extends BaseAdapter{
 			iv.setImageResource(R.drawable.illustaucuneimage111);
 			iv.setPadding(4, 4, 4, 4);
 			TextView badge = (TextView)v.findViewById(R.id.badge_notif);
-			//int count=notifications.get(position).getCount();
-			//if(count==0){
+			int count=notifications.get(position).getCount();
+			if(count==0){
 				badge.setVisibility(View.INVISIBLE);
-			//}else{
-			//	badge.setText(String.valueOf(count));
-			//}
+			}else{
+				badge.setText(String.valueOf(count));
+			}
 
 		return v;
 	}

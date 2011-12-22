@@ -8,6 +8,7 @@ import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.vue.CategoriesDialog;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -20,36 +21,32 @@ public class DetailEventsController implements OnClickListener {
 	CategoriesDialog dialog;
 	GoogleAnalyticsTracker tracker;
 	
-	public DetailEventsController(Context c, int idEvenement) {
-		context=c;
+	public DetailEventsController(Context c, long idEvenement) {
+		this.context=c;
 		eventsDao=new EventsDAO(context);
 		evenement=eventsDao.getEvenement(idEvenement);
 		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
 	public CharSequence initTitre() {
-		// TODO Auto-generated method stub
 		return "Evénement";
 	}
 
 	public CharSequence getTitreEvenement() {
-		// TODO Auto-generated method stub
 		return evenement.getTitre();
 	}
 
 	public CharSequence getDateEvenement() {
-		// TODO Auto-generated method stub
 		return evenement.getDateHeureEvenement();
 	}
 
 	public CharSequence getLieuEvenement() {
-		// TODO Auto-generated method stub
 		return evenement.getLieu();
 	}
 
 	@Override
 	public void onClick(View v) {
-		if(v.getId()==R.id.buttonRetour){
+		if(v.getId()==R.id.buttonRetour || v.getId()==R.id.buttonEvents){
 			tracker.trackEvent("Detail d'un evenement", "clic", "Précédent", 1);
 			((Activity) context).finish();
 		}

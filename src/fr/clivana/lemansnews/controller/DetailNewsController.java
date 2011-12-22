@@ -17,17 +17,17 @@ public class DetailNewsController implements OnClickListener {
 	Context context;
 	NewsDAO newsDao;
 	Article article;
-	int idArticle;
+	long idArticle;
 	String categorie;
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
 	CategoriesDialog dialog;
 	GoogleAnalyticsTracker tracker;
 	
-	public DetailNewsController(Context c, int idArticle, String categorie) {
+	public DetailNewsController(Context c, long idArticle2, String categorie) {
 		context=c;
-		this.idArticle=idArticle;
+		this.idArticle=idArticle2;
 		newsDao=new NewsDAO(context);
-		article=newsDao.getArticle(idArticle);
+		article=newsDao.getArticle(idArticle2);
 		this.categorie= categorie;
 		tracker = GoogleAnalyticsTracker.getInstance();
 	}
@@ -35,7 +35,7 @@ public class DetailNewsController implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(v.getId()==R.id.buttonRetour){
+		if(v.getId()==R.id.buttonRetour|| v.getId()==R.id.buttonNews){
 			tracker.trackEvent("Detail d'une news", "clic", "Précédent", 1);
 			((Activity) context).finish();
 		}

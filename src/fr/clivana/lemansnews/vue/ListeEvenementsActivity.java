@@ -58,7 +58,7 @@ public class ListeEvenementsActivity extends Activity{
 		Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
 		titreApplication.setTypeface(tfRoman);
 		
-		//initAdapters();
+		initAdapters();
 		
 		listeEvents.setOnItemClickListener(listeEvenementsController);
 	}

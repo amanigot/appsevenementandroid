@@ -27,7 +27,7 @@ public class DetailEvenementActivity extends Activity {
 	Button boutonInfo, boutonActualiser;
 	Button boutonFavoris;
 	DetailEventsController detailEventsController;
-	int idEvenement;
+	long idEvenement;
 	GoogleAnalyticsTracker tracker;
 	
 	public void onCreate(Bundle savedInstanceState){
@@ -36,9 +36,9 @@ public class DetailEvenementActivity extends Activity {
         
         Bundle extras = getIntent().getExtras();
 		if(extras!=null){
-			idEvenement=extras.getInt("event");
+			idEvenement=extras.getLong("event");
 		}else{
-			idEvenement=savedInstanceState.getInt("event");
+			idEvenement=savedInstanceState.getLong("event");
 		}
 		
 		detailEventsController = new DetailEventsController(this, idEvenement);

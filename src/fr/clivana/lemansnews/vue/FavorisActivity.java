@@ -61,7 +61,7 @@ public class FavorisActivity extends TabActivity {
 	    Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
 		titreApplication.setTypeface(tfRoman);
 	    
-	    //initAdapters();
+	    initAdapters();
 	    listViewNews.setOnItemClickListener(controller);
 	    listViewEvents.setOnItemClickListener(controller);
 	    

@@ -92,7 +92,7 @@ public class VuePrincipaleActivity extends Activity{
 	
 	public void initAdapters(){
 		galleryEvents.setAdapter(controller.initGalleryAdapter());
-		//gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
+		gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
 	}
 	
 	@Override

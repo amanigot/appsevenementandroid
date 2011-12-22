@@ -25,7 +25,7 @@ public class DetailNewsActivity extends Activity{
 	Button boutonInfo, boutonActualiser;
 	Button boutonFavoris;
 	DetailNewsController detailNewsController;
-	int idArticle;
+	long idArticle;
 	String categorie;
 	GoogleAnalyticsTracker tracker;
 	
@@ -35,7 +35,7 @@ public class DetailNewsActivity extends Activity{
         
         Bundle extras = getIntent().getExtras();
 		if(extras!=null){
-			idArticle=extras.getInt("article");
+			idArticle=extras.getLong("article");
 			categorie=extras.getString("categorie");
 		}else{
 			idArticle=savedInstanceState.getInt("article");

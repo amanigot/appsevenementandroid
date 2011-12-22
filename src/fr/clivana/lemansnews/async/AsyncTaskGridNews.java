@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.async;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.vue.GridNewsActivity;
 
 public class AsyncTaskGridNews extends AsyncTask<Void, Void, Void> {
@@ -27,7 +28,7 @@ public class AsyncTaskGridNews extends AsyncTask<Void, Void, Void> {
 	
 	@Override
 	protected Void doInBackground(Void... params) {
-		// Reseau.webservice();
+		Reseau.majArticles(context, categorie, 0, 0);
 		return null;
 	}
 	

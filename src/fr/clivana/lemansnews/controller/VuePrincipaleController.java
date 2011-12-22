@@ -48,7 +48,7 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	}
 	
 	public GalleryAdapter initGalleryAdapter(){
-		//evenements=eventsDao.getAllEvents();
+		evenements=eventsDao.getAllEvents();
 		
 		galleryAdapter=new GalleryAdapter(ctx, evenements);
 		return galleryAdapter;
