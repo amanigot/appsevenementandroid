@@ -1,12 +1,15 @@
 package fr.clivana.lemansnews.vue;
 
 import android.app.TabActivity;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.FavorisController;
@@ -55,12 +58,36 @@ public class FavorisActivity extends TabActivity {
 	    listViewNews.setOnItemClickListener(controller);
 	    listViewEvents.setOnItemClickListener(controller);
 	    
-	    mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator(null, getResources().getDrawable(R.drawable.btnfavnewsxml)).setContent(R.id.listViewNews));
-	    mTabHost.addTab(mTabHost.newTabSpec("tab_test3").setIndicator(null, getResources().getDrawable(R.drawable.btnfaveventsxml)).setContent(R.id.listViewEvenementsFav));
+//	    mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator(null, getResources().getDrawable(R.drawable.btnfavnewsxml)).setContent(R.id.listViewNews));
+//	    mTabHost.addTab(mTabHost.newTabSpec("tab_test3").setIndicator(null, getResources().getDrawable(R.drawable.btnfaveventsxml)).setContent(R.id.listViewEvenementsFav));
+
+	    setupTab(1);
+	    setupTab(2);
 	    
 	    mTabHost.setCurrentTab(0);
 	}
-
+	
+	//méthodes de création de tabs pour le tabwidget 1:news, 2:events
+	private void setupTab(int tag) {
+		View tabview = createTabView(mTabHost.getContext(), tag);
+		TabSpec setContent=null;
+		
+		if(tag==1){ setContent = mTabHost.newTabSpec("tab_test"+tag).setIndicator(tabview).setContent(R.id.listViewNews); }
+		if(tag==2){ setContent = mTabHost.newTabSpec("tab_test"+tag).setIndicator(tabview).setContent(R.id.listViewEvenementsFav); }
+		
+		if(setContent!=null){ mTabHost.addTab(setContent); }
+	}
+	
+	
+	private static View createTabView(final Context context, int type) {
+		View view=null;
+		
+		if(type==1){ view = LayoutInflater.from(context).inflate(R.layout.favtabbgnews, null); }
+		if(type==2){ view = LayoutInflater.from(context).inflate(R.layout.favtabbgevents, null); }
+		
+		return view;
+	}
+	
 	private void initAdapters() {
 		
 		listViewNews.setAdapter(controller.initListNewsAdapter());

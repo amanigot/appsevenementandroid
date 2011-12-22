@@ -13,7 +13,7 @@
     <Gallery
         android:id="@+id/galleryEvents"
         android:layout_width="match_parent"
-        android:layout_height="180px" />
+        android:layout_height="180px"/>
 
     <LinearLayout
         android:layout_width="match_parent"
