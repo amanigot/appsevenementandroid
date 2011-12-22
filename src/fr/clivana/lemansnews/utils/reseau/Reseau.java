@@ -2,6 +2,7 @@ package fr.clivana.lemansnews.utils.reseau;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,11 +31,11 @@ import android.util.Log;
 
 public class Reseau {
 
-	public final static String URL_LIST_NEWS = "/m/news/list/"; // /m/news/list/{motClef}/{numPage}/qte
-	public final static String URL_LIST_EVENTS = "/m/events/list/all/"; // /m/events/list/{motClef}/{numPage}/qte
-	public final static String URL_LIST_CATEGORIES = "/m/categories/list"; // pas de parametres
-	public final static String URL_COUNT_CATEGORIES = "/m/categories/count/";// /m/categories/count/{nom}/{date}
-	public final static String URL_IMAGES = "/data/images/"; // /data/images/{nom}
+	private final static String URL_LIST_NEWS = "/m/news/list/"; // /m/news/list/{motClef}/{numPage}/qte
+	private final static String URL_LIST_EVENTS = "/m/events/list/all/"; // /m/events/list/{motClef}/{numPage}/qte
+	private final static String URL_LIST_CATEGORIES = "/m/categories/list"; // pas de parametres
+	private final static String URL_COUNT_CATEGORIES = "/m/categories/count/";// /m/categories/count/{nom}/{date}
+	private final static String URL_IMAGES = "/data/images/"; // /data/images/{nom}
 	
 // verification du reseau
 	public static boolean verifReseau(Context context) {
@@ -92,7 +93,8 @@ public class Reseau {
 		}
 		String url = Params.BASE_SERVEUR + URL_LIST_NEWS + motClef + "/" + numPage + "/" + quantite;
 		DeSerializer<ListArticles> deserialize = new DeSerializer<ListArticles>();
-		List<Article> listArticle = deserialize.deJson(requeteWeb(url));
+		ListArticles listArticle = new ListArticles();
+		listArticle = deserialize.deJson(requeteWeb(url),listArticle);
 		if (listArticle != null && listArticle.size() != 0){
 			NewsDAO newsDao = new NewsDAO(context);
 			newsDao.setArticles(listArticle);
@@ -115,9 +117,10 @@ public class Reseau {
 		if (numPage == 0){
 			numPage = 1;
 		}
-		String url = Params.BASE_SERVEUR + URL_LIST_EVENTS + "/" + numPage + "/" + quantite;
+		String url = Params.BASE_SERVEUR + URL_LIST_EVENTS + numPage + "/" + quantite;
 		DeSerializer<ListEvents> deserialize = new DeSerializer<ListEvents>();
-		List<Evenement> listEvents = deserialize.deJson(requeteWeb(url));
+		ListEvents listEvents = new ListEvents();
+		listEvents = deserialize.deJson(requeteWeb(url),listEvents);
 		if (listEvents != null && listEvents.size() != 0){
 			EventsDAO eventsDao = new EventsDAO(context);
 			eventsDao.setEvents(listEvents);
@@ -130,7 +133,8 @@ public class Reseau {
 	public static void majCategories(Context context){
 		String url = Params.BASE_SERVEUR + URL_LIST_CATEGORIES;
 		DeSerializer<ListCategorie> deserialize = new DeSerializer<ListCategorie>();
-		List<Categorie> listCategorie = deserialize.deJson(requeteWeb(url));
+		ListCategorie listCategorie = new ListCategorie();
+		listCategorie = deserialize.deJson(requeteWeb(url), listCategorie);
 		if (listCategorie != null && listCategorie.size() != 0){
 			CategoriesDAO categorieDao = new CategoriesDAO(context);
 			categorieDao.setCategories(listCategorie);
@@ -147,7 +151,8 @@ public class Reseau {
 		}
 		String url = Params.BASE_SERVEUR + URL_COUNT_CATEGORIES + nomCategorie + "/" + dateDernierClick;
 		DeSerializer<Categorie> deserialize = new DeSerializer<Categorie>();
-		Categorie categorie = deserialize.deJson(requeteWeb(url));
+		Categorie categorie = new Categorie();
+		categorie = deserialize.deJson(requeteWeb(url), categorie);
 		if (categorie != null){
 			CategoriesDAO categorieDao = new CategoriesDAO(context);
 			categorieDao.setCategorie(categorie);

@@ -92,11 +92,13 @@ public class EventsDAO {
 		Cursor c = dbClivana.query(
 				NomsSQL.TABLE_EVENEMENT,
 				null,
-				NomsSQL.COLONNE_EVENEMENT_DATETRI +" >= " + dateTri,
+				null,//NomsSQL.COLONNE_EVENEMENT_DATETRI +" >= '" + dateTri + "'",
 				null, null, null,
 				NomsSQL.COLONNE_EVENEMENT_DATETRI,
 				Params.QTE_MAX_EVENEMENTS + "");
-		return cursorToEventTab(c);
+		List<Evenement> evenements = cursorToEventTab(c);
+		
+		return evenements;
 	}
 	
 	public List<Evenement> getFavoriteEvents(){
@@ -105,7 +107,7 @@ public class EventsDAO {
 		Cursor c = dbClivana.query(
 				NomsSQL.TABLE_EVENEMENT,
 				null,
-				NomsSQL.COLONNE_EVENEMENT_DATETRI +" >= " + dateTri + " AND " + NomsSQL.COLONNE_EVENEMENT_FAVORIS + " = 0",
+				NomsSQL.COLONNE_EVENEMENT_FAVORIS + " = 0",
 				null, null, null,
 				NomsSQL.COLONNE_EVENEMENT_DATETRI,
 				Params.QTE_MAX_EVENEMENTS + "");

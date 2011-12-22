@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import fr.clivana.lemansnews.utils.Formatage;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.vue.VuePrincipaleActivity;
 
 public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
@@ -33,11 +35,15 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 	
 	@Override
 	protected Void doInBackground(Void... params) {
+		Log.w("async task", "lancer");
 		publishProgress("Chargement des événements..."); //inscrit sur la textview chargement des events
+		Reseau.majEvenements(context, 0, 0);
 //		Reseau.webService(Reseau.URL_LIST_EVENTS+"all/1");
 		publishProgress("Chargement des actualités..."); //inscrit sur la textview chargement des actus
+		Reseau.majArticles(context, "all", 0, 0);
 //		Reseau.webService(Reseau.URL_LIST_NEWS+"all/1");
 		publishProgress("Chargement..."); //inscrit sur la textview chargement
+		Reseau.majCategories(context);
 //		Reseau.webService(Reseau.URL_LIST_KEYWORDS);
 		return null;
 	}
@@ -52,6 +58,7 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 	@Override
 	protected void onPostExecute(Void params){
 
+		Log.w("async task", "post execute");
 		Editor editor=context.getSharedPreferences("prefs", 0).edit();
 		editor.putString("date", Formatage.dateEnTexteComplet(new Date()));
 		editor.putBoolean("newuser", false);

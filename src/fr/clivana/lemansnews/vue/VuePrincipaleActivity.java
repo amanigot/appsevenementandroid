@@ -65,7 +65,7 @@ public class VuePrincipaleActivity extends Activity{
 		
 		derniereMaj.setText(getSharedPreferences("prefs", 0).getString("date", ""));
 		
-		//initAdapters();
+		initAdapters();
 		
 		boutonALaUne.setPressed(true);
         boutonALaUne.setClickable(false);
