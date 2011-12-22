@@ -37,6 +37,7 @@ public class VuePrincipaleActivity extends Activity{
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
 	GoogleAnalyticsTracker tracker;
 	
+	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -68,7 +69,7 @@ public class VuePrincipaleActivity extends Activity{
 		
 		derniereMaj.setText(getSharedPreferences("prefs", 0).getString("date", ""));
 		
-		//initAdapters();
+		initAdapters();
 		
 		boutonALaUne.setPressed(true);
         boutonALaUne.setClickable(false);
@@ -91,7 +92,7 @@ public class VuePrincipaleActivity extends Activity{
 	
 	public void initAdapters(){
 		galleryEvents.setAdapter(controller.initGalleryAdapter());
-		gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
+		//gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
 	}
 	
 	@Override
