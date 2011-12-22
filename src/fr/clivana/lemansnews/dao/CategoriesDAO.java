@@ -32,9 +32,12 @@ public class CategoriesDAO {
 		dbClivana.close();
 	}
 
-	// insert un article
+// insert un article
 	public void insertCategorie(Categorie categorie){
 		open();
+		if(!categorie.isSupprimable()){
+			categorie.setSelected(true);
+		}
 		dbClivana.insert(NomsSQL.TABLE_CATEGORIE, null, categorieToContentValues(categorie));
 		close();
 	}
@@ -53,6 +56,9 @@ public class CategoriesDAO {
 // update un article
 	public boolean updateCategorie(Categorie categorie){
 		open();
+		if(!categorie.isSupprimable()){
+			categorie.setSelected(true);
+		}
 		boolean upd = dbClivana.update(
 				NomsSQL.TABLE_CATEGORIE, 
 				categorieToContentValues(categorie), 
@@ -115,20 +121,24 @@ public class CategoriesDAO {
 		return cursorToCategorieTab(c);
 	}
 	
-	// Mise à jour des articles avec une liste d'articles
+// Mise à jour des articles avec une liste d'articles venant du reseau
 	public void setCategories(List<Categorie> categories){
 		Iterator<Categorie> iter = categories.iterator();
 		Categorie categorie;
 		while(iter.hasNext()){
 			categorie = iter.next();
-			Categorie oldCategorie = getCategorie(categorie.getId());
-			if (oldCategorie == null){
-				insertCategorie(categorie);
-			}else{
-				categorie.setSelected(oldCategorie.isSelected());
-				categorie.setDateConsult(oldCategorie.getDateConsult());
-				updateCategorie(categorie);
-			}
+			setCategorie(categorie);
+		}
+	}
+	
+	public void setCategorie(Categorie categorie){
+		Categorie oldCategorie = getCategorie(categorie.getId());
+		if (oldCategorie == null){
+			insertCategorie(categorie);
+		}else{
+			categorie.setSelected(oldCategorie.isSelected());
+			categorie.setDateConsult(oldCategorie.getDateConsult());
+			updateCategorie(categorie);
 		}
 	}
 	
@@ -161,7 +171,7 @@ public class CategoriesDAO {
 				c.getInt(NomsSQL.RANG_CATEGORIE_TOTAL), 
 				supprimable, 
 				selection, 
-				c.getLong(NomsSQL.RANG_CATEGORIE_DATEACCES));
+				c.getString(NomsSQL.RANG_CATEGORIE_DATEACCES));
 		return categorie;
 	}
 

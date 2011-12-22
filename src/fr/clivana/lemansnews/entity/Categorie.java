@@ -9,7 +9,7 @@ public class Categorie {
 	private int total;
 	private boolean supprimable;
 	private boolean selected;
-	private long dateConsult;
+	private String dateConsult;
 	
 	/* identifiant (auto),
 	nom = motclef (un seul),
@@ -43,10 +43,10 @@ public class Categorie {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public long getDateConsult() {
+	public String getDateConsult() {
 		return dateConsult;
 	}
-	public void setDateConsult(long dateConsult) {
+	public void setDateConsult(String dateConsult) {
 		this.dateConsult = dateConsult;
 	}
 	public int getTotal() {
@@ -70,7 +70,7 @@ public class Categorie {
 	}
 	
 	public Categorie(long id, String nom, String nomImage, int count,
-			int total, boolean supprimable, boolean selected, long dateConsult) {
+			int total, boolean supprimable, boolean selected, String dateConsult) {
 		super();
 		this.id = id;
 		this.nom = nom;
