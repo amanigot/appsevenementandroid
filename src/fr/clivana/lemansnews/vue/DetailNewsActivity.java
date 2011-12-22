@@ -1,5 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ public class DetailNewsActivity extends Activity{
 	DetailNewsController detailNewsController;
 	int idArticle;
 	String categorie;
+	GoogleAnalyticsTracker tracker;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -38,6 +41,10 @@ public class DetailNewsActivity extends Activity{
 			idArticle=savedInstanceState.getInt("article");
 			categorie=savedInstanceState.getString("categorie");
 		}
+        detailNewsController=new DetailNewsController(this, idArticle, categorie);
+        
+        tracker=GoogleAnalyticsTracker.getInstance();
+    	tracker.trackPageView("/Article/"+idArticle+"/"+detailNewsController.getTitreNews());
         
         titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
         titreNews=(TextView)findViewById(R.id.textViewTitreNews);
@@ -53,7 +60,7 @@ public class DetailNewsActivity extends Activity{
 		boutonInfo=(Button)findViewById(R.id.buttonInfo);
 		boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
 		
-        detailNewsController=new DetailNewsController(this, idArticle, categorie);
+        
         
         boutonInfo.setOnClickListener(detailNewsController);
         partager.setOnClickListener(detailNewsController);

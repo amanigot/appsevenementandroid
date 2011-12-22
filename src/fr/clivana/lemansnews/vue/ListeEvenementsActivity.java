@@ -1,5 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.ListeEvenementsController;
 import android.app.Activity;
@@ -19,12 +21,16 @@ public class ListeEvenementsActivity extends Activity{
 	TextView titreApplication;
 	ListView listeEvents;
 	ListeEvenementsController listeEvenementsController;
+	GoogleAnalyticsTracker tracker;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listeevenement);
+		
+		tracker=GoogleAnalyticsTracker.getInstance();
+		tracker.trackPageView("/ListeEvenement");
 		
 		boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
 		boutonRetour=(Button)findViewById(R.id.buttonRetour);

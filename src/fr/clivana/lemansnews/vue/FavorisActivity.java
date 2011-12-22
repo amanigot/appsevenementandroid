@@ -1,5 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import android.app.TabActivity;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -21,12 +23,17 @@ public class FavorisActivity extends TabActivity {
 	FavorisController controller;
 	TextView titreApplication;
 	Button boutonRetour, boutonNews, boutonEvenement, boutonALaUne, boutonActualiser,boutonInfo,boutonFavoris;
+	GoogleAnalyticsTracker tracker;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.favoris);
+		
+		 tracker=GoogleAnalyticsTracker.getInstance();
+		 tracker.trackPageView("/Favoris");
+		
 		mTabHost = getTabHost();
 	    listViewEvents=(ListView)findViewById(R.id.listViewEvenementsFav);
 	    listViewNews=(ListView)findViewById(R.id.listViewNews);

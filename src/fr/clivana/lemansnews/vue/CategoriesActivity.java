@@ -1,5 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.CategoriesController;
 import android.app.Activity;
@@ -20,10 +22,15 @@ public class CategoriesActivity extends Activity{
 	Button boutonFavoris;
 	GridView categories;
 	TextView titreApplication;
+	GoogleAnalyticsTracker tracker; 
+	
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.categorie);
+        
+        tracker=GoogleAnalyticsTracker.getInstance();
+    	tracker.trackPageView("/Categories");
         
         ajouterCategorie=(Button)findViewById(R.id.buttonAjouterCategorie);
         boutonRetour=(Button)findViewById(R.id.buttonRetour);

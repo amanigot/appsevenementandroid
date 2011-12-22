@@ -1,6 +1,8 @@
 package fr.clivana.lemansnews.vue;
 
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.GridNewsController;
 import android.app.Activity;
@@ -21,6 +23,7 @@ public class GridNewsActivity extends Activity{
 	GridView gridViewNews;
 	TextView titreApplication;
 	String bundle;
+	GoogleAnalyticsTracker tracker;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -33,6 +36,9 @@ public class GridNewsActivity extends Activity{
 			bundle=savedInstanceState.getString("categorie");
 		}
 		controller = new GridNewsController(this, bundle);
+		
+		tracker=GoogleAnalyticsTracker.getInstance();
+		tracker.trackPageView("/Categorie/"+bundle);
 		
 		gridViewNews=(GridView)findViewById(R.id.gridViewNews);
 		boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
