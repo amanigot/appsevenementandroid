@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-        android:background="@drawable/bgtitreapplication"
+     android:background="@drawable/bgtitreapplication"  
     android:orientation="horizontal" >
 
     
@@ -10,23 +10,22 @@
         <Button
             android:id="@+id/buttonInfo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icomenuhautinfobig"
-            android:visibility="visible" />
+            android:layout_height="match_parent"
+            android:background="@drawable/icomenuhautinfobig" />
 
         <TextView
             android:id="@+id/textViewTitreApplication"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="1.00"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20dp" 
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/buttonActualiser"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/icomenuhautrafraichirbig" />
 
    

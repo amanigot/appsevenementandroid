@@ -5,6 +5,7 @@ import java.util.Date;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.controller.GalleryOneByOne;
 import fr.clivana.lemansnews.controller.VuePrincipaleController;
 import fr.clivana.lemansnews.utils.Formatage;
 import android.app.Activity;
@@ -24,7 +25,7 @@ public class VuePrincipaleActivity extends Activity{
 	TextView titreActualite;
 	TextView titreSuite;
 	TextView derniereMaj;
-	Gallery galleryEvents;
+	GalleryOneByOne galleryEvents;
 	GridView gridViewNewsPrincipale;
 	Button boutonALaUne;
 	Button boutonNews;
@@ -36,20 +37,23 @@ public class VuePrincipaleActivity extends Activity{
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
 	GoogleAnalyticsTracker tracker;
 	
+	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
 		tracker = GoogleAnalyticsTracker.getInstance();
 		tracker.startNewSession("UA-27873084-1",1, this);
+		tracker.setAnonymizeIp(true);
 		
+		tracker.trackPageView("/index");
 		
 		controller = new VuePrincipaleController(this);
 		titreApplication =(TextView)findViewById(R.id.textViewTitreApplication);
 		titreActualite = (TextView)findViewById(R.id.titreActualite);
 		titreSuite = (TextView)findViewById(R.id.titreActualiteSuite);
 		derniereMaj = (TextView)findViewById(R.id.textViewDateMAJ);
-		galleryEvents = (Gallery)findViewById(R.id.galleryEvents);
+		galleryEvents = (GalleryOneByOne)findViewById(R.id.galleryEvents);
 		gridViewNewsPrincipale = (GridView)findViewById(R.id.gridViewNewsPrincipal);
 		boutonALaUne = (Button)findViewById(R.id.buttonALaUne);
 		boutonNews = (Button)findViewById(R.id.buttonNews);
@@ -88,7 +92,7 @@ public class VuePrincipaleActivity extends Activity{
 	
 	public void initAdapters(){
 		galleryEvents.setAdapter(controller.initGalleryAdapter());
-		gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
+		//gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
 	}
 	
 	@Override

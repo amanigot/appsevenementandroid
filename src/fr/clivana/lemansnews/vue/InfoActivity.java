@@ -1,5 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,10 +18,15 @@ public class InfoActivity extends Activity {
 	Button boutonFavoris;
 	TextView titreApplication;
 	InfoController infoController;
+	GoogleAnalyticsTracker tracker;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.info);
+        
+        tracker=GoogleAnalyticsTracker.getInstance();
+		tracker.trackPageView("/Infos");
+        
         boutonRetour=(Button)findViewById(R.id.buttonRetour);
         boutonNews=(Button)findViewById(R.id.buttonNews);
 		boutonEvenement=(Button)findViewById(R.id.buttonEvents);

@@ -1,5 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ public class DetailEvenementActivity extends Activity {
 	Button boutonFavoris;
 	DetailEventsController detailEventsController;
 	int idEvenement;
+	GoogleAnalyticsTracker tracker;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -39,6 +42,9 @@ public class DetailEvenementActivity extends Activity {
 		}
 		
 		detailEventsController = new DetailEventsController(this, idEvenement);
+		
+		tracker=GoogleAnalyticsTracker.getInstance();
+		tracker.trackPageView("/Evenement/"+idEvenement+"/"+detailEventsController.getTitreEvenement());
 		
 		titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
 		titreEvenement=(TextView)findViewById(R.id.textViewTitreEvents);
@@ -71,7 +77,7 @@ public class DetailEvenementActivity extends Activity {
 		boutonRetour.setVisibility(View.VISIBLE);
 		boutonActualiser.setVisibility(View.INVISIBLE);
 		
-		//boutonInfo.setBackgroundResource();
+		boutonInfo.setBackgroundResource(R.drawable.btnmenuhautfavoris);
 		
 		boutonInfo.setOnClickListener(detailEventsController);
 		
