@@ -137,7 +137,7 @@ public class NomsSQL {
 			+ COLONNE_CATEGORIE_TOTAL +" integer, "
 			+ COLONNE_CATEGORIE_SUPPRIMABLE + " boolean, "
 			+ COLONNE_CATEGORIE_SELECTION + " boolean, "
-			+ COLONNE_CATEGORIE_DATEACCES + " long," + ");";
+			+ COLONNE_CATEGORIE_DATEACCES + " text," + ");";
 		
 // requetes de mise à jour V2 
 	public static final String QUERY_ALTERTABLE_V1_V2 = "";

@@ -2,6 +2,7 @@ package fr.clivana.lemansnews.utils.reseau;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -28,8 +29,8 @@ import android.util.Log;
 
 public class Reseau {
 
-	public final static String URL_LIST_NEWS = "/m/news/list/"; // /m/news/{motClef}/{numPage}
-	public final static String URL_LIST_EVENTS = "/m/events/list/"; // /m/news/{motClef}/{numPage}
+	public final static String URL_LIST_NEWS = "/m/news/list/"; // /m/news/list/{motClef}/{numPage}/qte
+	public final static String URL_LIST_EVENTS = "/m/events/list/all/"; // /m/events/list/{motClef}/{numPage}/qte
 	public final static String URL_LIST_CATEGORIES = "/m/categories/list"; // pas de parametres
 	public final static String URL_COUNT_CATEGORIES = "/m/categories/count/";// /m/categories/count/{nom}/{date}
 	public final static String URL_IMAGES = "/data/images/"; // /data/images/{nom}
@@ -73,8 +74,14 @@ public class Reseau {
 	
 // recuperation des articles sur le reseau et mise à jour BDD
 	public static void majArticles(Context context, String motClef, int numPage, int quantite){
-		if (quantite == 0 || quantite > Params.QTE_MAX_ARTICLES){
-			quantite = Params.QTE_MAX_ARTICLES;
+		int max;
+		if (isSlow(context)){
+			max = Params.QTE_MAX_ARTICLES_SLOW;
+		}else{
+			max = Params.QTE_MAX_ARTICLES;
+		}
+		if (quantite == 0 || quantite > max){
+			quantite = max;
 		}
 		if (motClef.equals("") || motClef.equals(" ")){
 			motClef = "all";
@@ -95,21 +102,26 @@ public class Reseau {
 	
 // recuperation des evenements sur le reseau et mise à jour BDD
 	public static void majEvenements(Context context, int numPage, int quantite){
-		if (quantite == 0 || quantite > Params.QTE_MAX_EVENEMENTS){
-			quantite = Params.QTE_MAX_EVENEMENTS;
+		int max;
+		if (isSlow(context)){
+			max = Params.QTE_MAX_EVENEMENTS_SLOW;
+		}else{
+			max = Params.QTE_MAX_EVENEMENTS;
+		}
+		if (quantite == 0 || quantite > max){
+			quantite = max;
 		}
 		if (numPage == 0){
 			numPage = 1;
 		}
-		String motClef = "all";
-		String url = Params.BASE_SERVEUR + URL_LIST_EVENTS + motClef + "/" + numPage + "/" + quantite;
+		String url = Params.BASE_SERVEUR + URL_LIST_EVENTS + "/" + numPage + "/" + quantite;
 		DeSerializer<ListEvents> deserialize = new DeSerializer<ListEvents>();
 		List<Evenement> listEvents = deserialize.deJson(requeteWeb(url));
 		if (listEvents != null && listEvents.size() != 0){
 			EventsDAO eventsDao = new EventsDAO(context);
 			eventsDao.setEvents(listEvents);
 		}else{
-			Log.w("Reseau","liste Evenements vide pour : " + motClef + " - " + numPage + " - " + quantite);
+			Log.w("Reseau","liste Evenements vide pour : all-" + numPage + " - " + quantite);
 		}
 	}
 	
@@ -124,12 +136,33 @@ public class Reseau {
 		}else{
 			Log.e("Reseau", "la liste des categories n''a pas pu être chargée");
 		}
+		comptageAllCategorie(context);
 	}
 	
 //récuperation d'une categorie avec son comptage
-	public static void countCategorie(Context context, String nomCategorie, long dateDernierClick){
+	public static void countCategorie(Context context, String nomCategorie, String dateDernierClick){
 		if (nomCategorie.equals("")|| nomCategorie.equals(" ")){
 			nomCategorie = "all";
+		}
+		String url = Params.BASE_SERVEUR + URL_COUNT_CATEGORIES + nomCategorie + "/" + dateDernierClick;
+		DeSerializer<Categorie> deserialize = new DeSerializer<Categorie>();
+		Categorie categorie = deserialize.deJson(requeteWeb(url));
+		if (categorie != null){
+			CategoriesDAO categorieDao = new CategoriesDAO(context);
+			categorieDao.setCategorie(categorie);
+		}else{
+			Log.e("Reseau", "la categorie " + nomCategorie +" n''a pas pu être chargée");
+		}
+	}
+	
+	private static void comptageAllCategorie(Context context){
+		CategoriesDAO dao = new CategoriesDAO(context);
+		List<Categorie> categories = dao.getSelectedCategories();
+		Iterator<Categorie> iter = categories.iterator();
+		Categorie categorie;
+		while (iter.hasNext()){
+			categorie = iter.next();
+			countCategorie(context, categorie.getNom(), categorie.getDateConsult());
 		}
 	}
 }
