@@ -40,7 +40,7 @@ public class CategoriesController implements OnClickListener,
 	
 	public CategoriesController(Context c) {
 		context = c;
-		asyncTask=new AsyncTaskCategories(context);
+		
 		newsDao=new NewsDAO(context);
 		tracker = GoogleAnalyticsTracker.getInstance();
 		
@@ -66,6 +66,7 @@ public class CategoriesController implements OnClickListener,
 		if (v.getId() == R.id.buttonActualiser) {
 			tracker.trackEvent("Categories", "clic", "actualiser", 1);
 			if(Reseau.verifReseau(context)){
+				asyncTask=new AsyncTaskCategories(context);
 				asyncTask.execute();
 			}else{
 				Toast.makeText(context, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();

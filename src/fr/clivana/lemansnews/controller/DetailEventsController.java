@@ -54,7 +54,7 @@ public class DetailEventsController implements OnClickListener {
 			tracker.trackEvent("Detail d'un evenement", "clic", "Partager-"+evenement.getId()+"-"+evenement.getTitre(), 1);
 			dialog=new CategoriesDialog(context, "Partager", "", "", "Annuler", items, -1, 3);
 			dialog.addInfos(evenement.getTitre(), evenement.getDetailEvenement());
-			dialog.show();
+			dialog.getBuilder().show();
 		}
 		if(v.getId()==R.id.buttonInfo){
 			tracker.trackEvent("Detail d'un evenement", "clic", "Favoris-"+evenement.getId()+"-"+evenement.getTitre(), 1);

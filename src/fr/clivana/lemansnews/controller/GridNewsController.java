@@ -33,7 +33,6 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 		context = c;
 		newsDao = new NewsDAO(context);
 		this.categorie=categorie;
-		asyncTask=new AsyncTaskListeEvenements(context);
 		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
@@ -52,6 +51,7 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 		if(v.getId()==R.id.buttonActualiser){
 			tracker.trackEvent("Categorie-"+categorie, "clic", "Actualiser", 1);
 			if(Reseau.verifReseau(context)){
+				asyncTask=new AsyncTaskListeEvenements(context);
 				asyncTask.execute();
 			}else{
 				Toast.makeText(context, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();

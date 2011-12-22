@@ -33,7 +33,6 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 		// TODO Auto-generated constructor stub
 		context=c;
 		eventsDao= new EventsDAO(context);
-		asyncTask=new AsyncTaskListeEvenements(context);
 		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
@@ -43,6 +42,7 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 		if(v.getId()==R.id.buttonActualiser){
 			tracker.trackEvent("Liste des Evenements", "clic", "actualiser", 1);
 			if(Reseau.verifReseau(context)){
+				asyncTask=new AsyncTaskListeEvenements(context);
 				asyncTask.execute();
 			}else{
 				Toast.makeText(context, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();

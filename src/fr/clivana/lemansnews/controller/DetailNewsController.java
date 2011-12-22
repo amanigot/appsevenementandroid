@@ -43,7 +43,7 @@ public class DetailNewsController implements OnClickListener {
 			tracker.trackEvent("Detail d'une news", "clic", "Partager-"+article.getId()+"-"+article.getTitre(), 1);
 			dialog=new CategoriesDialog(context, "Partager", "", "", "Annuler", items, -1, 3);
 			dialog.addInfos(article.getTitre(), article.getArticle());
-			dialog.show();
+			dialog.getBuilder().show();
 		}
 		if(v.getId()==R.id.buttonInfo){
 			tracker.trackEvent("Detail d'une news", "clic", "Favoris-"+article.getId()+"-"+article.getTitre(), 1);

@@ -43,7 +43,7 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 		ctx = context;
 		eventsDao = new EventsDAO(ctx);
 		newsDao = new NewsDAO(ctx);
-		asyncTask=new AsyncTaskVuePrincipale(ctx);
+		
 		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 	
@@ -104,6 +104,7 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	public void Actualisation() {
 		// TODO Auto-generated method stub
 		if(Reseau.verifReseau(ctx)){
+			asyncTask=new AsyncTaskVuePrincipale(ctx);
 			asyncTask.execute();
 		}else{
 			Toast.makeText(ctx, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
