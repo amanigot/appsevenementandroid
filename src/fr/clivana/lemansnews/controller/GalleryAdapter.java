@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskImage;
 import fr.clivana.lemansnews.entity.Evenement;
 
 
@@ -23,7 +24,7 @@ public class GalleryAdapter extends BaseAdapter {
 	Context context;
 	Bitmap bitmap=null;
 	
-	
+	AsyncTaskImage asyncTask;
 	
 	public GalleryAdapter(Context context, List<Evenement> events
 			) {
@@ -58,6 +59,7 @@ public class GalleryAdapter extends BaseAdapter {
 		l1.setVisibility(View.GONE);
 		l2.setVisibility(View.GONE);
 		ImageView image = (ImageView) convertView.findViewById(R.id.imageEventDetail);
+		
 		TextView titre = (TextView) convertView.findViewById(R.id.textViewTitreEvent);
 		ImageView suivant = (ImageView)convertView.findViewById(R.id.suivant);
 		ImageView precedant = (ImageView)convertView.findViewById(R.id.precedent);
@@ -79,7 +81,8 @@ public class GalleryAdapter extends BaseAdapter {
 			}
 		}
 		
-		image.setImageResource(R.drawable.illustaucuneimage480);
+		asyncTask = new AsyncTaskImage(events.get(position).getNomImageMobile(), image);
+		asyncTask.execute();
 		
 		
 		titre.setText(events.get(position).getTitre());

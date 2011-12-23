@@ -44,7 +44,7 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 
 	@Override
 	public void onClick(View v) {
-		if(v.getId()==R.id.buttonRetour){
+		if(v.getId()==R.id.buttonRetour || v.getId()==R.id.buttonNews){
 			tracker.trackEvent("Categorie-"+categorie, "clic", "Retour aux Categories", 1);
 			((Activity) context).finish();
 		}

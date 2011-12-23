@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskImage;
 import fr.clivana.lemansnews.entity.Evenement;
 
 public class ListEvenementsAdapter extends BaseAdapter {
@@ -17,6 +18,7 @@ public class ListEvenementsAdapter extends BaseAdapter {
 	LayoutInflater inflater;
 	Context ctx;
 	List<Evenement> events;
+	AsyncTaskImage asyncTask;
 	
 	public ListEvenementsAdapter(Context context, List<Evenement> evenements) {
 		// TODO Auto-generated constructor stub
@@ -56,7 +58,8 @@ public class ListEvenementsAdapter extends BaseAdapter {
 				.findViewById(R.id.textViewLieuEvent);
 		lieu.setText(events.get(position).getLieu());
 		ImageView imageEvent = (ImageView)convertView.findViewById(R.id.imageEventDetail);
-		imageEvent.setImageResource(R.drawable.illustaucuneimage480);
+		asyncTask = new AsyncTaskImage(events.get(position).getNomImageMobile(), imageEvent);
+		asyncTask.execute();
 		return convertView;
 	}
 

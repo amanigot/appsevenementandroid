@@ -60,7 +60,7 @@ public class DetailNewsActivity extends Activity{
 		boutonInfo=(Button)findViewById(R.id.buttonInfo);
 		boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
 		
-        
+        detailNewsController.setImage(imageNews);
         
         boutonInfo.setOnClickListener(detailNewsController);
         partager.setOnClickListener(detailNewsController);

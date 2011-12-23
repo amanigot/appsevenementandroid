@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.controller;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskImage;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.utils.Formatage;
@@ -11,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class DetailNewsController implements OnClickListener {
@@ -23,6 +25,7 @@ public class DetailNewsController implements OnClickListener {
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
 	CategoriesDialog dialog;
 	GoogleAnalyticsTracker tracker;
+	AsyncTaskImage asyncTask;
 	
 	public DetailNewsController(Context c, long idArticle2, String categorie) {
 		context=c;
@@ -73,4 +76,10 @@ public class DetailNewsController implements OnClickListener {
 		return article.getArticle();
 	}
 
+	public void setImage(ImageView imageEvenement) {
+		// TODO Auto-generated method stub
+		asyncTask = new AsyncTaskImage(article.getUrlImageMobile(), imageEvenement);
+		asyncTask.execute();
+	}
+	
 }

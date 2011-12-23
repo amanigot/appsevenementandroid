@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskImage;
 import fr.clivana.lemansnews.entity.Categorie;
 
 public class CategorieAdapter extends BaseAdapter{
@@ -20,7 +21,7 @@ public class CategorieAdapter extends BaseAdapter{
 	Context mContext;
 	public static final int ACTIVITY_CREATE = 10;
 	List<Categorie> notifications;
-	
+	AsyncTaskImage asyncTask;
 	
 	
 	
@@ -46,7 +47,8 @@ public class CategorieAdapter extends BaseAdapter{
 				tv.setText(notifications.get(position).getNom());
 			}
 			ImageView iv = (ImageView)v.findViewById(R.id.icon_image);
-			iv.setImageResource(R.drawable.illustaucuneimage111);
+			asyncTask = new AsyncTaskImage(notifications.get(position).getNomImage(), iv);
+			asyncTask.execute();
 			iv.setPadding(4, 4, 4, 4);
 			TextView badge = (TextView)v.findViewById(R.id.badge_notif);
 			int count=notifications.get(position).getCount();

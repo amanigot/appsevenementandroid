@@ -67,7 +67,7 @@ public class VuePrincipaleActivity extends Activity{
 		controller.miseEnPageRomanLight(titreActualite);
 		controller.miseEnPageRomanLight(titreSuite);
 		
-		derniereMaj.setText("Mis à jour le : "+getSharedPreferences("prefs", 0).getString("date", ""));
+		derniereMaj.setText("Dernière mise à jour : "+getSharedPreferences("prefs", 0).getString("date", ""));
 		
 		initAdapters();
 		

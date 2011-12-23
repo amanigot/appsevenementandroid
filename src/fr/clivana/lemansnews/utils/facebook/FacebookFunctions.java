@@ -51,7 +51,7 @@ public class FacebookFunctions {
 	/** Url du site web keoli */
 	private static final String ANDROID_URL = "www.clivana.com";
 	/** Android image */
-	private static final String ANDROID_IMAGE_URL = "http://levenezia72.fr/public/images/logoVeneziaFacebook.gif";
+	private static final String ANDROID_IMAGE_URL = "http://www.clivana.com/";
 	/** Activity qui sert � certaines op�rations */
 	private static Context mContext;
 	/** Request code retourn� par le login facebook */
