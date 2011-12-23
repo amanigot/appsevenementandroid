@@ -2,7 +2,6 @@ package fr.clivana.lemansnews.utils.reseau;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,12 +17,12 @@ import org.apache.http.params.HttpParams;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
-import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Categorie;
-import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.utils.Params;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
@@ -170,5 +169,8 @@ public class Reseau {
 			categorie = iter.next();
 			countCategorie(context, categorie.getNom(), categorie.getDateConsult());
 		}
+	}
+	public static Bitmap chargementImage(String nom){
+		return BitmapFactory.decodeStream(requeteWeb(Params.BASE_SERVEUR + URL_IMAGES + nom));
 	}
 }
