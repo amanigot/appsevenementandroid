@@ -86,6 +86,23 @@ public class CategoriesDAO {
 		return categorie;
 	}
 	
+	public Categorie getCategorie(String nom){
+		open();
+		Cursor c = dbClivana.query(
+				NomsSQL.TABLE_CATEGORIE, 
+				null, 
+				NomsSQL.COLONNE_CATEGORIE_NOM + " = " + nom, 
+				null, null, null, null);
+		if (c.getCount()==0){
+			return null;
+		}
+		c.moveToFirst();
+		Categorie categorie = cursorToCategorie(c);
+		c.close();
+		close();
+		return categorie;
+	}
+	
 // récuperation d'un liste d'article triée par date (décroissante) et limitée à Params.QTE_MAX_ARTICLES articles
 	public List<Categorie> getAllCategories(){
 		open();
