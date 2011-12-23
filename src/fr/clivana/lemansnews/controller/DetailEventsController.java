@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.controller;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskImage;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.vue.CategoriesDialog;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class DetailEventsController implements OnClickListener {
@@ -23,6 +25,7 @@ public class DetailEventsController implements OnClickListener {
 	CategoriesDialog dialog;
 	GoogleAnalyticsTracker tracker;
 	Button bouton;
+	AsyncTaskImage asyncTask;
 	
 	public DetailEventsController(Context c, long idEvenement) {
 		this.context=c;
@@ -92,6 +95,12 @@ public class DetailEventsController implements OnClickListener {
 		}else{
 			bouton.setBackgroundResource( R.drawable.btnmenuhautfavorisoff);
 		}
+	}
+
+	public void setImage(ImageView imageEvenement) {
+		// TODO Auto-generated method stub
+		asyncTask = new AsyncTaskImage(evenement.getNomImageMobile(), imageEvenement);
+		asyncTask.execute();
 	}
 
 }

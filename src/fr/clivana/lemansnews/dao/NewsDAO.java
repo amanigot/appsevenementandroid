@@ -104,7 +104,7 @@ public class NewsDAO {
 			c = dbClivana.query(
 					NomsSQL.TABLE_ARTICLE, 
 					null, 
-					NomsSQL.COLONNE_ARTICLE_MOTSCLEFS + " LIKE %" + motClef + "%", 
+					NomsSQL.COLONNE_ARTICLE_MOTSCLEFS + " LIKE '%" + motClef + "%'", 
 					null, null, null, NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " DESC", 
 					Params.QTE_MAX_ARTICLES + "");
 			return cursorToArticleTab(c);

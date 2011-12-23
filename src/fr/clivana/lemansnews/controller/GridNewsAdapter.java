@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskImage;
 import fr.clivana.lemansnews.entity.Article;
 
 
@@ -23,6 +24,7 @@ public class GridNewsAdapter extends BaseAdapter {
 	View view;
 	ImageView imageNews;
 	TextView titre;
+	AsyncTaskImage asyncTask;
 	
 	public GridNewsAdapter(Context context, List<Article> events
 			) {
@@ -58,8 +60,8 @@ public class GridNewsAdapter extends BaseAdapter {
 			
 			
 			titre.setText(events.get(position).getTitre());
-			imageNews.setImageResource(R.drawable.illustaucuneimage240);
-			
+			asyncTask = new AsyncTaskImage(events.get(position).getUrlMiniature(), imageNews);
+			asyncTask.execute();
 			views.put(position, imageNews);
 			
 			

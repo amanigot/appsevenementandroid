@@ -80,6 +80,7 @@ public class DetailEvenementActivity extends Activity {
 		detailEventsController.initFavButton(boutonInfo);
 		detailEventsController.setFavButton();
 		
+		detailEventsController.setImage(imageEvenement);
 		
 		boutonInfo.setOnClickListener(detailEventsController);
 		
