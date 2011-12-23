@@ -21,6 +21,7 @@ public class AsyncTaskCategories extends AsyncTask<Void, Void, Void> {
 		super();
 		this.context = context;
 		progress=new ProgressDialog(this.context);
+		progress.setMessage("Mise à jour en cours...");
 	}
 
 	@Override

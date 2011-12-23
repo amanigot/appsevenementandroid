@@ -4,6 +4,7 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,8 @@ public class FavorisActivity extends TabActivity {
 	TextView titreApplication;
 	Button boutonRetour, boutonNews, boutonEvenement, boutonALaUne, boutonActualiser,boutonInfo,boutonFavoris;
 	GoogleAnalyticsTracker tracker;
+	Intent newsIntent, eventsIntent;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +67,7 @@ public class FavorisActivity extends TabActivity {
 		setupTab(1);
 	    setupTab(2);
 	    
-	    initAdapters();
-	    
-	    listViewNews.setOnItemClickListener(controller);
-	    listViewEvents.setOnItemClickListener(controller);
-	    
+  
 //	    mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator(null, getResources().getDrawable(R.drawable.btnfavnewsxml)).setContent(R.id.listViewNews));
 //	    mTabHost.addTab(mTabHost.newTabSpec("tab_test3").setIndicator(null, getResources().getDrawable(R.drawable.btnfaveventsxml)).setContent(R.id.listViewEvenementsFav));
 
@@ -82,8 +81,10 @@ public class FavorisActivity extends TabActivity {
 		View tabview = createTabView(mTabHost.getContext(), tag);
 		TabSpec setContent=null;
 		
-		if(tag==1){ setContent = mTabHost.newTabSpec("tab_test"+tag).setIndicator(tabview).setContent(R.id.listViewNews); }
-		if(tag==2){ setContent = mTabHost.newTabSpec("tab_test"+tag).setIndicator(tabview).setContent(R.id.listViewEvenementsFav); }
+		newsIntent= new Intent(this, ListeNewsFavorisActivity.class);
+		eventsIntent= new Intent(this, ListeEvenementsFavorisActivity.class);
+		if(tag==1){ setContent = mTabHost.newTabSpec("tab_test"+tag).setIndicator(tabview).setContent(newsIntent); }
+		if(tag==2){ setContent = mTabHost.newTabSpec("tab_test"+tag).setIndicator(tabview).setContent(eventsIntent); }
 		
 		if(setContent!=null){ mTabHost.addTab(setContent); }
 	}
@@ -98,10 +99,5 @@ public class FavorisActivity extends TabActivity {
 		return view;
 	}
 	
-	private void initAdapters() {
-		
-		listViewNews.setAdapter(controller.initListNewsAdapter());
-		listViewEvents.setAdapter(controller.initListEventsAdapter());
-		
-	}
+
 }

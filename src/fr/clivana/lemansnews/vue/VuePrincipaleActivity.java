@@ -43,7 +43,7 @@ public class VuePrincipaleActivity extends Activity{
 		setContentView(R.layout.main);
 		
 		tracker = GoogleAnalyticsTracker.getInstance();
-		tracker.startNewSession("UA-27873084-1",1, this);
+		tracker.startNewSession("UA-27914218-1",1, this);
 		tracker.setAnonymizeIp(true);
 		
 		tracker.trackPageView("/index");
@@ -67,8 +67,7 @@ public class VuePrincipaleActivity extends Activity{
 		controller.miseEnPageRomanLight(titreActualite);
 		controller.miseEnPageRomanLight(titreSuite);
 		
-		derniereMaj.setText("Dernière mise à jour : "+getSharedPreferences("prefs", 0).getString("date", ""));
-		
+		setDate();
 		initAdapters();
 		
 		boutonALaUne.setPressed(true);
@@ -126,5 +125,10 @@ public class VuePrincipaleActivity extends Activity{
 	protected void onDestroy() {
 		tracker.stopSession();
 		super.onDestroy();
+	}
+
+	public void setDate() {
+		derniereMaj.setText("Dernière mise à jour : "+getSharedPreferences("prefs", 0).getString("date", ""));
+		
 	}
 }

@@ -169,6 +169,7 @@ public class Reseau {
 		while (iter.hasNext()){
 			categorie = iter.next();
 			countCategorie(context, categorie.getNom(), categorie.getDateConsult());
+			Log.w("date", categorie.getDateConsult()+"");
 		}
 	}
 	public static Bitmap chargementImage(String nom){

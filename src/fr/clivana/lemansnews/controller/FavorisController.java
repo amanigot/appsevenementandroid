@@ -21,7 +21,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 
-public class FavorisController implements OnItemClickListener, OnClickListener {
+public class FavorisController implements OnClickListener {
 
 	Context context;
 	NewsDAO newsDao;
@@ -37,36 +37,6 @@ public class FavorisController implements OnItemClickListener, OnClickListener {
 		newsDao=new NewsDAO(context);
 		eventsDao=new EventsDAO(context);
 		tracker = GoogleAnalyticsTracker.getInstance();
-	}
-
-	public ListNewsAdapter initListNewsAdapter() {
-		articles=newsDao.getFavoriteArticles();
-		newsAdapter=new ListNewsAdapter(context, articles);
-		return newsAdapter;
-	}
-
-	public ListAdapter initListEventsAdapter() {
-		evenements=eventsDao.getFavoriteEvents();
-		Log.w("favevents",evenements.size()+"");
-		eventsAdapter=new ListEvenementsAdapter(context, evenements);
-		return eventsAdapter;
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		// TODO Auto-generated method stub
-		if(parent.getId()==R.id.listViewEvenementsFav){
-			tracker.trackEvent("Favoris-Evenement", "clic", "detail-"+evenements.get(position).getId()+"-"+evenements.get(position).getTitre(), 1);
-			Intent evenementIntent = new Intent(context, DetailEvenementActivity.class);
-			evenementIntent.putExtra("event", evenements.get(position).getId());
-			context.startActivity(evenementIntent);
-		}
-		if(parent.getId()==R.id.listViewNews){
-			tracker.trackEvent("Favoris-News", "clic", "detail-"+articles.get(position).getId()+"-"+articles.get(position).getTitre(), 1);
-			Intent intentNews = new Intent(context, DetailNewsActivity.class);
-			intentNews.putExtra("article", articles.get(position).getId());
-			context.startActivity(intentNews);
-		}
 	}
 
 	public CharSequence initTitre() {

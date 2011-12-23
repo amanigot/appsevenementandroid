@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class CategorieAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 			View v;
+			Log.w("position gridview", position+"");
 			LayoutInflater li = ((Activity) mContext).getLayoutInflater();
 			v = li.inflate(R.layout.gridnewsitem, null);
 		
@@ -52,6 +54,7 @@ public class CategorieAdapter extends BaseAdapter{
 			iv.setPadding(4, 4, 4, 4);
 			TextView badge = (TextView)v.findViewById(R.id.badge_notif);
 			int count=notifications.get(position).getCount();
+			Log.w("count", count+"");
 			if(count==0){
 				badge.setVisibility(View.INVISIBLE);
 			}else{
