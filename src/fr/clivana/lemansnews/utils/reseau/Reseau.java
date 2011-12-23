@@ -54,7 +54,6 @@ public class Reseau {
 	
 // requete web
 	public static InputStream requeteWeb(String url){
-		Log.d("Recherche", "debut "+url);
 		HttpParams params = new BasicHttpParams();
 		params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 		DefaultHttpClient client = new DefaultHttpClient(params);
@@ -69,7 +68,6 @@ public class Reseau {
 			} catch (IOException e) {
 				Log.e("erreur IO Reseau", e.getMessage());
 			}
-		Log.d("Recherche", "fin "+url);
 		return result;
 	}
 	
@@ -98,7 +96,7 @@ public class Reseau {
 			NewsDAO newsDao = new NewsDAO(context);
 			newsDao.setArticles(listArticle);
 		}else{
-			Log.w("Reseau","liste Articles vide pour : " + motClef + " - " + numPage + " - " + quantite);
+			Log.w("Reseau","liste Articles vide pour : " + motClef + "-" + numPage + "-" + quantite);
 		}
 	}
 	
@@ -124,7 +122,7 @@ public class Reseau {
 			EventsDAO eventsDao = new EventsDAO(context);
 			eventsDao.setEvents(listEvents);
 		}else{
-			Log.w("Reseau","liste Evenements vide pour : all-" + numPage + " - " + quantite);
+			Log.w("Reseau","liste Evenements vide pour : all-" + numPage + "-" + quantite);
 		}
 	}
 	
@@ -138,7 +136,7 @@ public class Reseau {
 			CategoriesDAO categorieDao = new CategoriesDAO(context);
 			categorieDao.setCategories(listCategorie);
 		}else{
-			Log.e("Reseau", "la liste des categories n''a pas pu être chargée");
+			Log.e("Reseau", "la liste des categories n'a pas pu être chargée");
 		}
 		comptageAllCategorie(context);
 	}
