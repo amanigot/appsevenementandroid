@@ -14,6 +14,7 @@ import fr.clivana.lemansnews.vue.DetailNewsActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -46,6 +47,7 @@ public class FavorisController implements OnItemClickListener, OnClickListener {
 
 	public ListAdapter initListEventsAdapter() {
 		evenements=eventsDao.getFavoriteEvents();
+		Log.w("favevents",evenements.size()+"");
 		eventsAdapter=new ListEvenementsAdapter(context, evenements);
 		return eventsAdapter;
 	}

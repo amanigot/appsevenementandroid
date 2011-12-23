@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.Params;
@@ -62,6 +63,7 @@ public class EventsDAO {
 				eventToContentValues(event), 
 				NomsSQL.COLONNE_EVENEMENT_ID + " = " + event.getId(), 
 				null) > 0;
+		Log.w("update","done");
 		close();
 		return upd;
 	}
@@ -107,10 +109,11 @@ public class EventsDAO {
 		Cursor c = dbClivana.query(
 				NomsSQL.TABLE_EVENEMENT,
 				null,
-				NomsSQL.COLONNE_EVENEMENT_FAVORIS + " = 0",
+				NomsSQL.COLONNE_EVENEMENT_FAVORIS + " = 1",
 				null, null, null,
 				NomsSQL.COLONNE_EVENEMENT_DATETRI,
 				Params.QTE_MAX_EVENEMENTS + "");
+		Log.w("getfavevents", "done");
 		return cursorToEventTab(c);
 	}
 	

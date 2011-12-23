@@ -71,6 +71,9 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 	}
 
 	public CharSequence initTitre() {
+		if(categorie.equals("all")){
+			categorie="Toutes les news";
+		}
 		return categorie;
 	}
 

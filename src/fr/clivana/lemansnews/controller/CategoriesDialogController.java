@@ -26,6 +26,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 	CategoriesDAO categoriesDao;
 	Context context;
 	int position;
+	CharSequence[] categories;
 	//Cet id correspond au type de dialog affiché : 1: Ajouter une catégorie, 2: Supprimer, 3: Partager
 	//Il est utilisé pour le onclick listener.
 	int dialID; 
@@ -58,15 +59,17 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 
 	
 	
-	public CategoriesDialogController(Context ctx) {
+	public CategoriesDialogController(Context ctx, int id, CharSequence[] items) {
 		context = ctx;
 		categoriesDao=new CategoriesDAO(context);
+		categories=items;
 	}
 
-	public CategoriesDialogController(Context ctx, int id) {
+	public CategoriesDialogController(Context ctx, int id, CharSequence[] items, int pos) {
 		context = ctx;
 		categoriesDao=new CategoriesDAO(context);
 		dialID=id;
+		categories=items;
 	}
 	
 
@@ -86,17 +89,18 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 		}
 			
 		if(dialID==1){ //Ici on ajoute une catégorie
-			//categ=categoriesDao.selectCategorie(which);
-			//categ.setSelected(true);
-			//categoriesDao.update(categ);
+			
+			categ=categoriesDao.getCategorie(categories[which].toString());
+			categ.setSelected(true);
+			categoriesDao.updateCategorie(categ);
 			((CategoriesActivity) context).initAdapters();
 		}
 		
 		if(dialID==2){//Ici on supprime une catégorie
 			if(which== AlertDialog.BUTTON_POSITIVE){
-				//categ=categoriesDao.selectCategorie(position);
-				//categ.setSelected(false);
-				//categoriesDao.update(categ);
+				categ=categoriesDao.getCategorie(position);
+				categ.setSelected(false);
+				categoriesDao.updateCategorie(categ);
 				((CategoriesActivity) context).initAdapters();
 			}
 		}

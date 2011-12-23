@@ -8,7 +8,7 @@ public class CategoriesDialog extends AlertDialog {
 
 	private Context ctx;
 	private String title, message, nomPositiveButton, nomNegativeButton;
-	private String[] items;
+	CharSequence[] items;
 	private CategoriesDialogController controller;
 	int pos;
 	Builder builder;
@@ -16,20 +16,29 @@ public class CategoriesDialog extends AlertDialog {
 	public CategoriesDialog(Context context, String titre, String message, String posButton, String negButton, String[] objets, int position, int id) {
 		super(context);
 		
+		//----------------------------------------------------------
+		//Attention : 	un alertDialog ne peut pas faire un setItems 
+		//				et un setMessage en meme temps sinon conflit
+		//----------------------------------------------------------
+		
 		this.ctx=context;
 		this.title=titre;
 		this.message=message;
 		this.nomPositiveButton=posButton;
 		this.nomNegativeButton=negButton;
-		this.items=objets;
+		items=new String[objets.length];
+		for(int i=0;i<objets.length;i++){
+			items[i]=objets[i];
+		}
+		
 		builder= new Builder(ctx);
 		
 		//le constructeur utilisant la position n'est utilisé que pour la suppression
 		pos = position;
 		if(pos==-1){
-			controller = new CategoriesDialogController(ctx, id);
+			controller = new CategoriesDialogController(ctx, id, items);
 		}else{
-			controller = new CategoriesDialogController(ctx, id, pos);
+			controller = new CategoriesDialogController(ctx, id, items, pos);
 		}
 		
 		if(!titre.equals("")){
@@ -39,7 +48,9 @@ public class CategoriesDialog extends AlertDialog {
 		
 		if(!this.message.equals("")){
 			
-			builder.setMessage(this.message);
+			if(this.message.equals("Supprimer")){ builder.setMessage("Voulez-vous supprimer la catégorie ?"); }
+			if(this.message.equals("NonSupprimer")){ builder.setMessage("Cette catégorie n'est pas supprimable."); }
+			
 		}
 		
 		if(!nomPositiveButton.equals("")){
@@ -52,13 +63,17 @@ public class CategoriesDialog extends AlertDialog {
 			builder.setNegativeButton(nomNegativeButton, controller);
 		}
 		
-		if(items.length>0 && !items.equals(null)){
+		if(items.length != 0 ){
 			
 			builder.setItems(items, controller);
 			
 		}else{
-			builder.setMessage("Aucune nouvelle catégorie n'est disponible pour le moment.");
+			if(this.message.equals("")){
+				builder.setMessage("Aucune nouvelle catégorie à ajouter");
+			}
+			
 		}
+		
 		
 		
 		builder.create();

@@ -60,16 +60,19 @@ public class FavorisActivity extends TabActivity {
 	    titreApplication.setText(controller.initTitre());
 	    Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
 		titreApplication.setTypeface(tfRoman);
+		
+		setupTab(1);
+	    setupTab(2);
 	    
 	    initAdapters();
+	    
 	    listViewNews.setOnItemClickListener(controller);
 	    listViewEvents.setOnItemClickListener(controller);
 	    
 //	    mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator(null, getResources().getDrawable(R.drawable.btnfavnewsxml)).setContent(R.id.listViewNews));
 //	    mTabHost.addTab(mTabHost.newTabSpec("tab_test3").setIndicator(null, getResources().getDrawable(R.drawable.btnfaveventsxml)).setContent(R.id.listViewEvenementsFav));
 
-	    setupTab(1);
-	    setupTab(2);
+	    
 	    
 	    mTabHost.setCurrentTab(0);
 	}

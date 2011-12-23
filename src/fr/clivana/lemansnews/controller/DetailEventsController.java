@@ -11,6 +11,8 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class DetailEventsController implements OnClickListener {
 
@@ -20,6 +22,7 @@ public class DetailEventsController implements OnClickListener {
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
 	CategoriesDialog dialog;
 	GoogleAnalyticsTracker tracker;
+	Button bouton;
 	
 	public DetailEventsController(Context c, long idEvenement) {
 		this.context=c;
@@ -57,15 +60,38 @@ public class DetailEventsController implements OnClickListener {
 			dialog.getBuilder().show();
 		}
 		if(v.getId()==R.id.buttonInfo){
-			tracker.trackEvent("Detail d'un evenement", "clic", "Favoris-"+evenement.getId()+"-"+evenement.getTitre(), 1);
-			evenement.setFavoris(true);
-			eventsDao.updateEvent(evenement);
+			if(evenement.isFavoris()){
+				tracker.trackEvent("Detail d'un evenement", "clic", "Favoris-"+evenement.getId()+"-"+evenement.getTitre(), 1);
+				evenement.setFavoris(true);
+				eventsDao.updateEvent(evenement);
+				setFavButton();
+				Toast.makeText(context, "Mis en favoris", Toast.LENGTH_SHORT).show();
+			}else{
+				tracker.trackEvent("Detail d'un evenement", "clic", "Non-Favoris-"+evenement.getId()+"-"+evenement.getTitre(), 1);
+				evenement.setFavoris(false);
+				eventsDao.updateEvent(evenement);
+				setFavButton();
+				Toast.makeText(context, "Retiré des favoris", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 
 	public String getDescriptionEvenement() {
 		// TODO Auto-generated method stub
 		return evenement.getDetailEvenement();
+	}
+
+	public void initFavButton(Button bouton) {
+		this.bouton=bouton;
+		
+	}
+	
+	public void setFavButton(){
+		if(evenement.isFavoris()){
+			bouton.setBackgroundResource( R.drawable.btnmenuhautfavoris);
+		}else{
+			bouton.setBackgroundResource( R.drawable.btnmenuhautfavorisoff);
+		}
 	}
 
 }

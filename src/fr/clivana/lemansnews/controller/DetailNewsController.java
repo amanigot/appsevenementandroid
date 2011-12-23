@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 public class DetailNewsController implements OnClickListener {
 
@@ -49,12 +50,13 @@ public class DetailNewsController implements OnClickListener {
 			tracker.trackEvent("Detail d'une news", "clic", "Favoris-"+article.getId()+"-"+article.getTitre(), 1);
 			article.setFavoris(true);
 			newsDao.updateNews(article);
+			Toast.makeText(context, "Mis en favoris", Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	public CharSequence initTitre() {
 		// TODO Auto-generated method stub
-		return categorie;
+		return "Actualités";
 	}
 
 	public CharSequence getTitreNews() {

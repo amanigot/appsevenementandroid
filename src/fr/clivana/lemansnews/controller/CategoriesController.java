@@ -8,6 +8,7 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -40,7 +41,7 @@ public class CategoriesController implements OnClickListener,
 	
 	public CategoriesController(Context c) {
 		context = c;
-		
+		categoriesDao = new CategoriesDAO(context);
 		newsDao=new NewsDAO(context);
 		tracker = GoogleAnalyticsTracker.getInstance();
 		
@@ -60,7 +61,8 @@ public class CategoriesController implements OnClickListener,
 			for(int i=0;i<categoriesAAjouter.size();i++){
 				categoriesAAjouterTitre[i]=categoriesAAjouter.get(i).getNom();
 			}
-			ajouterCategorie= new CategoriesDialog(context, "Ajouter une catégorie", "Appuyez sur une catégorie pour l'ajouter. Appuyez longuement sur une catégorie du menu pour la supprimer.", "", "Annuler",categoriesAAjouterTitre, -1, 1 );
+			Log.w("categorie size", categoriesAAjouterTitre.length+"");
+			ajouterCategorie= new CategoriesDialog(context, "Ajouter une catégorie", "", "", "Annuler",categoriesAAjouterTitre, -1, 1 );
 			ajouterCategorie.getBuilder().show();
 		}
 		if (v.getId() == R.id.buttonActualiser) {
@@ -101,7 +103,11 @@ public class CategoriesController implements OnClickListener,
 			final int position, long id) {
 		tracker.trackEvent("Categories", "long-clic", categoriesMenu.get(position).getNom(), 1);
 		if(categoriesMenu.get(position).isSupprimable()){
-			categoriesDialog = new CategoriesDialog(context, "Supprimer", "Voulez-vous supprimer la catégorie ?", "Supprimer", "Annuler", new String[0], position, 2);
+			categoriesDialog = new CategoriesDialog(context, "Supprimer", "Supprimer", "Supprimer", "Annuler", new String[0], position, 2);
+			categoriesDialog.getBuilder().show();
+			
+		}else{
+			categoriesDialog = new CategoriesDialog(context, "Supprimer", "NonSupprimer", "", "Annuler", new String[0], position, 2);
 			categoriesDialog.getBuilder().show();
 			
 		}

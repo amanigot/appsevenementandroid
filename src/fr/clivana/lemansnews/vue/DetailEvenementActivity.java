@@ -77,7 +77,9 @@ public class DetailEvenementActivity extends Activity {
 		boutonRetour.setVisibility(View.VISIBLE);
 		boutonActualiser.setVisibility(View.INVISIBLE);
 		
-		boutonInfo.setBackgroundResource(R.drawable.btnmenuhautfavoris);
+		detailEventsController.initFavButton(boutonInfo);
+		detailEventsController.setFavButton();
+		
 		
 		boutonInfo.setOnClickListener(detailEventsController);
 		
