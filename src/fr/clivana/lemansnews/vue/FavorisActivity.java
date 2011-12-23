@@ -38,8 +38,6 @@ public class FavorisActivity extends TabActivity {
 		 tracker.trackPageView("/Favoris");
 		
 		mTabHost = getTabHost();
-	    listViewEvents=(ListView)findViewById(R.id.listViewEvenementsFav);
-	    listViewNews=(ListView)findViewById(R.id.listViewNews);
 	    controller=new FavorisController(this);
 	    titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
 	    boutonRetour=(Button)findViewById(R.id.buttonRetour);

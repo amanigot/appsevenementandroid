@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.async.AsyncTaskImage;
@@ -49,6 +50,8 @@ public class ListNewsAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		convertView = inflater.inflate(R.layout.eventitem, null);
+		LinearLayout ll=(LinearLayout)convertView.findViewById(R.id.linearLayout2);
+		ll.setVisibility(View.GONE);
 		TextView titre = (TextView) convertView
 				.findViewById(R.id.textViewTitreEvent);
 		titre.setText(articles.get(position).getTitre());
@@ -59,7 +62,7 @@ public class ListNewsAdapter extends BaseAdapter{
 				.findViewById(R.id.textViewLieuEvent);
 		lieu.setVisibility(View.GONE);
 		ImageView imageEvent = (ImageView)convertView.findViewById(R.id.imageEventDetail);
-		asyncTask = new AsyncTaskImage(articles.get(position).getUrlImage(), imageEvent);
+		asyncTask = new AsyncTaskImage(articles.get(position).getUrlImageMobile(), imageEvent, R.drawable.illustaucuneimage480);
 		asyncTask.execute();
 		return convertView;
 	}

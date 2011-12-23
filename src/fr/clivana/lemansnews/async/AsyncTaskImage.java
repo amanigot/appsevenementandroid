@@ -1,8 +1,10 @@
 package fr.clivana.lemansnews.async;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.utils.ImageSingleton;
 
 public class AsyncTaskImage extends AsyncTask<Void, Void, Void> {
@@ -11,14 +13,14 @@ public class AsyncTaskImage extends AsyncTask<Void, Void, Void> {
 	Bitmap bitmapRecu;
 	ImageView imageView;
 	ImageSingleton imageSingleton;
+	int imageParDefaut;
 	
-	
-	public AsyncTaskImage(String nomImage, ImageView viewRecue) {
+	public AsyncTaskImage(String nomImage, ImageView viewRecue , int defResId) {
 		super();
 		this.nomImage = nomImage;
 		imageSingleton = ImageSingleton.getInstance();
 		imageView=viewRecue;
-		
+		imageParDefaut=defResId;
 	}
 	
 	@Override
@@ -33,7 +35,12 @@ public class AsyncTaskImage extends AsyncTask<Void, Void, Void> {
 	}
 
 	protected void onPostExecute(Void result) {
-		imageView.setImageBitmap(bitmapRecu);
+		if(bitmapRecu==null){
+			imageView.setBackgroundResource(imageParDefaut);
+		
+		}else{
+			imageView.setImageBitmap(bitmapRecu);
+		}
 	};
 	
 }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/tabhost"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
     
     <include
         android:id="@+id/include1"
@@ -10,51 +11,42 @@
         android:layout_height="wrap_content"
         layout="@layout/hautpage" />
     
-     <LinearLayout
-        android:orientation="vertical"
+     
+       <TabHost 
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
          <FrameLayout
              android:id="@android:id/tabcontent"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:layout_weight="1" >
+             android:layout_height="350dp"
+             android:layout_gravity="top" >
 
-             <ListView
-		        android:id="@+id/listViewNews"
-		        android:layout_width="match_parent"
-		        android:layout_height="0dip">
-
-    		 </ListView>
-             
-             <ListView
-                 android:id="@+id/listViewEvenementsFav"
-                 android:layout_width="match_parent"
-                 android:layout_height="0dip" >
-		
-		     </ListView>
-		     
          </FrameLayout>
 
          <TabWidget
              android:id="@android:id/tabs"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content" 
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom"
              android:layout_margin="0dp"
-             android:tabStripEnabled="false"
-             android:divider="@null">
+             android:divider="@null"
+             android:tabStripEnabled="false" >
 			 
          </TabWidget>
 
-         <include
+         
+
+     
+      
+	  </TabHost>
+     
+       <include
              android:id="@+id/include2"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_weight="1"
              layout="@layout/baspage" />
-
-      </LinearLayout>
-      
-	  </TabHost>
-     
+ </LinearLayout>

@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class DetailNewsController implements OnClickListener {
 	CategoriesDialog dialog;
 	GoogleAnalyticsTracker tracker;
 	AsyncTaskImage asyncTask;
+	Button bouton;
 	
 	public DetailNewsController(Context c, long idArticle2, String categorie) {
 		context=c;
@@ -50,10 +52,19 @@ public class DetailNewsController implements OnClickListener {
 			dialog.getBuilder().show();
 		}
 		if(v.getId()==R.id.buttonInfo){
-			tracker.trackEvent("Detail d'une news", "clic", "Favoris-"+article.getId()+"-"+article.getTitre(), 1);
-			article.setFavoris(true);
-			newsDao.updateNews(article);
-			Toast.makeText(context, "Mis en favoris", Toast.LENGTH_SHORT).show();
+			if(!article.isFavoris()){
+				tracker.trackEvent("Detail d'une news", "clic", "Favoris-"+article.getId()+"-"+article.getTitre(), 1);
+				article.setFavoris(true);
+				newsDao.updateNews(article);
+				setFavButton();
+				Toast.makeText(context, "Mis en favoris", Toast.LENGTH_SHORT).show();
+			}else{
+				tracker.trackEvent("Detail d'une news", "clic", "Non-Favoris-"+article.getId()+"-"+article.getTitre(), 1);
+				article.setFavoris(false);
+				newsDao.updateNews(article);
+				setFavButton();
+				Toast.makeText(context, "Retirée des favoris", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 
@@ -76,9 +87,22 @@ public class DetailNewsController implements OnClickListener {
 		return article.getArticle();
 	}
 
+	public void initFavButton(Button bouton) {
+		this.bouton=bouton;
+		
+	}
+	
+	public void setFavButton(){
+		if(article.isFavoris()){
+			bouton.setBackgroundResource( R.drawable.btnmenuhautfavoris);
+		}else{
+			bouton.setBackgroundResource( R.drawable.btnmenuhautfavorisoff);
+		}
+	}
+	
 	public void setImage(ImageView imageEvenement) {
 		// TODO Auto-generated method stub
-		asyncTask = new AsyncTaskImage(article.getUrlImageMobile(), imageEvenement);
+		asyncTask = new AsyncTaskImage(article.getUrlImageMobile(), imageEvenement, R.drawable.illustaucuneimage480);
 		asyncTask.execute();
 	}
 	

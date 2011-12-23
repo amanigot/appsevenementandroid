@@ -81,7 +81,7 @@ public class GalleryAdapter extends BaseAdapter {
 			}
 		}
 		
-		asyncTask = new AsyncTaskImage(events.get(position).getNomImageMobile(), image);
+		asyncTask = new AsyncTaskImage(events.get(position).getNomImageMobile(), image, R.drawable.illustaucuneimage480);
 		asyncTask.execute();
 		
 		

@@ -58,7 +58,7 @@ public class ListEvenementsAdapter extends BaseAdapter {
 				.findViewById(R.id.textViewLieuEvent);
 		lieu.setText(events.get(position).getLieu());
 		ImageView imageEvent = (ImageView)convertView.findViewById(R.id.imageEventDetail);
-		asyncTask = new AsyncTaskImage(events.get(position).getNomImageMobile(), imageEvent);
+		asyncTask = new AsyncTaskImage(events.get(position).getNomImageMobile(), imageEvent, R.drawable.illustaucuneimage480);
 		asyncTask.execute();
 		return convertView;
 	}
