@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.Params;
@@ -138,11 +139,15 @@ public class EventsDAO {
 			while(c.moveToNext()){
 				event = cursorToEvent(c);
 				if (event.getDateTri().compareTo(dateTri)<0){
-					
+					Log.w("event", "inferieur");
 				}else{
+					Log.w("event", "suppérieur");
 					events.add(event);
 				}
 			};
+		}
+		if (events.size()==0){			
+			events.add(Evenement.noEvents());
 		}
 		c.close();
 		close();
