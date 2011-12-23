@@ -2,6 +2,7 @@ package fr.clivana.lemansnews.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Formatage {
 
@@ -11,12 +12,16 @@ public class Formatage {
 	}
 	
 	public static String datePourPlay(long date) {
+		TimeZone tz = TimeZone.getTimeZone("Europe/Paris" );
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		formatter.setTimeZone(tz);
 		return formatter.format(date);
 	}
 	
 	public static String datePourTriEvenement(Date date) {
+		TimeZone tz = TimeZone.getTimeZone("Europe/Paris" );
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
+		formatter.setTimeZone(tz);
 		return formatter.format(date);
 	}
 
