@@ -87,7 +87,6 @@ public class EventsDAO {
 	
 // liste evenement, tri par date croissante, date >= datejour, limit QTE_MAX_EVENTS
 	public List<Evenement> getAllEvents(){
-		String dateTri = Formatage.datePourTriEvenement(new Date());
 		open();
 		Cursor c = dbClivana.query(
 				NomsSQL.TABLE_EVENEMENT,
@@ -102,7 +101,6 @@ public class EventsDAO {
 	}
 	
 	public List<Evenement> getFavoriteEvents(){
-		String dateTri = Formatage.datePourTriEvenement(new Date());
 		open();
 		Cursor c = dbClivana.query(
 				NomsSQL.TABLE_EVENEMENT,
@@ -130,6 +128,7 @@ public class EventsDAO {
 
 	}
 	private List<Evenement> cursorToEventTab(Cursor c){
+		String dateTri = Formatage.datePourTriEvenement(new Date());
 		List<Evenement> events = new ArrayList<Evenement>();
 		Evenement event;
 		
@@ -137,8 +136,12 @@ public class EventsDAO {
 			events.add(Evenement.noEvents());
 		}else{
 			while(c.moveToNext()){
-				event = cursorToEvent(c);		
-				events.add(event);		
+				event = cursorToEvent(c);
+				if (event.getDateTri().compareTo(dateTri)<0){
+					
+				}else{
+					events.add(event);
+				}
 			};
 		}
 		c.close();
