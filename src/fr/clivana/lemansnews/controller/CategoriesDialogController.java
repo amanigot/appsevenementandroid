@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.widget.Toast;
+import fr.clivana.lemansnews.async.AsyncTaskAddCategorie;
+import fr.clivana.lemansnews.async.AsyncTaskCategories;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
@@ -32,6 +34,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 	int dialogueID; 
 	Categorie categ;
 	String titre, description;
+	AsyncTaskAddCategorie asyncTask;
 	
 	public String getTitre() {
 		return titre;
@@ -91,7 +94,9 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 				categ=categoriesDao.getCategorie(categories[idElementAppuye].toString());
 				categ.setSelected(true);
 				categoriesDao.updateCategorie(categ);
-				((CategoriesActivity) context).initAdapters();
+				asyncTask = new AsyncTaskAddCategorie(context, categ.getNom());
+				asyncTask.execute();
+				
 				
 			}
 			

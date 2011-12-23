@@ -40,9 +40,6 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 		Reseau.majEvenements(context, 0, 0);
 //		Reseau.webService(Reseau.URL_LIST_EVENTS+"all/1");
 		publishProgress("Chargement des actualités..."); //inscrit sur la textview chargement des actus
-		Reseau.majArticles(context, "all", 0, 0);
-//		Reseau.webService(Reseau.URL_LIST_NEWS+"all/1");
-		publishProgress("Chargement..."); //inscrit sur la textview chargement
 		Reseau.majCategories(context);
 //		Reseau.webService(Reseau.URL_LIST_KEYWORDS);
 		return null;

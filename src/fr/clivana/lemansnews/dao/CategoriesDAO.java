@@ -38,6 +38,7 @@ public class CategoriesDAO {
 		if(!categorie.isSupprimable()){
 			categorie.setSelected(true);
 		}
+		categorie.setDateConsult("00000000000000");
 		dbClivana.insert(NomsSQL.TABLE_CATEGORIE, null, categorieToContentValues(categorie));
 		close();
 	}
