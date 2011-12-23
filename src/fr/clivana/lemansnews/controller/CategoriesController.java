@@ -32,7 +32,7 @@ public class CategoriesController implements OnClickListener,
 	CategorieAdapter adapter;
 	Context context;
 	CategoriesDAO categoriesDao;
-	List<Categorie> categoriesMenu, categoriesAAjouter;
+	List<Categorie> categoriesAffichees, categoriesAAjouter;
 	String[] categoriesAAjouterTitre;
 	CategoriesDialog categoriesDialog, ajouterCategorie;
 	NewsDAO newsDao;
@@ -78,20 +78,20 @@ public class CategoriesController implements OnClickListener,
 	}
 
 	public CategorieAdapter initCategorieAdapter() {
-		categoriesMenu = categoriesDao.getSelectedCategories();
-		adapter = new CategorieAdapter(context, categoriesMenu);
+		categoriesAffichees = categoriesDao.getSelectedCategories();
+		adapter = new CategorieAdapter(context, categoriesAffichees);
 		return adapter;
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		tracker.trackEvent("Categories", "clic", categoriesMenu.get(position).getNom(), 1);
+		tracker.trackEvent("Categories", "clic", categoriesAffichees.get(position).getNom(), 1);
 				// Intent de la Grid News
-				 if(categoriesMenu.get(position).getTotal()>0){
+				 if(categoriesAffichees.get(position).getTotal()>0){
 					Intent intentNews = new Intent(context, GridNewsActivity.class);
-				 	intentNews.putExtra("categorie", categoriesMenu.get(position).getNom());
-				 	categoriesMenu.get(position).setDateConsult(Formatage.datePourPlay(new Date().getTime()));
-				 	categoriesDao.updateCategorie(categoriesMenu.get(position) );
+				 	intentNews.putExtra("categorie", categoriesAffichees.get(position).getNom());
+				 	categoriesAffichees.get(position).setDateConsult(Formatage.datePourPlay(new Date().getTime()));
+				 	categoriesDao.updateCategorie(categoriesAffichees.get(position) );
 				 	context.startActivity(intentNews);
 				 }else{
 					 Toast.makeText(context, "Aucun article pour le moment dans la catégorie.", Toast.LENGTH_SHORT).show();
@@ -101,13 +101,13 @@ public class CategoriesController implements OnClickListener,
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View v,
 			final int position, long id) {
-		tracker.trackEvent("Categories", "long-clic", categoriesMenu.get(position).getNom(), 1);
-		if(categoriesMenu.get(position).isSupprimable()){
-			categoriesDialog = new CategoriesDialog(context, "Supprimer", "Supprimer", "Supprimer", "Annuler", new String[0], position, 2);
+		tracker.trackEvent("Categories", "long-clic", categoriesAffichees.get(position).getNom(), 1);
+		if(categoriesAffichees.get(position).isSupprimable()){
+			categoriesDialog = new CategoriesDialog(context, "Supprimer", "Supprimer", "Supprimer", "Annuler", new String[0], categoriesAffichees.get(position).getId(), 2);
 			categoriesDialog.getBuilder().show();
 			
 		}else{
-			categoriesDialog = new CategoriesDialog(context, "Supprimer", "NonSupprimer", "", "Annuler", new String[0], position, 2);
+			categoriesDialog = new CategoriesDialog(context, "Supprimer", "NonSupprimer", "", "Annuler", new String[0], categoriesAffichees.get(position).getId(), 2);
 			categoriesDialog.getBuilder().show();
 			
 		}

@@ -25,11 +25,11 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 	int FACEBOOK_REQUEST_CODE=123;
 	CategoriesDAO categoriesDao;
 	Context context;
-	int position;
+	long idCategorieASupprimer;
 	CharSequence[] categories;
 	//Cet id correspond au type de dialog affiché : 1: Ajouter une catégorie, 2: Supprimer, 3: Partager
 	//Il est utilisé pour le onclick listener.
-	int dialID; 
+	int dialogueID; 
 	Categorie categ;
 	String titre, description;
 	
@@ -50,11 +50,11 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 	}
 
 	public int getDialID() {
-		return dialID;
+		return dialogueID;
 	}
 
 	public void setDialID(int dialID) {
-		this.dialID = dialID;
+		this.dialogueID = dialID;
 	}
 
 	
@@ -63,96 +63,96 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 		context = ctx;
 		categoriesDao=new CategoriesDAO(context);
 		categories=items;
+		dialogueID=id;
 	}
 
-	public CategoriesDialogController(Context ctx, int id, CharSequence[] items, int pos) {
+	public CategoriesDialogController(Context ctx, int id, CharSequence[] items, long idCategorie) {
 		context = ctx;
 		categoriesDao=new CategoriesDAO(context);
-		dialID=id;
+		dialogueID=id;
 		categories=items;
+		idCategorieASupprimer=idCategorie;
 	}
 	
 
-	public CategoriesDialogController(Context ctx, int id, int pos) {
-		context = ctx;
-		categoriesDao=new CategoriesDAO(context);
-		dialID=id;
-		position=pos;
-	}
-
 	@Override
-	public void onClick(DialogInterface dialog, int which) {
+	public void onClick(DialogInterface dialog, int idElementAppuye) {
 		
 		//Le bouton annuler est présent sur tous les dialogs
-		if(which== AlertDialog.BUTTON_NEGATIVE){
+		if(idElementAppuye== AlertDialog.BUTTON_NEGATIVE){
 			dialog.cancel();
-		}
+		}else{	// Si ce n'est pas le bouton d'annulation, alors on vérifie dans quel dialog on se 
+				// trouve pour savoir quelle action exécuter 	(1:dialogue pour ajouter une catégorie, CatégoriesActivity)
+				//												(2:dialogue pour supprimer une catégorie, CatégoriesActivity)
+				//												(3:dialogue pour le partage sur réseaux sociaux, DetailNewsActivity, DetailEvenementActivity et VuePrincipaleActivity)
 			
-		if(dialID==1){ //Ici on ajoute une catégorie
-			
-			categ=categoriesDao.getCategorie(categories[which].toString());
-			categ.setSelected(true);
-			categoriesDao.updateCategorie(categ);
-			((CategoriesActivity) context).initAdapters();
-		}
-		
-		if(dialID==2){//Ici on supprime une catégorie
-			if(which== AlertDialog.BUTTON_POSITIVE){
-				categ=categoriesDao.getCategorie(position);
-				categ.setSelected(false);
+			if(dialogueID==1){ //Ici on ajoute une catégorie
+				
+				categ=categoriesDao.getCategorie(categories[idElementAppuye].toString());
+				categ.setSelected(true);
 				categoriesDao.updateCategorie(categ);
 				((CategoriesActivity) context).initAdapters();
+				
 			}
-		}
-		
-		if(dialID==3){//Ici on partage sur facebook, twitter,...
-			switch(which){
-			case 0:
-				FacebookFunctions.initialize(context);
-				SessionEvents.addAuthListener(returnAuthListener(titre, description));
-				if (!FacebookFunctions.isConnected()) {
-					FacebookFunctions.login(((Activity)context), FACEBOOK_REQUEST_CODE);
-				} else {
-					publishMessage(titre, description);
+			
+			if(dialogueID==2){//Ici on supprime une catégorie
+				if(idElementAppuye== AlertDialog.BUTTON_POSITIVE){
+					categ=categoriesDao.getCategorie(idCategorieASupprimer);
+					categ.setSelected(false);
+					categoriesDao.updateCategorie(categ);
+					((CategoriesActivity) context).initAdapters();
 				}
-			break;
-			case 1:
-				Intent TwitterIntent = findTwitterClient();
-		    	if(TwitterIntent != null)
-		    	{
-		    		TwitterIntent.putExtra(android.content.Intent.EXTRA_TEXT, titre+" : "+description);
-		    		context.startActivity(Intent.createChooser(TwitterIntent, "Partager..."));
-		    	}
-		    	else
-		    	{
-		    		Toast toast=new Toast(context);
-					CharSequence text = "Vous devez d'abord telecharger une application Twitter.";
-					int duration = Toast.LENGTH_SHORT;
-					toast = Toast.makeText(context, text, duration);
-					toast.show();
-		    	}
-		    break;
-			case 2:
-					Intent sendIntent = new Intent(Intent.ACTION_SEND);
-			    	sendIntent.setType("plain/text");
-					sendIntent .putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
-					sendIntent .putExtra(android.content.Intent.EXTRA_TEXT, description);
-					context.startActivity(Intent.createChooser( sendIntent, "Envoyer un mail..."));
-			break;
-			case 3:
-					Intent sendIntentSMS = new Intent(Intent.ACTION_VIEW);
-					sendIntentSMS.putExtra("sms_body", titre+" : "+description); 
-					sendIntentSMS.setType("vnd.android-dir/mms-sms");
-					context.startActivity(sendIntentSMS);
-			break;
-			case 4:
-					Intent sendIntentG = new Intent(Intent.ACTION_SEND);
-			    	sendIntentG.setType("text/plain");
-					sendIntentG.putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
-					sendIntentG.putExtra(android.content.Intent.EXTRA_TEXT, description);
-					sendIntentG.setPackage("com.google.android.apps.plus"); 
-					context.startActivity(Intent.createChooser( sendIntentG, "Partager sur Google+"));
-			break;
+			}
+			
+			if(dialogueID==3){//Ici on partage sur facebook, twitter,...
+				switch(idElementAppuye){
+				case 0:
+					FacebookFunctions.initialize(context);
+					SessionEvents.addAuthListener(returnAuthListener(titre, description));
+					if (!FacebookFunctions.isConnected()) {
+						FacebookFunctions.login(((Activity)context), FACEBOOK_REQUEST_CODE);
+					} else {
+						publishMessage(titre, description);
+					}
+				break;
+				case 1:
+					Intent TwitterIntent = findTwitterClient();
+			    	if(TwitterIntent != null)
+			    	{
+			    		TwitterIntent.putExtra(android.content.Intent.EXTRA_TEXT, titre+" : "+description);
+			    		context.startActivity(Intent.createChooser(TwitterIntent, "Partager..."));
+			    	}
+			    	else
+			    	{
+			    		Toast toast=new Toast(context);
+						CharSequence text = "Vous devez d'abord telecharger une application Twitter.";
+						int duration = Toast.LENGTH_SHORT;
+						toast = Toast.makeText(context, text, duration);
+						toast.show();
+			    	}
+			    break;
+				case 2:
+						Intent sendIntent = new Intent(Intent.ACTION_SEND);
+				    	sendIntent.setType("plain/text");
+						sendIntent .putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
+						sendIntent .putExtra(android.content.Intent.EXTRA_TEXT, description);
+						context.startActivity(Intent.createChooser( sendIntent, "Envoyer un mail..."));
+				break;
+				case 3:
+						Intent sendIntentSMS = new Intent(Intent.ACTION_VIEW);
+						sendIntentSMS.putExtra("sms_body", titre+" : "+description); 
+						sendIntentSMS.setType("vnd.android-dir/mms-sms");
+						context.startActivity(sendIntentSMS);
+				break;
+				case 4:
+						Intent sendIntentG = new Intent(Intent.ACTION_SEND);
+				    	sendIntentG.setType("text/plain");
+						sendIntentG.putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
+						sendIntentG.putExtra(android.content.Intent.EXTRA_TEXT, description);
+						sendIntentG.setPackage("com.google.android.apps.plus"); 
+						context.startActivity(Intent.createChooser( sendIntentG, "Partager sur Google+"));
+				break;
+				}
 			}
 		}
 	}

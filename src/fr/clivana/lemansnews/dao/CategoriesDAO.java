@@ -91,7 +91,7 @@ public class CategoriesDAO {
 		Cursor c = dbClivana.query(
 				NomsSQL.TABLE_CATEGORIE, 
 				null, 
-				NomsSQL.COLONNE_CATEGORIE_NOM + " = " + nom, 
+				NomsSQL.COLONNE_CATEGORIE_NOM + " = '" + nom + "'", 
 				null, null, null, null);
 		if (c.getCount()==0){
 			return null;

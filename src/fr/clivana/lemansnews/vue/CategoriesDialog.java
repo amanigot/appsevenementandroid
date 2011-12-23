@@ -7,13 +7,13 @@ import fr.clivana.lemansnews.controller.CategoriesDialogController;
 public class CategoriesDialog extends AlertDialog {
 
 	private Context ctx;
-	private String title, message, nomPositiveButton, nomNegativeButton;
+	private String title, message, boutonValider, boutonAnnuler;
 	CharSequence[] items;
-	private CategoriesDialogController controller;
-	int pos;
+	private CategoriesDialogController categoriesDialogController;
+	long positionElementGridview;
 	Builder builder;
 	
-	public CategoriesDialog(Context context, String titre, String message, String posButton, String negButton, String[] objets, int position, int id) {
+	public CategoriesDialog(Context context, String titre, String message, String validerButton, String annulerButton, String[] tabCategories, long position, int id) {
 		super(context);
 		
 		//----------------------------------------------------------
@@ -24,21 +24,18 @@ public class CategoriesDialog extends AlertDialog {
 		this.ctx=context;
 		this.title=titre;
 		this.message=message;
-		this.nomPositiveButton=posButton;
-		this.nomNegativeButton=negButton;
-		items=new String[objets.length];
-		for(int i=0;i<objets.length;i++){
-			items[i]=objets[i];
-		}
+		this.boutonValider=validerButton;
+		this.boutonAnnuler=annulerButton;
+		this.items=tabCategories;
 		
 		builder= new Builder(ctx);
 		
 		//le constructeur utilisant la position n'est utilisé que pour la suppression
-		pos = position;
-		if(pos==-1){
-			controller = new CategoriesDialogController(ctx, id, items);
+		positionElementGridview = position; 
+		if(positionElementGridview == -1){
+			categoriesDialogController = new CategoriesDialogController(ctx, id, items);
 		}else{
-			controller = new CategoriesDialogController(ctx, id, items, pos);
+			categoriesDialogController = new CategoriesDialogController(ctx, id, items, positionElementGridview);
 		}
 		
 		if(!titre.equals("")){
@@ -53,19 +50,19 @@ public class CategoriesDialog extends AlertDialog {
 			
 		}
 		
-		if(!nomPositiveButton.equals("")){
+		if(!boutonValider.equals("")){
 			
-			builder.setPositiveButton(nomPositiveButton, controller);
+			builder.setPositiveButton(boutonValider, categoriesDialogController);
 		}
 		
-		if(!nomNegativeButton.equals("")){
+		if(!boutonAnnuler.equals("")){
 			
-			builder.setNegativeButton(nomNegativeButton, controller);
+			builder.setNegativeButton(boutonAnnuler, categoriesDialogController);
 		}
 		
 		if(items.length != 0 ){
 			
-			builder.setItems(items, controller);
+			builder.setItems(items, categoriesDialogController);
 			
 		}else{
 			if(this.message.equals("")){
@@ -82,8 +79,8 @@ public class CategoriesDialog extends AlertDialog {
 
 	//Méthode utilisée pour le dialog de partage
 	public void addInfos(String titre, String details) {
-		controller.setTitre(titre);
-		controller.setDescription(details);
+		categoriesDialogController.setTitre(titre);
+		categoriesDialogController.setDescription(details);
 	}
 
 	public Builder getBuilder() {
