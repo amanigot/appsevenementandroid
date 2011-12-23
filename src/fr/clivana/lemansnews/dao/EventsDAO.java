@@ -141,11 +141,15 @@ public class EventsDAO {
 			while(c.moveToNext()){
 				event = cursorToEvent(c);
 				if (event.getDateTri().compareTo(dateTri)<0){
-					
+					Log.w("event", "inferieur");
 				}else{
+					Log.w("event", "suppérieur");
 					events.add(event);
 				}
 			};
+		}
+		if (events.size()==0){			
+			events.add(Evenement.noEvents());
 		}
 		c.close();
 		close();

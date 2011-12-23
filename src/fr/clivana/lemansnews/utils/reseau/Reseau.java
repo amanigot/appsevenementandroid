@@ -156,7 +156,10 @@ public class Reseau {
 			CategoriesDAO categorieDao = new CategoriesDAO(context);
 			categorieDao.setCategorie(categorie);
 		}else{
-			Log.e("Reseau", "la categorie " + nomCategorie +" n''a pas pu être chargée");
+			Log.e("Reseau", "la categorie " + nomCategorie +" n'a pas pu être chargée");
+		}
+		if (categorie.getCount() != 0){
+			majArticles(context, categorie.getNom(), 0, 0);
 		}
 	}
 	
