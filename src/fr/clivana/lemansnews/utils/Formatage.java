@@ -1,5 +1,6 @@
 package fr.clivana.lemansnews.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -11,11 +12,23 @@ public class Formatage {
 		return formatter.format(date);
 	}
 	
-	public static String datePourPlay(long date) {
+	public static String datePourPlay(Date date) {
 		TimeZone tz = TimeZone.getTimeZone("Europe/Paris" );
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 		formatter.setTimeZone(tz);
 		return formatter.format(date);
+	}
+	public static Date stringToDate(String date) {
+		TimeZone tz = TimeZone.getTimeZone("Europe/Paris" );
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		formatter.setTimeZone(tz);
+		Date retour = null;
+		try {
+			retour = formatter.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return retour;
 	}
 	
 	public static String datePourTriEvenement(Date date) {

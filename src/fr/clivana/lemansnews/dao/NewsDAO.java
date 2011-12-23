@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.Params;
 import fr.clivana.lemansnews.utils.database.DatabaseLeMansNews;
 import fr.clivana.lemansnews.utils.database.NomsSQL;
@@ -166,12 +167,13 @@ public class NewsDAO {
 	public Article cursorToArticle(Cursor c){
 		boolean notif = c.getInt(NomsSQL.RANG_ARTICLE_NOTIFICATION) == 1;
 		boolean favoris = c.getInt(NomsSQL.RANG_ARTICLE_FAVORIS) == 1;
+		
 		Article retArticle = new Article(
 				c.getLong(NomsSQL.RANG_ARTICLE_ID), 
 				c.getString(NomsSQL.RANG_ARTICLE_TITRE), 
 				c.getString(NomsSQL.RANG_ARTICLE_CONTENU), 
 				c.getString(NomsSQL.RANG_ARTICLE_ACCROCHE), 
-				new Date(c.getLong(NomsSQL.RANG_ARTICLE_DATEPARUTION)), 
+				c.getString(NomsSQL.RANG_ARTICLE_DATEPARUTION), 
 				c.getString(NomsSQL.RANG_ARTICLE_AUTEUR), 
 				c.getString(NomsSQL.RANG_ARTICLE_URLARTICLE), 
 				c.getString(NomsSQL.RANG_ARTICLE_NOMIMAGE), 
@@ -190,7 +192,7 @@ public class NewsDAO {
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_TITRE , article.getTitre());
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_CONTENU , article.getArticle());
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_ACCROCHE , article.getAccroche());
-		contentValues.put(NomsSQL.COLONNE_ARTICLE_DATEPARUTION , article.getDateParution().getTime());
+		contentValues.put(NomsSQL.COLONNE_ARTICLE_DATEPARUTION , article.getDateParution());
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_AUTEUR , article.getAuteur());
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_URLARTICLE , article.getUrlArticle());
 		contentValues.put(NomsSQL.COLONNE_ARTICLE_NOMIMAGE , article.getUrlImage());

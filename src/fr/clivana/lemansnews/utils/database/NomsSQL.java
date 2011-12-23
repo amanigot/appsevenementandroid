@@ -99,7 +99,7 @@ public class NomsSQL {
 								+ COLONNE_ARTICLE_TITRE + " text not null, "
 								+ COLONNE_ARTICLE_CONTENU + " varchar(10000), "
 								+ COLONNE_ARTICLE_ACCROCHE + " varchar(10000), "
-								+ COLONNE_ARTICLE_DATEPARUTION + " long, "
+								+ COLONNE_ARTICLE_DATEPARUTION + " text, "
 								+ COLONNE_ARTICLE_AUTEUR + " text, "
 								+ COLONNE_ARTICLE_URLARTICLE + " text, "
 								+ COLONNE_ARTICLE_NOMIMAGE + " text, "

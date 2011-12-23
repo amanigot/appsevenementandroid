@@ -67,7 +67,7 @@ public class DetailNewsController implements OnClickListener {
 	}
 
 	public CharSequence initDateAuteur() {
-		String retString = "Publié le "+Formatage.dateEnTexteComplet(article.getDateParution())+" | "+article.getAuteur();
+		String retString = "Publié le "+Formatage.dateEnTexteComplet(Formatage.stringToDate(article.getDateParution()))+" | "+article.getAuteur();
 		return retString;
 	}
 

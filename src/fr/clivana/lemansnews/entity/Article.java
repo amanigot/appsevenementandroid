@@ -2,13 +2,15 @@ package fr.clivana.lemansnews.entity;
 
 import java.util.Date;
 
+import fr.clivana.lemansnews.utils.Formatage;
+
 public class Article {
     
 	private long id;
 	private String titre;
 	private String article;
 	private String accroche;
-	private Date dateParution;
+	private String dateParution;
 	private String auteur;
 	private String urlArticle;
 	private String urlImage;
@@ -20,7 +22,7 @@ public class Article {
 // ajouter favoris;
 
 	public Article(long id, String titre, String article, String accroche,
-			Date dateParution, String auteur, String urlArticle, String urlImage, String urlImageMobile,
+			String dateParution, String auteur, String urlArticle, String urlImage, String urlImageMobile,
 			String urlMiniature, String motsClefs, boolean notification, boolean favoris) {
 		super();
 		this.id = id;
@@ -44,7 +46,7 @@ public class Article {
 				"Aucune nouveauté",
 				"Aucune nouveauté pour le theme : "+sujet.replace("/1", "")+".",
 				"",
-				new Date(),
+				Formatage.datePourPlay(new Date()),
 				"Clivana",
 				"",
 				"",
@@ -62,7 +64,7 @@ public class Article {
 				"Pas de réseau",
 				"Veuillez vous connecter à Internet pour connaître les dernières nouveautés",
 				"",
-				new Date(),
+				Formatage.datePourPlay(new Date()),
 				"Clivana",
 				"",
 				"",
@@ -110,11 +112,11 @@ public class Article {
 		this.accroche = accroche;
 	}
 
-	public Date getDateParution() {
+	public String getDateParution() {
 		return dateParution;
 	}
 
-	public void setDateParution(Date dateParution) {
+	public void setDateParution(String dateParution) {
 		this.dateParution = dateParution;
 	}
 

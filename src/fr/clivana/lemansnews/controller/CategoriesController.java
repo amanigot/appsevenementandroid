@@ -90,7 +90,7 @@ public class CategoriesController implements OnClickListener,
 				 if(categoriesAffichees.get(position).getTotal()>0){
 					Intent intentNews = new Intent(context, GridNewsActivity.class);
 				 	intentNews.putExtra("categorie", categoriesAffichees.get(position).getNom());
-				 	categoriesAffichees.get(position).setDateConsult(Formatage.datePourPlay(new Date().getTime()));
+				 	categoriesAffichees.get(position).setDateConsult(Formatage.datePourPlay(new Date()));
 				 	categoriesDao.updateCategorie(categoriesAffichees.get(position) );
 				 	context.startActivity(intentNews);
 				 }else{

@@ -54,7 +54,7 @@ public class ListNewsAdapter extends BaseAdapter{
 		titre.setText(articles.get(position).getTitre());
 		TextView date = (TextView) convertView
 				.findViewById(R.id.textViewDateEvent);
-		date.setText(Formatage.dateEnTexteComplet(articles.get(position).getDateParution()));
+		date.setText(Formatage.dateEnTexteComplet(Formatage.stringToDate(articles.get(position).getDateParution())));
 		TextView lieu = (TextView) convertView
 				.findViewById(R.id.textViewLieuEvent);
 		lieu.setVisibility(View.GONE);
