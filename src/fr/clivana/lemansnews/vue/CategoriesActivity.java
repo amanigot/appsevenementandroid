@@ -5,6 +5,7 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.CategoriesController;
 import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -51,14 +52,16 @@ public class CategoriesActivity extends Activity{
         Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
 		titreApplication.setTypeface(tfRoman);
 
+		boutonInfo.setBackgroundResource(R.drawable.icomenuhautaide);
+		
         //ici on gère la visibilité des boutons du menu du bas
         boutonEvenement.setVisibility(View.GONE);
 		boutonALaUne.setVisibility(View.GONE);
-		boutonInfo.setVisibility(View.INVISIBLE);
 		boutonRetour.setVisibility(View.VISIBLE);
 		boutonFavoris.setVisibility(View.GONE);
 		
 		//listeners
+		boutonInfo.setOnClickListener(controller);
 		boutonNews.setOnClickListener(controller);
         ajouterCategorie.setOnClickListener(controller);
         boutonActualiser.setOnClickListener(controller);
@@ -69,6 +72,8 @@ public class CategoriesActivity extends Activity{
         //listeners de la gridnews
         categories.setOnItemClickListener(controller);
         categories.setOnItemLongClickListener(controller);
+        
+        
 	}
 
 	public void initAdapters() {
@@ -76,5 +81,6 @@ public class CategoriesActivity extends Activity{
 		categories.setAdapter(controller.initCategorieAdapter());
 		
 	}
+	
 	
 }

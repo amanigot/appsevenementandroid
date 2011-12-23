@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskGridNews;
 import fr.clivana.lemansnews.async.AsyncTaskListeEvenements;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
@@ -26,7 +27,7 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 	GridNewsAdapter adapter;
 	Context context;
 	String categorie;
-	AsyncTaskListeEvenements asyncTask;
+	AsyncTaskGridNews asyncTask;
 	GoogleAnalyticsTracker tracker;
 	
 	public GridNewsController(Context c, String categorie) {
@@ -51,7 +52,8 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 		if(v.getId()==R.id.buttonActualiser){
 			tracker.trackEvent("Categorie-"+categorie, "clic", "Actualiser", 1);
 			if(Reseau.verifReseau(context)){
-				asyncTask=new AsyncTaskListeEvenements(context);
+				if(categorie.equals("Toutes les news")){categorie="all";}
+				asyncTask=new AsyncTaskGridNews(context, categorie);
 				asyncTask.execute();
 			}else{
 				Toast.makeText(context, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();

@@ -6,12 +6,17 @@ import java.util.List;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -38,6 +43,7 @@ public class CategoriesController implements OnClickListener,
 	NewsDAO newsDao;
 	AsyncTaskCategories asyncTask;
 	GoogleAnalyticsTracker tracker;
+	Builder dialog;
 	
 	public CategoriesController(Context c) {
 		context = c;
@@ -74,7 +80,13 @@ public class CategoriesController implements OnClickListener,
 				Toast.makeText(context, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
 			}
 		}
-
+		if(v.getId() == R.id.buttonInfo){
+			dialog= new AlertDialog.Builder(context);
+			ImageView iv=new ImageView(context);
+			iv.setImageResource(R.drawable.illustaidecategorieactu);
+		    dialog.setView(iv);
+		    dialog.show();
+		}
 	}
 
 	public CategorieAdapter initCategorieAdapter() {

@@ -48,6 +48,7 @@ public class GridNewsActivity extends Activity{
 		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
 		titreApplication=(TextView)findViewById(R.id.textViewTitreApplication);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
+		boutonInfo = (Button)findViewById(R.id.buttonInfo);
 		
 		initAdapters();
 		
@@ -57,6 +58,7 @@ public class GridNewsActivity extends Activity{
 		boutonEvenement.setVisibility(View.GONE);
 		boutonALaUne.setVisibility(View.GONE);
 		boutonFavoris.setVisibility(View.GONE);
+		boutonInfo.setVisibility(View.INVISIBLE);
 		boutonRetour.setVisibility(View.VISIBLE);
 		
 		boutonNews.setOnClickListener(controller);
