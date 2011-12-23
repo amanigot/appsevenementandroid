@@ -49,7 +49,7 @@ public class CategorieAdapter extends BaseAdapter{
 				tv.setText(notifications.get(position).getNom());
 			}
 			ImageView iv = (ImageView)v.findViewById(R.id.icon_image);
-			asyncTask = new AsyncTaskImage(notifications.get(position).getNomImage(), iv);
+			asyncTask = new AsyncTaskImage(notifications.get(position).getNomImage(), iv, R.drawable.illustaucuneimage111);
 			asyncTask.execute();
 			iv.setPadding(4, 4, 4, 4);
 			TextView badge = (TextView)v.findViewById(R.id.badge_notif);

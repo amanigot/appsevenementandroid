@@ -63,7 +63,7 @@ public class DetailEventsController implements OnClickListener {
 			dialog.getBuilder().show();
 		}
 		if(v.getId()==R.id.buttonInfo){
-			if(evenement.isFavoris()){
+			if(!evenement.isFavoris()){
 				tracker.trackEvent("Detail d'un evenement", "clic", "Favoris-"+evenement.getId()+"-"+evenement.getTitre(), 1);
 				evenement.setFavoris(true);
 				eventsDao.updateEvent(evenement);
@@ -99,7 +99,7 @@ public class DetailEventsController implements OnClickListener {
 
 	public void setImage(ImageView imageEvenement) {
 		// TODO Auto-generated method stub
-		asyncTask = new AsyncTaskImage(evenement.getNomImageMobile(), imageEvenement);
+		asyncTask = new AsyncTaskImage(evenement.getNomImageMobile(), imageEvenement, R.drawable.illustaucuneimage480);
 		asyncTask.execute();
 	}
 

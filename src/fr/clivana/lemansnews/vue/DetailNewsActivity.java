@@ -73,8 +73,8 @@ public class DetailNewsActivity extends Activity{
 		boutonRetour.setVisibility(View.VISIBLE);
 		boutonActualiser.setVisibility(View.INVISIBLE);
 		
-		boutonInfo.setBackgroundResource(R.drawable.btnmenuhautfavoris);
-		
+		detailNewsController.initFavButton(boutonInfo);
+		detailNewsController.setFavButton();
 		
         titreApplication.setText(detailNewsController.initTitre());
         Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");

@@ -22,6 +22,24 @@
             </intent-filter>
         </activity>
         
+     	<activity android:name=".vue.ListeNewsFavorisActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+     	<activity android:name=".vue.ListeEvenementsFavorisActivity" 
+       		android:theme="@android:style/Theme.NoTitleBar"
+        	android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
      	<activity android:name=".vue.SplashActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">

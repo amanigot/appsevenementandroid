@@ -60,7 +60,7 @@ public class GridNewsAdapter extends BaseAdapter {
 			
 			
 			titre.setText(events.get(position).getTitre());
-			asyncTask = new AsyncTaskImage(events.get(position).getUrlMiniature(), imageNews);
+			asyncTask = new AsyncTaskImage(events.get(position).getUrlMiniature(), imageNews, R.drawable.illustaucuneimage240);
 			asyncTask.execute();
 			views.put(position, imageNews);
 			
