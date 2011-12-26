@@ -68,7 +68,7 @@ public class DetailEvenementActivity extends Activity {
 		//initialise le contenu des vues
 		titreApplication.setText(detailEventsController.initTitre());
 		tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
-		tfLight = Typeface.createFromAsset(getAssets(), "fonts/helveticlight.otf");
+		tfLight = Typeface.createFromAsset(getAssets(), "fonts/helveticalight.otf");
 		titreApplication.setTypeface(tfRoman);
 		titreEvenement.setText(detailEventsController.getTitreEvenement());
 		dateEvenement.setText(detailEventsController.getDateEvenement());
