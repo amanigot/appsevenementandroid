@@ -81,7 +81,8 @@ public class DetailNewsActivity extends Activity{
 		titreApplication.setTypeface(tfRoman);
         titreNews.setText(detailNewsController.getTitreNews());
         dateAuteur.setText(detailNewsController.initDateAuteur());
-        detailNews.loadData(detailNewsController.getDescription(), "text/html", "utf-8");
+        String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
+        detailNews.loadData(header+detailNewsController.getDescription(), "text/html", "UTF-8");
         
 	}
 }

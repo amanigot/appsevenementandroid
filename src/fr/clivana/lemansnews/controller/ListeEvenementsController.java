@@ -30,7 +30,6 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 	GoogleAnalyticsTracker tracker;
 	
 	public ListeEvenementsController(Context c) {
-		// TODO Auto-generated constructor stub
 		context=c;
 		eventsDao= new EventsDAO(context);
 		tracker = GoogleAnalyticsTracker.getInstance();
@@ -38,7 +37,6 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		if(v.getId()==R.id.buttonActualiser){
 			tracker.trackEvent("Liste des Evenements", "clic", "actualiser", 1);
 			if(Reseau.verifReseau(context)){
@@ -55,7 +53,6 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 	}
 
 	public CharSequence initTitre() {
-		// TODO Auto-generated method stub
 		return "Evénements";
 	}
 
@@ -70,7 +67,6 @@ public class ListeEvenementsController implements OnClickListener, OnItemClickLi
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		// TODO Auto-generated method stub
 		tracker.trackEvent("Liste des Evenements", "clic", "evenement-"+evenements.get(position).getId()+"-"+evenements.get(position).getTitre(), 1);
 		Intent evenementIntent = new Intent(context, DetailEvenementActivity.class);
 		evenementIntent.putExtra("event", evenements.get(position).getId());

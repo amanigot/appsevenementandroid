@@ -40,7 +40,6 @@ public class DetailNewsController implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		if(v.getId()==R.id.buttonRetour|| v.getId()==R.id.buttonNews){
 			tracker.trackEvent("Detail d'une news", "clic", "Précédent", 1);
 			((Activity) context).finish();
@@ -69,7 +68,6 @@ public class DetailNewsController implements OnClickListener {
 	}
 
 	public CharSequence initTitre() {
-		// TODO Auto-generated method stub
 		return "Actualités";
 	}
 
@@ -83,7 +81,6 @@ public class DetailNewsController implements OnClickListener {
 	}
 
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return article.getArticle();
 	}
 
@@ -101,7 +98,6 @@ public class DetailNewsController implements OnClickListener {
 	}
 	
 	public void setImage(ImageView imageEvenement) {
-		// TODO Auto-generated method stub
 		asyncTask = new AsyncTaskImage(article.getUrlImageMobile(), imageEvenement, R.drawable.illustaucuneimage480);
 		asyncTask.execute();
 	}

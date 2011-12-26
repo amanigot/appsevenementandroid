@@ -20,21 +20,21 @@ import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 
 /**
- * Ensemble des m�thodes pour la gestion facebook.
+ * Ensemble des méthodes pour la gestion facebook.
  * 
  */
 public class FacebookFunctions {
 	/** Nom du package facebook */
 	private static final String PACKAGE_NAME = "com.facebook.katana";
 	/** Id de l'application */
-	private static final String FACEBOOK_APP_ID = "204855662928547";// Id de l'application donn� par facebook
-	/** Objet d'appel des m�thodes */
+	private static final String FACEBOOK_APP_ID = "204855662928547";// Id de l'application donné par facebook
+	/** Objet d'appel des méthodes */
 	private static final Facebook mFacebook = new Facebook(FACEBOOK_APP_ID);
 	/** Pour passer des appels asynchrones */
 	private static final AsyncFacebookRunner mAsyncFacebookRunner = new AsyncFacebookRunner(mFacebook);
 	/** Permission de publication */
 	private static final String PUBLISH_PERMISSION = "publish_stream";
-	/** Permissions utilis�e */
+	/** Permissions utilisée */
 	private static final String[] PERMISSIONS = new String[] { PUBLISH_PERMISSION };
 	/** Post */
 	private static final String GP_POST_REQUEST = "POST";
@@ -52,13 +52,13 @@ public class FacebookFunctions {
 	private static final String ANDROID_URL = "www.clivana.com";
 	/** Android image */
 	private static final String ANDROID_IMAGE_URL = "http://www.clivana.com/";
-	/** Activity qui sert � certaines op�rations */
+	/** Activity qui sert à certaines opérations */
 	private static Context mContext;
-	/** Request code retourn� par le login facebook */
+	/** Request code retourné par le login facebook */
 	public static int mFacebookRequestCode;
 
 	/**
-	 * Initialisation n�cessaire.
+	 * Initialisation nécessaire.
 	 * 
 	 * @param context
 	 */
@@ -67,7 +67,7 @@ public class FacebookFunctions {
 	}
 
 	/**
-	 * Indique si l'application facebook est install�.
+	 * Indique si l'application facebook est installé.
 	 */
 	public static boolean isInstalled(Context context) {
 		try {
@@ -97,7 +97,7 @@ public class FacebookFunctions {
 	}
 
 	/**
-	 * G�re le retour demande de login.
+	 * Gère le retour demande de login.
 	 * @param resultCode
 	 * @param data
 	 */

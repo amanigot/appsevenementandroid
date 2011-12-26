@@ -23,7 +23,6 @@ public class ListNewsAdapter extends BaseAdapter{
 	AsyncTaskImage asyncTask;
 	
 	public ListNewsAdapter(Context context, List<Article> articlesRecus) {
-		// TODO Auto-generated constructor stub
 		ctx=context;
 		articles=articlesRecus;
 		this.inflater = LayoutInflater.from(ctx);
@@ -31,19 +30,16 @@ public class ListNewsAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return articles.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return articles.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 

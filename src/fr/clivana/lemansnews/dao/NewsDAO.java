@@ -1,7 +1,6 @@
 package fr.clivana.lemansnews.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Categorie;
-import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.Params;
 import fr.clivana.lemansnews.utils.database.DatabaseLeMansNews;
 import fr.clivana.lemansnews.utils.database.NomsSQL;

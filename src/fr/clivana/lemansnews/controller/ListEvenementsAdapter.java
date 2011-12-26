@@ -21,7 +21,6 @@ public class ListEvenementsAdapter extends BaseAdapter {
 	AsyncTaskImage asyncTask;
 	
 	public ListEvenementsAdapter(Context context, List<Evenement> evenements) {
-		// TODO Auto-generated constructor stub
 		ctx=context;
 		events=evenements;
 		this.inflater = LayoutInflater.from(ctx);
@@ -29,19 +28,16 @@ public class ListEvenementsAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return events.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return events.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 

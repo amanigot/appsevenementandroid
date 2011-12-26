@@ -12,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.widget.Toast;
 import fr.clivana.lemansnews.async.AsyncTaskAddCategorie;
-import fr.clivana.lemansnews.async.AsyncTaskCategories;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;

@@ -11,7 +11,6 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -67,7 +66,6 @@ public class CategoriesController implements OnClickListener,
 			for(int i=0;i<categoriesAAjouter.size();i++){
 				categoriesAAjouterTitre[i]=categoriesAAjouter.get(i).getNom();
 			}
-			Log.w("categorie size", categoriesAAjouterTitre.length+"");
 			ajouterCategorie= new CategoriesDialog(context, "Ajouter une catégorie", "", "", "Annuler",categoriesAAjouterTitre, -1, 1 );
 			ajouterCategorie.getBuilder().show();
 		}
@@ -127,7 +125,6 @@ public class CategoriesController implements OnClickListener,
 	}
 
 	public CharSequence initTitre() {
-		// TODO Auto-generated method stub
 		return "Catégories";
 	}
 
