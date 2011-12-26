@@ -82,5 +82,10 @@ public class CategoriesActivity extends Activity{
 		
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		initAdapters();
+	}
 	
 }

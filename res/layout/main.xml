@@ -19,9 +19,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp" >
+        android:paddingTop="7dp" >
 
         <TextView
             android:id="@+id/titreActualite"
@@ -48,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:textColor="#CACACA"
-        android:textSize="11dp" />
+        android:textSize="13dp" />
 
     <GridView
         android:id="@+id/gridViewNewsPrincipal"
