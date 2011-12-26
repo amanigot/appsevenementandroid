@@ -9,7 +9,6 @@ import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.vue.CategoriesDialog;
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -80,7 +79,6 @@ public class DetailEventsController implements OnClickListener {
 	}
 
 	public String getDescriptionEvenement() {
-		// TODO Auto-generated method stub
 		return evenement.getDetailEvenement();
 	}
 
@@ -98,7 +96,6 @@ public class DetailEventsController implements OnClickListener {
 	}
 
 	public void setImage(ImageView imageEvenement) {
-		// TODO Auto-generated method stub
 		asyncTask = new AsyncTaskImage(evenement.getNomImageMobile(), imageEvenement);
 		asyncTask.execute();
 	}

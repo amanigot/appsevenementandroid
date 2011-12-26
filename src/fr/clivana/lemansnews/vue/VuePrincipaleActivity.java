@@ -1,22 +1,19 @@
 package fr.clivana.lemansnews.vue;
 
-import java.util.Date;
-
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
-import fr.clivana.lemansnews.R;
-import fr.clivana.lemansnews.controller.GalleryOneByOne;
-import fr.clivana.lemansnews.controller.VuePrincipaleController;
-import fr.clivana.lemansnews.utils.Formatage;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
+import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.controller.GalleryOneByOne;
+import fr.clivana.lemansnews.controller.VuePrincipaleController;
 
 public class VuePrincipaleActivity extends Activity{
 

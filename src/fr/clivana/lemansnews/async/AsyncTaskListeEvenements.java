@@ -27,7 +27,6 @@ public class AsyncTaskListeEvenements extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 		Reseau.majEvenements(context, 0, 0);
-		// Reseau.webservice();
 		return null;
 	}
 	

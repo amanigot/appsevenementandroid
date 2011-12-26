@@ -43,7 +43,6 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 		ctx = context;
 		eventsDao = new EventsDAO(ctx);
 		newsDao = new NewsDAO(ctx);
-		
 		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 	
@@ -102,7 +101,6 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	}
 
 	public void Actualisation() {
-		// TODO Auto-generated method stub
 		if(Reseau.verifReseau(ctx)){
 			asyncTask=new AsyncTaskVuePrincipale(ctx);
 			asyncTask.execute();
@@ -113,7 +111,6 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		// TODO Auto-generated method stub
 		if(parent.getId()==R.id.galleryEvents){
 			tracker.trackEvent("Accueil", "clic", "Evenement-"+evenements.get(position).getId()+"-"+evenements.get(position).getTitre(), 1);
 			Intent evenementIntent = new Intent(ctx, DetailEvenementActivity.class);

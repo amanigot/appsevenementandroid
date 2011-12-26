@@ -14,14 +14,12 @@ public class InfoController implements OnClickListener {
 	GoogleAnalyticsTracker tracker;
 	
 	public InfoController(Context c) {
-		// TODO Auto-generated constructor stub
 		context=c;
 		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		if(v.getId()==R.id.buttonRetour || v.getId()==R.id.buttonALaUne){
 			tracker.trackEvent("Infos", "clic", "Retour a l'accueil", 1);
 			((Activity) context).finish();
@@ -29,7 +27,6 @@ public class InfoController implements OnClickListener {
 	}
 
 	public CharSequence initTitre() {
-		// TODO Auto-generated method stub
 		return "Informations";
 	}
 

@@ -9,7 +9,6 @@ public class GalleryOneByOne extends Gallery {
 
 	public GalleryOneByOne(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
 	}
 
 	
@@ -17,7 +16,6 @@ public class GalleryOneByOne extends Gallery {
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

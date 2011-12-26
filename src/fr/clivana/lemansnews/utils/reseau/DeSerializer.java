@@ -11,6 +11,7 @@ import android.util.Log;
 
 public class DeSerializer <T>{
 
+	@SuppressWarnings("unchecked")
 	public T deJson(InputStream is, T retour){
 		ObjectMapper mapper = new ObjectMapper();
 		if (is != null){
