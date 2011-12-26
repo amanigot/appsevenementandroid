@@ -2,23 +2,23 @@ package fr.clivana.lemansnews.controller;
 
 import java.util.List;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
-import fr.clivana.lemansnews.R;
-import fr.clivana.lemansnews.async.AsyncTaskGridNews;
-import fr.clivana.lemansnews.async.AsyncTaskListeEvenements;
-import fr.clivana.lemansnews.dao.NewsDAO;
-import fr.clivana.lemansnews.entity.Article;
-import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.DetailNewsActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
+import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskGridNews;
+import fr.clivana.lemansnews.dao.NewsDAO;
+import fr.clivana.lemansnews.entity.Article;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
+import fr.clivana.lemansnews.vue.DetailNewsActivity;
 
 public class GridNewsController implements OnClickListener, OnItemClickListener {
 

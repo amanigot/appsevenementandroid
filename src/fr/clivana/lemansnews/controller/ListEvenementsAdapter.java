@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.controller;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,11 @@ public class ListEvenementsAdapter extends BaseAdapter {
 	Context ctx;
 	List<Evenement> events;
 	AsyncTaskImage asyncTask;
+	TextView titre;
+	TextView date;
+	TextView lieu;
+	ImageView imageEvent;
+	Typeface tfLight;
 	
 	public ListEvenementsAdapter(Context context, List<Evenement> evenements) {
 		ctx=context;
@@ -44,16 +50,22 @@ public class ListEvenementsAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		convertView = inflater.inflate(R.layout.eventitem, null);
-		TextView titre = (TextView) convertView
+		titre = (TextView) convertView
 				.findViewById(R.id.textViewTitreEvent);
 		titre.setText(events.get(position).getTitre());
-		TextView date = (TextView) convertView
+		date = (TextView) convertView
 				.findViewById(R.id.textViewDateEvent);
 		date.setText(events.get(position).getDateHeureEvenement());
-		TextView lieu = (TextView) convertView
+		lieu = (TextView) convertView
 				.findViewById(R.id.textViewLieuEvent);
 		lieu.setText(events.get(position).getLieu());
-		ImageView imageEvent = (ImageView)convertView.findViewById(R.id.imageEventDetail);
+		imageEvent = (ImageView)convertView.findViewById(R.id.imageEventDetail);
+		
+		tfLight = Typeface.createFromAsset(ctx.getAssets(), "fonts/helveticalight.otf");
+		titre.setTypeface(tfLight);
+		date.setTypeface(tfLight);
+		lieu.setTypeface(tfLight);
+		
 		asyncTask = new AsyncTaskImage(events.get(position).getNomImageMobile(), imageEvent, R.drawable.illustaucuneimage480);
 		asyncTask.execute();
 		return convertView;
