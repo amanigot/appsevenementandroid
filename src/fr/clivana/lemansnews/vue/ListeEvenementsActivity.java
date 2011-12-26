@@ -55,6 +55,7 @@ public class ListeEvenementsActivity extends Activity{
 		
 		titreApplication.setText(listeEvenementsController.initTitre());
 		Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		
 		titreApplication.setTypeface(tfRoman);
 		
 		initAdapters();

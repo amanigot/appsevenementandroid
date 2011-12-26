@@ -1,10 +1,8 @@
 package fr.clivana.lemansnews.async;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
-import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.utils.ImageSingleton;
 
 public class AsyncTaskImage extends AsyncTask<Void, Void, Void> {

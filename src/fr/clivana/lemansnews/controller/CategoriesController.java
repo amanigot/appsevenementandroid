@@ -3,22 +3,20 @@ package fr.clivana.lemansnews.controller;
 import java.util.Date;
 import java.util.List;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.async.AsyncTaskCategories;
 import fr.clivana.lemansnews.dao.CategoriesDAO;

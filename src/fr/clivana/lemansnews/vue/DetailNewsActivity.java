@@ -27,6 +27,7 @@ public class DetailNewsActivity extends Activity{
 	DetailNewsController detailNewsController;
 	long idArticle;
 	String categorie;
+	Typeface tfRoman, tfLight;
 	GoogleAnalyticsTracker tracker;
 	
 	public void onCreate(Bundle savedInstanceState){
@@ -77,10 +78,14 @@ public class DetailNewsActivity extends Activity{
 		detailNewsController.setFavButton();
 		
         titreApplication.setText(detailNewsController.initTitre());
-        Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+        tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+        tfLight = Typeface.createFromAsset(getAssets(), "fonts/helveticalight.otf");
 		titreApplication.setTypeface(tfRoman);
         titreNews.setText(detailNewsController.getTitreNews());
+        titreNews.setTypeface(tfLight);
+       
         dateAuteur.setText(detailNewsController.initDateAuteur());
+        dateAuteur.setTypeface(tfLight);
         String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
         detailNews.loadData(header+detailNewsController.getDescription(), "text/html", "UTF-8");
         

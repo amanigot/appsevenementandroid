@@ -22,11 +22,13 @@ public class DetailEvenementActivity extends Activity {
 	TextView lieuEvenement;
 	ImageView imageEvenement;
 	ImageView partager;
+	TextView date, lieu;
 	WebView detailEvenement;
 	Button boutonRetour, boutonNews, boutonEvenement, boutonALaUne;
 	Button boutonInfo, boutonActualiser;
 	Button boutonFavoris;
 	DetailEventsController detailEventsController;
+	Typeface tfRoman, tfLight;
 	long idEvenement;
 	GoogleAnalyticsTracker tracker;
 	
@@ -60,14 +62,22 @@ public class DetailEvenementActivity extends Activity {
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		boutonInfo=(Button)findViewById(R.id.buttonInfo);
 		boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
+		date=(TextView)findViewById(R.id.textViewDate);
+		lieu=(TextView)findViewById(R.id.textViewLieu);
 		
 		//initialise le contenu des vues
 		titreApplication.setText(detailEventsController.initTitre());
-		Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
+		tfLight = Typeface.createFromAsset(getAssets(), "fonts/helveticlight.otf");
 		titreApplication.setTypeface(tfRoman);
 		titreEvenement.setText(detailEventsController.getTitreEvenement());
 		dateEvenement.setText(detailEventsController.getDateEvenement());
 		lieuEvenement.setText(detailEventsController.getLieuEvenement());
+		titreEvenement.setTypeface(tfLight);
+		dateEvenement.setTypeface(tfLight);
+		lieuEvenement.setTypeface(tfLight);
+		date.setTypeface(tfLight);
+		lieu.setTypeface(tfLight);
         String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
 		detailEvenement.loadData(header+detailEventsController.getDescriptionEvenement(), "text/html", "UTF-8");
 		

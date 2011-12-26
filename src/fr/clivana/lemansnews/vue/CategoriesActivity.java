@@ -1,17 +1,17 @@
 package fr.clivana.lemansnews.vue;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
-import fr.clivana.lemansnews.R;
-import fr.clivana.lemansnews.controller.CategoriesController;
 import android.app.Activity;
-import android.app.Dialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
+import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.controller.CategoriesController;
 
 public class CategoriesActivity extends Activity{
 
