@@ -69,7 +69,7 @@ public class DetailEvenementActivity extends Activity {
 		dateEvenement.setText(detailEventsController.getDateEvenement());
 		lieuEvenement.setText(detailEventsController.getLieuEvenement());
         String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
-		detailEvenement.loadData(header+detailEventsController.getDescriptionEvenement(), "text/html", "UTF-8");
+		detailEvenement.loadDataWithBaseURL(null,header+detailEventsController.getDescriptionEvenement(), "text/html", "UTF-8",null);
 		
 		 //ici on gère la visibilité des boutons du menu du bas
 		boutonNews.setVisibility(View.GONE);
