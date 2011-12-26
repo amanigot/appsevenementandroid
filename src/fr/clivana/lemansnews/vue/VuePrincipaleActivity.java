@@ -21,6 +21,7 @@ public class VuePrincipaleActivity extends Activity{
 	TextView titreApplication;
 	TextView titreActualite;
 	TextView titreSuite;
+	TextView titreEvenement;
 	TextView derniereMaj;
 	GalleryOneByOne galleryEvents;
 	GridView gridViewNewsPrincipale;
@@ -60,6 +61,7 @@ public class VuePrincipaleActivity extends Activity{
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		
 		titreApplication.setBackgroundResource(R.drawable.titreapplication);
+		
 		
 		controller.miseEnPageRomanLight(titreActualite);
 		controller.miseEnPageRomanLight(titreSuite);
@@ -125,7 +127,7 @@ public class VuePrincipaleActivity extends Activity{
 	}
 
 	public void setDate() {
-		derniereMaj.setText("Dernière mise à jour : "+getSharedPreferences("prefs", 0).getString("date", ""));
+		derniereMaj.setText("Actualisé le : "+getSharedPreferences("prefs", 0).getString("date", ""));
 		
 	}
 }

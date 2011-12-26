@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class GalleryAdapter extends BaseAdapter {
 	
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		Typeface tfLight = Typeface.createFromAsset(context.getAssets(), "fonts/helveticalight.otf");
 		convertView = inflater.inflate(R.layout.eventitem, null);
 		LinearLayout l1 = (LinearLayout) convertView.findViewById(R.id.linearLayout1);
 		LinearLayout l2 = (LinearLayout) convertView.findViewById(R.id.linearLayout2);
@@ -86,6 +88,8 @@ public class GalleryAdapter extends BaseAdapter {
 		
 		
 		titre.setText(events.get(position).getTitre());
+		
+	    titre.setTypeface(tfLight);
 		return convertView;
 	}
 		

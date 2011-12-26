@@ -46,7 +46,7 @@ public class AsyncTaskVuePrincipale extends AsyncTask<Void, Void, Void> {
 		super.onPostExecute(result);
 		((VuePrincipaleActivity) context).initAdapters();
 		Editor editor=context.getSharedPreferences("prefs", 0).edit();
-		editor.putString("date", Formatage.dateEnTexteComplet(new Date()));
+		editor.putString("date", Formatage.dateEnTexteAvecHeure(new Date()));
 		editor.commit();
 		((VuePrincipaleActivity) context).setDate();
 		progress.dismiss();

@@ -19,10 +19,20 @@ public class ListeNewsFavorisActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listenewsfavoris);
 		listeNewsFavoris=(ListView)findViewById(R.id.ListeNewsFavoris);
+		setList();
+	}
+
+	private void setList() {
 		controller= new ListeNewsFavorisController(this);
 		
 		listeNewsFavoris.setAdapter(controller.initAdapter());
 		listeNewsFavoris.setOnItemClickListener(controller);
 	}
 	
+	@Override
+	protected void onResume() {
+		
+		super.onResume();
+		setList();
+	}
 }
