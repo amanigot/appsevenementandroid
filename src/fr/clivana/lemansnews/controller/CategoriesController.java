@@ -11,6 +11,7 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,7 +44,8 @@ public class CategoriesController implements OnClickListener,
 	NewsDAO newsDao;
 	AsyncTaskCategories asyncTask;
 	GoogleAnalyticsTracker tracker;
-	Builder dialog;
+	
+	Dialog dialog;
 	
 	public CategoriesController(Context c) {
 		context = c;
@@ -81,10 +83,12 @@ public class CategoriesController implements OnClickListener,
 			}
 		}
 		if(v.getId() == R.id.buttonInfo){
-			dialog= new AlertDialog.Builder(context);
+			
 			ImageView iv=new ImageView(context);
 			iv.setImageResource(R.drawable.illustaidecategorieactu);
-		    dialog.setView(iv);
+		    
+		    dialog = new Dialog(context, android.R.style.Theme_Panel);
+		    dialog.setContentView(iv);
 		    dialog.show();
 		}
 	}

@@ -17,10 +17,19 @@ public class ListeEvenementsFavorisActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listeevenementsfavoris);
 		controller = new ListeEvenementsFavorisController(this);
+		setList();
+	}
+
+	private void setList() {
 		listeEvenementsFavoris=(ListView)findViewById(R.id.ListeEvenementsFavoris);
 		
 		listeEvenementsFavoris.setAdapter(controller.initAdapter());
 		listeEvenementsFavoris.setOnItemClickListener(controller);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setList();
+	}
 }

@@ -12,6 +12,11 @@ public class Formatage {
 		return formatter.format(date);
 	}
 	
+	public static String dateEnTexteAvecHeure(Date date){
+		SimpleDateFormat formatter = new SimpleDateFormat("dd'/'MM'/'yyyy' à 'HH:mm");
+		return formatter.format(date);
+	}
+	
 	public static String datePourPlay(Date date) {
 		TimeZone tz = TimeZone.getTimeZone("Europe/Paris" );
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");

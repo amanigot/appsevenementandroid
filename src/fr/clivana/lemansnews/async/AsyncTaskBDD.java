@@ -57,7 +57,7 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 
 		Log.w("async task", "post execute");
 		Editor editor=context.getSharedPreferences("prefs", 0).edit();
-		editor.putString("date", Formatage.dateEnTexteComplet(new Date()));
+		editor.putString("date", Formatage.dateEnTexteAvecHeure(new Date()));
 		editor.putBoolean("newuser", false);
 		editor.commit();
 		

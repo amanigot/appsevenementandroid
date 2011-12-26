@@ -128,7 +128,7 @@ public class VuePrincipaleActivity extends Activity{
 	}
 
 	public void setDate() {
-		derniereMaj.setText("Dernière mise à jour : "+getSharedPreferences("prefs", 0).getString("date", ""));
+		derniereMaj.setText("Actualisé le : "+getSharedPreferences("prefs", 0).getString("date", ""));
 		
 	}
 }
