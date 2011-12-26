@@ -62,7 +62,6 @@ public class GridNewsController implements OnClickListener, OnItemClickListener 
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		// TODO Auto-generated method stub
 		tracker.trackEvent("Categorie-"+categorie, "clic", "article-"+articles.get(position).getId()+"-"+articles.get(position).getTitre(), 1);
 		Intent intentNews = new Intent(context, DetailNewsActivity.class);
 		intentNews.putExtra("article", articles.get(position).getId());
