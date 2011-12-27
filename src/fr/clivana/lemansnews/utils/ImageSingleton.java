@@ -23,10 +23,12 @@ public class ImageSingleton {
 	
 	public synchronized Bitmap chargementImage(String nom){
 		if (cache.containsKey(nom)){
+			Debugger.logHeap();
 			return cache.get(nom);
 		}else{
 			Bitmap bitmap = Reseau.chargementImage(nom);
 			cache.put(nom, bitmap);
+			Debugger.logHeap();
 			return bitmap;
 		}
 	}
