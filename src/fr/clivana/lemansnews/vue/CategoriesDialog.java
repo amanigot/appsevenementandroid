@@ -78,9 +78,10 @@ public class CategoriesDialog extends AlertDialog {
 	}
 
 	//Méthode utilisée pour le dialog de partage
-	public void addInfos(String titre, String details) {
+	public void addInfos(String titre, String details, String image) {
 		categoriesDialogController.setTitre(titre);
 		categoriesDialogController.setDescription(details);
+		categoriesDialogController.setImage(image);
 	}
 
 	public Builder getBuilder() {

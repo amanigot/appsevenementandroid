@@ -1,8 +1,10 @@
 package fr.clivana.lemansnews.vue;
 
+import com.facebook.android.Facebook;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.DetailNewsController;
+import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
 
 public class DetailNewsActivity extends Activity{
 	
@@ -29,6 +32,7 @@ public class DetailNewsActivity extends Activity{
 	String categorie;
 	Typeface tfRoman, tfLight;
 	GoogleAnalyticsTracker tracker;
+	
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -94,4 +98,12 @@ public class DetailNewsActivity extends Activity{
        
         
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode==FacebookFunctions.FACEBOOK_REQUEST_CODE){
+			FacebookFunctions.handleLoginResult(resultCode, data);
+		}
+	}
+	
 }

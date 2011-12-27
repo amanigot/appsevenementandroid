@@ -34,7 +34,7 @@ public class Reseau {
 	private final static String URL_LIST_EVENTS = "/m/events/list/all/"; // /m/events/list/{motClef}/{numPage}/qte
 	private final static String URL_LIST_CATEGORIES = "/m/categories/list"; // pas de parametres
 	private final static String URL_COUNT_CATEGORIES = "/m/categories/count/";// /m/categories/count/{nom}/{date}
-	private final static String URL_IMAGES = "/data/images/"; // /data/images/{nom}
+	public final static String URL_IMAGES = "/data/images/"; // /data/images/{nom}
 	
 // verification du reseau
 	public static boolean verifReseau(Context context) {

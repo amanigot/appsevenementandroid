@@ -1,6 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,11 +10,13 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.facebook.android.Facebook;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.GalleryOneByOne;
 import fr.clivana.lemansnews.controller.VuePrincipaleController;
+import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
 
 public class VuePrincipaleActivity extends Activity{
 
@@ -34,7 +37,7 @@ public class VuePrincipaleActivity extends Activity{
 	CategoriesDialog dialog;
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
 	GoogleAnalyticsTracker tracker;
-	
+	Facebook facebook;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -108,7 +111,7 @@ public class VuePrincipaleActivity extends Activity{
 		case R.id.share:
 			tracker.trackEvent("Accueil", "option", "partage application", 1);
 			dialog=new CategoriesDialog(this, "Partager l'application", "", "", "Annuler", items, -1, 3);
-			dialog.addInfos("Application Le Mans News & Evénements","");
+			dialog.addInfos("Application Le Mans News & Evénements","", "");
 			dialog.getBuilder().show();
 			break;
 			
@@ -129,5 +132,12 @@ public class VuePrincipaleActivity extends Activity{
 	public void setDate() {
 		derniereMaj.setText("Actualisé le : "+getSharedPreferences("prefs", 0).getString("date", ""));
 		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode==FacebookFunctions.FACEBOOK_REQUEST_CODE){
+			FacebookFunctions.handleLoginResult(resultCode, data);
+		}
 	}
 }

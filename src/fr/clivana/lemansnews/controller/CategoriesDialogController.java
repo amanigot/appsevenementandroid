@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.util.Log;
 import android.widget.Toast;
 import fr.clivana.lemansnews.async.AsyncTaskAddCategorie;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
@@ -22,8 +23,8 @@ import fr.clivana.lemansnews.vue.CategoriesActivity;
 
 public class CategoriesDialogController implements DialogInterface.OnClickListener{
 
+	
 	ProgressDialog publishDialog;
-	int FACEBOOK_REQUEST_CODE=123;
 	CategoriesDAO categoriesDao;
 	Context context;
 	long idCategorieASupprimer;
@@ -32,32 +33,14 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 	//Il est utilisé pour le onclick listener.
 	int dialogueID; 
 	Categorie categ;
-	String titre, description;
+	String titre;
+	String description;
+	String image;
+	
 	AsyncTaskAddCategorie asyncTask;
 	
-	public String getTitre() {
-		return titre;
-	}
-
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getDialID() {
-		return dialogueID;
-	}
-
-	public void setDialID(int dialID) {
-		this.dialogueID = dialID;
-	}
+	
+	
 
 	
 	
@@ -66,6 +49,9 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 		categoriesDao=new CategoriesDAO(context);
 		categories=items;
 		dialogueID=id;
+		//this.facebook = new FacebookNewsLeMans(context);
+		//baseDialogListener = new PostDialogListener(context);
+		
 	}
 
 	public CategoriesDialogController(Context ctx, int id, CharSequence[] items, long idCategorie) {
@@ -74,6 +60,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 		dialogueID=id;
 		categories=items;
 		idCategorieASupprimer=idCategorie;
+		//this.facebook = new FacebookNewsLeMans(context);
 	}
 	
 
@@ -112,12 +99,20 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 				switch(idElementAppuye){
 				case 0:
 					FacebookFunctions.initialize(context);
-					SessionEvents.addAuthListener(returnAuthListener(titre, description));
+					SessionEvents.addAuthListener(returnAuthListener(titre, description, image));
 					if (!FacebookFunctions.isConnected()) {
-						FacebookFunctions.login(((Activity)context), FACEBOOK_REQUEST_CODE);
+						Log.w("connect", "non");
+						FacebookFunctions.login(((Activity)context), FacebookFunctions.FACEBOOK_REQUEST_CODE);
 					} else {
-						publishMessage(titre, description);
+						Log.w("connect", "yes");
+						publishMessage(titre, description, image);
 					}
+					
+//					findFacebookClient();
+//					facebook.dialog(context, "feed", new PostDialogListener(context) );
+//					
+//					Intent fb = new Intent(context, FacebookActivity.class);
+//					context.startActivity(fb);
 				break;
 				case 1:
 					Intent TwitterIntent = findTwitterClient();
@@ -161,6 +156,8 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 		}
 	}
 	
+	
+
 	public Intent findTwitterClient() {
         final String[] twitterApps = {
                 // package // name - nb installs (thousands)
@@ -187,26 +184,30 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
         return null;
     }
 	
-	public void publishMessage(String titre, String comment) {
+	public void publishMessage(String titre, String comment, String image) {
 		publishDialog = ProgressDialog.show(context,"","");
-		FacebookFunctions.publishCommentOnWallPerso(titre, comment,pocRequestListener);
+		FacebookFunctions.publishCommentOnWallPerso(titre, comment, image, pocRequestListener);
 	}
 
 	public AuthListener returnAuthListener(final String titre,
-			final String comment) {
+			final String comment, final String image) {
 		final AuthListener authListener = new AuthListener() {
-
+			
 			@Override
 			public void onAuthSucceed() {
-				publishMessage(titre, comment);
+				Log.w("auth", "succes");
+				publishMessage(titre, comment, image);
+				
 			}
 
 			@Override
 			public void onAuthFail(final String error) {
+				Log.w("auth", "fail");
 				final String message = "Echec de login : " + error;
 				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			}
 		};
+		Log.w("auth", "return");
 		return authListener;
 	}
 	
@@ -216,11 +217,13 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 			if (publishDialog.isShowing()) {
 				publishDialog.dismiss();
 			}
+			
 		}
 
 		@Override
 		public void onSuccess(String response) {
 
+			Log.w("publish", "succes");
 			cancelDialog();
 			((Activity) context).runOnUiThread(new Runnable() {
 				@Override
@@ -233,6 +236,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 
 		@Override
 		public void onError(final Throwable t) {
+			Log.w("publish", "error");
 			((Activity) context).runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
@@ -244,4 +248,37 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 			});
 		}
 	};
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getDialID() {
+		return dialogueID;
+	}
+
+	public void setDialID(int dialID) {
+		this.dialogueID = dialID;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 }

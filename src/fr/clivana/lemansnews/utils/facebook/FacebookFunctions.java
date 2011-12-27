@@ -19,15 +19,20 @@ import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 
+import fr.clivana.lemansnews.utils.Params;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
+
 /**
  * Ensemble des méthodes pour la gestion facebook.
  * 
  */
 public class FacebookFunctions {
+	
+	public static final int FACEBOOK_REQUEST_CODE = 123;
 	/** Nom du package facebook */
 	private static final String PACKAGE_NAME = "com.facebook.katana";
 	/** Id de l'application */
-	private static final String FACEBOOK_APP_ID = "204855662928547";// Id de l'application donné par facebook
+	public static final String FACEBOOK_APP_ID = "204855662928547";// Id de l'application donné par facebook
 	/** Objet d'appel des méthodes */
 	private static final Facebook mFacebook = new Facebook(FACEBOOK_APP_ID);
 	/** Pour passer des appels asynchrones */
@@ -49,9 +54,9 @@ public class FacebookFunctions {
 	/** texte name param */
 	private static final String GP_DESCRIPTION_PARAM_FEED = "description";	
 	/** Url du site web keoli */
-	private static final String ANDROID_URL = "www.clivana.com";
+	private static final String ANDROID_URL = "www.clivana.com/lemansnews";
 	/** Android image */
-	private static final String ANDROID_IMAGE_URL = "";
+	private static final String ANDROID_IMAGE_URL = Params.BASE_SERVEUR+Reseau.URL_IMAGES;
 	/** Activity qui sert à certaines opérations */
 	private static Context mContext;
 	/** Request code retourné par le login facebook */
@@ -122,11 +127,13 @@ public class FacebookFunctions {
 	
 	//fonction pour personnaliser les publications sur Facebook
 	
-	public static void publishCommentOnWallPerso(String name, String comment, PocRequestListener requestListener){
+	public static void publishCommentOnWallPerso(String name, String comment, String image, PocRequestListener requestListener){
 		final Bundle parameters = new Bundle();
 		parameters.putString(GP_LINK_PARAM_FEED, ANDROID_URL);
 		parameters.putString(GP_NAME_PARAM_FEED, name);
-		parameters.putString(GP_PICTURE_PARAM_FEED, ANDROID_IMAGE_URL); 
+		if(!image.equals("")){
+			parameters.putString(GP_PICTURE_PARAM_FEED, ANDROID_IMAGE_URL+image); 
+		}
 		parameters.putString(GP_DESCRIPTION_PARAM_FEED, comment);		
 		mAsyncFacebookRunner.request(GP_ME_FEED_URI, parameters, GP_POST_REQUEST, requestListener, null);	
 	}

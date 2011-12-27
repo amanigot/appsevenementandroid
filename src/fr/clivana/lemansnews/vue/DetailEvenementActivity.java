@@ -1,8 +1,7 @@
 package fr.clivana.lemansnews.vue;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +9,12 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.DetailEventsController;
+import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
 
 public class DetailEvenementActivity extends Activity {
 
@@ -31,6 +34,7 @@ public class DetailEvenementActivity extends Activity {
 	Typeface tfRoman, tfLight;
 	long idEvenement;
 	GoogleAnalyticsTracker tracker;
+	
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -98,6 +102,13 @@ public class DetailEvenementActivity extends Activity {
 		partager.setOnClickListener(detailEventsController);
 		boutonRetour.setOnClickListener(detailEventsController);
 		boutonEvenement.setOnClickListener(detailEventsController);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode==FacebookFunctions.FACEBOOK_REQUEST_CODE){
+			FacebookFunctions.handleLoginResult(resultCode, data);
+		}
 	}
 	
 }

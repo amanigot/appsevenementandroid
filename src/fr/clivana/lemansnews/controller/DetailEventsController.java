@@ -58,7 +58,7 @@ public class DetailEventsController implements OnClickListener {
 		if(v.getId()==R.id.imageViewPartager){
 			tracker.trackEvent("Detail d'un evenement", "clic", "Partager-"+evenement.getId()+"-"+evenement.getTitre(), 1);
 			dialog=new CategoriesDialog(context, "Partager", "", "", "Annuler", items, -1, 3);
-			dialog.addInfos(evenement.getTitre(), evenement.getDetailEvenement());
+			dialog.addInfos(evenement.getTitre(), evenement.getDetailEvenement(), evenement.getNomImageMobile());
 			dialog.getBuilder().show();
 		}
 		if(v.getId()==R.id.buttonInfo){

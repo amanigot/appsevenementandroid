@@ -47,7 +47,7 @@ public class DetailNewsController implements OnClickListener {
 		if(v.getId()==R.id.imageViewPartager){
 			tracker.trackEvent("Detail d'une news", "clic", "Partager-"+article.getId()+"-"+article.getTitre(), 1);
 			dialog=new CategoriesDialog(context, "Partager", "", "", "Annuler", items, -1, 3);
-			dialog.addInfos(article.getTitre(), article.getArticle());
+			dialog.addInfos(article.getTitre(), article.getArticle(), article.getUrlImageMobile());
 			dialog.getBuilder().show();
 		}
 		if(v.getId()==R.id.buttonInfo){
