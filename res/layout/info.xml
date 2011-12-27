@@ -25,7 +25,8 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="@string/application"
-            android:textSize="20dp" />
+            android:textSize="20dp" 
+            android:textColor="#FFFFFF"/>
 
         <ImageView
             android:id="@+id/imageView1"
@@ -41,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="@string/adresse_web" />
+            android:text="@string/adresse_web"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/textView3"
@@ -50,7 +52,9 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
-            android:text="@string/paragraphe1"/>
+            android:text="@string/paragraphe1"
+            android:textColor="#FFFFFF"/>
+        
     </LinearLayout>
 
     <LinearLayout
@@ -67,7 +71,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="@string/paragraphe2"/>
+            android:text="@string/paragraphe2"
+            android:textColor="#FFFFFF" />
+        
     </LinearLayout>
 
     <include layout="@layout/baspage" />

@@ -54,7 +54,7 @@ public class FacebookFunctions {
 	/** texte name param */
 	private static final String GP_DESCRIPTION_PARAM_FEED = "description";	
 	/** Url du site web keoli */
-	private static final String ANDROID_URL = "www.clivana.com/lemansnews";
+	private static final String ANDROID_URL = "";
 	/** Android image */
 	private static final String ANDROID_IMAGE_URL = Params.BASE_SERVEUR+Reseau.URL_IMAGES;
 	/** Activity qui sert à certaines opérations */

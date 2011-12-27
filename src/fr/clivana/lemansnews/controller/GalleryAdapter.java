@@ -21,18 +21,18 @@ public class GalleryAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
 	List<Evenement> events;
-	
+	VuePrincipaleController controller;
 	Context context;
 	Bitmap bitmap=null;
 	
 	AsyncTaskImage asyncTask;
 	
-	public GalleryAdapter(Context context, List<Evenement> events
+	public GalleryAdapter(Context context, List<Evenement> events, VuePrincipaleController vuePrincipaleController
 			) {
 		this.events = events;
 		this.inflater = LayoutInflater.from(context);
 		this.context=context;
-		
+		controller = vuePrincipaleController;
 	}
 
 	@Override
@@ -64,14 +64,14 @@ public class GalleryAdapter extends BaseAdapter {
 		
 		TextView titre = (TextView) convertView.findViewById(R.id.textViewTitreEvent);
 		ImageView suivant = (ImageView)convertView.findViewById(R.id.suivant);
-		ImageView precedant = (ImageView)convertView.findViewById(R.id.precedent);
+		ImageView precedent = (ImageView)convertView.findViewById(R.id.precedent);
 		
 		//affichage des fleches du slider : les fleches n'apparaissent que s'il y a plus d'1 image
 		if(getCount()>1){
 			//si ce n'est ni la dernière, ni la première, on affiche les deux flèches
 			if(position!=0 && position!=getCount()-1){
 				suivant.setVisibility(View.VISIBLE);
-				precedant.setVisibility(View.VISIBLE);
+				precedent.setVisibility(View.VISIBLE);
 			}
 			//si c'est la première, on affiche la flèche de droite seulement
 			if(position==0){
@@ -79,7 +79,7 @@ public class GalleryAdapter extends BaseAdapter {
 			}
 			//si c'est la dernière, on affiche la flèche de gauche seulement
 			if(position==getCount()-1){
-				precedant.setVisibility(View.VISIBLE);
+				precedent.setVisibility(View.VISIBLE);
 			}
 		}
 		
@@ -90,6 +90,10 @@ public class GalleryAdapter extends BaseAdapter {
 		titre.setText(events.get(position).getTitre());
 		
 	    titre.setTypeface(tfLight);
+	    
+	    suivant.setOnClickListener(controller);
+	    precedent.setOnClickListener(controller);
+	    
 		return convertView;
 	}
 		

@@ -7,6 +7,7 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -38,18 +39,23 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	List<Article> articles;
 	AsyncTaskVuePrincipale asyncTask;
 	GoogleAnalyticsTracker tracker;
+	GalleryOneByOne galleryAccueil;
+	MotionEvent e1, e2;
+	int position;
 	
-	public VuePrincipaleController(Context context){
+	public VuePrincipaleController(Context context, GalleryOneByOne galleryEvents){
 		ctx = context;
 		eventsDao = new EventsDAO(ctx);
 		newsDao = new NewsDAO(ctx);
+		galleryAccueil=galleryEvents;
 		tracker = GoogleAnalyticsTracker.getInstance();
+		position=0;
 	}
 	
 	public GalleryAdapter initGalleryAdapter(){
 		evenements=eventsDao.getAllEvents();
 		
-		galleryAdapter=new GalleryAdapter(ctx, evenements);
+		galleryAdapter=new GalleryAdapter(ctx, evenements, this);
 		return galleryAdapter;
 	}
 	
@@ -97,6 +103,15 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 			tracker.trackEvent("Accueil", "clic", "Actualiser", 1);
 			//Toast.makeText(ctx, "actualisation", Toast.LENGTH_SHORT).show();
 			Actualisation();
+		}
+		if(v.getId()==R.id.suivant){
+			
+			galleryAccueil.setSelection(galleryAccueil.getSelectedItemPosition()+1);
+		}
+		if(v.getId()==R.id.precedent){
+			
+			galleryAccueil.setSelection(galleryAccueil.getSelectedItemPosition()-1);
+			
 		}
 	}
 

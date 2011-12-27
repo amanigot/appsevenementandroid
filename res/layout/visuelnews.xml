@@ -36,7 +36,8 @@
 		        android:layout_marginRight="15dp"
 		        android:layout_marginTop="5dp"
 		        android:text="TextView"
-		        android:textSize="22dp" />
+		        android:textSize="22dp" 
+		        android:textColor="#FFFFFF"/>
 		
 		    <TextView
 		        android:id="@+id/textViewDateNews"
@@ -44,7 +45,8 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginLeft="15dp"
 		        android:layout_marginRight="15dp"
-		        android:text="TextView" />
+		        android:text="TextView" 
+		        android:textColor="#FFFFFF"/>
 		
 		    <ImageView
 		            android:id="@+id/imageViewPartager"

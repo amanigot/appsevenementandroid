@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.android.Facebook;
@@ -38,6 +39,8 @@ public class VuePrincipaleActivity extends Activity{
 	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
 	GoogleAnalyticsTracker tracker;
 	Facebook facebook;
+	ImageView suivant;
+	ImageView precedent;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -48,13 +51,13 @@ public class VuePrincipaleActivity extends Activity{
 		tracker.setAnonymizeIp(true);
 		
 		tracker.trackPageView("/index");
-		
-		controller = new VuePrincipaleController(this);
+		galleryEvents = (GalleryOneByOne)findViewById(R.id.galleryEvents);
+		controller = new VuePrincipaleController(this, galleryEvents);
 		titreApplication =(TextView)findViewById(R.id.textViewTitreApplication);
 		titreActualite = (TextView)findViewById(R.id.titreActualite);
 		titreSuite = (TextView)findViewById(R.id.titreActualiteSuite);
 		derniereMaj = (TextView)findViewById(R.id.textViewDateMAJ);
-		galleryEvents = (GalleryOneByOne)findViewById(R.id.galleryEvents);
+		
 		gridViewNewsPrincipale = (GridView)findViewById(R.id.gridViewNewsPrincipal);
 		boutonALaUne = (Button)findViewById(R.id.buttonALaUne);
 		boutonNews = (Button)findViewById(R.id.buttonNews);
@@ -62,6 +65,8 @@ public class VuePrincipaleActivity extends Activity{
 		boutonInfo = (Button)findViewById(R.id.buttonInfo);
 		boutonActualiser = (Button)findViewById(R.id.buttonActualiser);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
+		
+		
 		
 		titreApplication.setBackgroundResource(R.drawable.titreapplication);
 		
@@ -72,6 +77,8 @@ public class VuePrincipaleActivity extends Activity{
 		setDate();
 		initAdapters();
 		
+		
+		
 		boutonALaUne.setPressed(true);
         boutonALaUne.setClickable(false);
         
@@ -80,6 +87,7 @@ public class VuePrincipaleActivity extends Activity{
         boutonEvents.setOnClickListener(controller);
         boutonInfo.setOnClickListener(controller);
         boutonFavoris.setOnClickListener(controller);
+        
         
         galleryEvents.setOnItemClickListener(controller);
         gridViewNewsPrincipale.setOnItemClickListener(controller);

@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.controller;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class ListNewsAdapter extends BaseAdapter{
 	Context ctx;
 	List<Article> articles;
 	AsyncTaskImage asyncTask;
+	Typeface tfLight;
 	
 	public ListNewsAdapter(Context context, List<Article> articlesRecus) {
 		ctx=context;
@@ -51,6 +53,8 @@ public class ListNewsAdapter extends BaseAdapter{
 		TextView titre = (TextView) convertView
 				.findViewById(R.id.textViewTitreEvent);
 		titre.setText(articles.get(position).getTitre());
+		tfLight=Typeface.createFromAsset(ctx.getAssets(), "fonts/helveticalight.otf");
+		titre.setTypeface(tfLight);
 		TextView date = (TextView) convertView
 				.findViewById(R.id.textViewDateEvent);
 		date.setText(Formatage.dateEnTexteComplet(Formatage.stringToDate(articles.get(position).getDateParution())));

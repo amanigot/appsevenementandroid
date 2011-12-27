@@ -18,7 +18,7 @@
 		    android:gravity="center"
 		    android:paddingTop="105dp"
 		    android:text="TextView"
-		    android:textColor="#D63500"
+		    android:textColor="#FF0000"
 		    android:textColorHighlight="#FF0000"
 		    android:textSize="17dp"/>
 
