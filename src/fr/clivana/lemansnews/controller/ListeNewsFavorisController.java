@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class ListeNewsFavorisController implements OnItemClickListener {
 
@@ -29,11 +30,15 @@ public class ListeNewsFavorisController implements OnItemClickListener {
 		tracker = GoogleAnalyticsTracker.getInstance();
 	}
 
-	public ListAdapter initAdapter() {
+	public void initAdapter(ListView listeNewsFavoris) {
 		
 			articles=newsDao.getFavoriteArticles();
-			newsAdapter=new ListNewsAdapter(context, articles);
-			return newsAdapter;
+			if(articles.size()==1 && articles.get(0).getId()==0){
+				listeNewsFavoris.setVisibility(View.GONE);
+			}else{
+				newsAdapter=new ListNewsAdapter(context, articles);
+				listeNewsFavoris.setAdapter(newsAdapter);
+			}
 
 	}
 

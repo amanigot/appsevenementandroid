@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
@@ -29,11 +30,14 @@ public class ListeEvenementsFavorisController implements OnItemClickListener {
 		tracker=GoogleAnalyticsTracker.getInstance();
 	}
 
-	public ListAdapter initAdapter() {
+	public void initAdapter(ListView listeEvenementsFavoris) {
 		evenements=eventsDao.getFavoriteEvents();
-		
-		eventsAdapter=new ListEvenementsAdapter(context, evenements);
-		return eventsAdapter;
+		if(evenements.size()==1 && evenements.get(0).getId()==0){
+			listeEvenementsFavoris.setVisibility(View.GONE);
+		}else{
+			eventsAdapter=new ListEvenementsAdapter(context, evenements);
+			listeEvenementsFavoris.setAdapter(eventsAdapter);
+		}
 		
 	}
 

@@ -84,6 +84,7 @@ public class CategoriesController implements OnClickListener,
 		    
 		    dialog = new Dialog(context, android.R.style.Theme_Panel);
 		    dialog.setContentView(iv);
+		    iv.setOnClickListener(new OnClickListener() { public void onClick(View v) { dialog.dismiss(); } });
 		    dialog.show();
 		}
 	}

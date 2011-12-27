@@ -25,7 +25,7 @@ public class ListeNewsFavorisActivity extends Activity {
 	private void setList() {
 		controller= new ListeNewsFavorisController(this);
 		
-		listeNewsFavoris.setAdapter(controller.initAdapter());
+		controller.initAdapter(listeNewsFavoris);
 		listeNewsFavoris.setOnItemClickListener(controller);
 	}
 	

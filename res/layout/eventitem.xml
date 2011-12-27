@@ -34,7 +34,8 @@
             android:layout_gravity="center_vertical|right"
             android:paddingRight="15dp"
             android:paddingLeft="5dp"
-            android:src="@drawable/icoslideevenementsuivant" />
+            android:src="@drawable/icoslideevenementsuivant" 
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/precedent"
@@ -43,7 +44,8 @@
             android:layout_gravity="center_vertical"
             android:paddingLeft="15dp"
             android:paddingRight="5dp"
-            android:src="@drawable/icoslideevenementprecedent" />
+            android:src="@drawable/icoslideevenementprecedent"
+            android:visibility="gone" />
         
     </FrameLayout>
 

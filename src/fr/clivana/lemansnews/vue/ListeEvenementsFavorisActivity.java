@@ -23,7 +23,7 @@ public class ListeEvenementsFavorisActivity extends Activity {
 	private void setList() {
 		listeEvenementsFavoris=(ListView)findViewById(R.id.ListeEvenementsFavoris);
 		
-		listeEvenementsFavoris.setAdapter(controller.initAdapter());
+		controller.initAdapter(listeEvenementsFavoris);
 		listeEvenementsFavoris.setOnItemClickListener(controller);
 	}
 
