@@ -87,7 +87,7 @@ public class GalleryAdapter extends BaseAdapter {
 		asyncTask.execute();
 		
 		
-		titre.setText(events.get(position).getTitre());
+		titre.setText(events.get(position).getTitre().toString().toUpperCase());
 		
 	    titre.setTypeface(tfLight);
 	    

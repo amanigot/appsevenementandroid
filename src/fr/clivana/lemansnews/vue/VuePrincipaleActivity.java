@@ -36,7 +36,7 @@ public class VuePrincipaleActivity extends Activity{
 	Button boutonActualiser;
 	Button boutonFavoris;
 	CategoriesDialog dialog;
-	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
+	String[] items={"Facebook", "Mail", "SMS", "Google+"};
 	GoogleAnalyticsTracker tracker;
 	Facebook facebook;
 	ImageView suivant;
@@ -119,7 +119,7 @@ public class VuePrincipaleActivity extends Activity{
 		case R.id.share:
 			tracker.trackEvent("Accueil", "option", "partage application", 1);
 			dialog=new CategoriesDialog(this, "Partager l'application", "", "", "Annuler", items, -1, 3);
-			dialog.addInfos("Application Le Mans News & Evénements","", "");
+			dialog.addInfos("Application Le Mans News & Evénements", "https://market.android.com/details?id=fr.clivana.lemansnews", "logoLeMans");
 			dialog.getBuilder().show();
 			break;
 			

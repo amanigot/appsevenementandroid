@@ -20,7 +20,7 @@ public class DetailEventsController implements OnClickListener {
 	Context context;
 	EventsDAO eventsDao;
 	Evenement evenement;
-	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
+	String[] items={"Facebook", "Mail", "SMS", "Google+"};
 	CategoriesDialog dialog;
 	GoogleAnalyticsTracker tracker;
 	Button bouton;
@@ -38,7 +38,7 @@ public class DetailEventsController implements OnClickListener {
 	}
 
 	public CharSequence getTitreEvenement() {
-		return evenement.getTitre();
+		return evenement.getTitre().toUpperCase();
 	}
 
 	public CharSequence getDateEvenement() {

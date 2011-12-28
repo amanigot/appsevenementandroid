@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.jsoup.Jsoup;
+
 public class Formatage {
 
 	public static String dateEnTexteComplet(Date date) {
@@ -74,5 +76,9 @@ public class Formatage {
 			}
 		}
 		return new String(tmp);
+	}
+	
+	public static String html2text(String html) {
+	    return Jsoup.parse(html).text();
 	}
 }

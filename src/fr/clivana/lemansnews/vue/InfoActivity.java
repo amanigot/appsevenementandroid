@@ -45,6 +45,7 @@ public class InfoActivity extends Activity {
         boutonInfo.setVisibility(View.INVISIBLE);
         boutonActualiser.setVisibility(View.INVISIBLE);
         
+        boutonALaUne.setBackgroundResource(R.drawable.btninfoxml);
         boutonALaUne.setOnClickListener(infoController);
         boutonRetour.setOnClickListener(infoController);
         titreApplication.setText(infoController.initTitre());

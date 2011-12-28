@@ -13,8 +13,7 @@
     <fr.clivana.lemansnews.controller.GalleryOneByOne
         android:id="@+id/galleryEvents"
         android:layout_width="match_parent"
-        android:layout_height="180px"
-        android:listSelector="@null" />
+        android:layout_height="180px" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,7 +55,8 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:numColumns="2"
-        android:listSelector="@null"
+        android:listSelector="@drawable/selectoractus"
+        android:drawSelectorOnTop="true"
         android:paddingTop="2dp" >
 
     </GridView>

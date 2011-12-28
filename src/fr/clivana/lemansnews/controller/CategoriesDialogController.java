@@ -15,6 +15,7 @@ import android.widget.Toast;
 import fr.clivana.lemansnews.async.AsyncTaskAddCategorie;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions.PocRequestListener;
 import fr.clivana.lemansnews.utils.facebook.SessionEvents;
@@ -99,13 +100,13 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 				switch(idElementAppuye){
 				case 0:
 					FacebookFunctions.initialize(context);
-					SessionEvents.addAuthListener(returnAuthListener(titre, description, image));
+					SessionEvents.addAuthListener(returnAuthListener(titre, Formatage.html2text(description), image));
 					if (!FacebookFunctions.isConnected()) {
-						Log.w("connect", "non");
+						
 						FacebookFunctions.login(((Activity)context), FacebookFunctions.FACEBOOK_REQUEST_CODE);
 					} else {
-						Log.w("connect", "yes");
-						publishMessage(titre, description, image);
+						
+						publishMessage(titre, Formatage.html2text(description), image);
 					}
 					
 //					findFacebookClient();
@@ -114,40 +115,40 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 //					Intent fb = new Intent(context, FacebookActivity.class);
 //					context.startActivity(fb);
 				break;
+//				case 1:
+//					Intent TwitterIntent = findTwitterClient();
+//			    	if(TwitterIntent != null)
+//			    	{
+//			    		TwitterIntent.putExtra(android.content.Intent.EXTRA_TEXT, titre+" : "+description);
+//			    		context.startActivity(Intent.createChooser(TwitterIntent, "Partager..."));
+//			    	}
+//			    	else
+//			    	{
+//			    		Toast toast=new Toast(context);
+//						CharSequence text = "Vous devez d'abord telecharger une application Twitter.";
+//						int duration = Toast.LENGTH_SHORT;
+//						toast = Toast.makeText(context, text, duration);
+//						toast.show();
+//			    	}
+//			    break;
 				case 1:
-					Intent TwitterIntent = findTwitterClient();
-			    	if(TwitterIntent != null)
-			    	{
-			    		TwitterIntent.putExtra(android.content.Intent.EXTRA_TEXT, titre+" : "+description);
-			    		context.startActivity(Intent.createChooser(TwitterIntent, "Partager..."));
-			    	}
-			    	else
-			    	{
-			    		Toast toast=new Toast(context);
-						CharSequence text = "Vous devez d'abord telecharger une application Twitter.";
-						int duration = Toast.LENGTH_SHORT;
-						toast = Toast.makeText(context, text, duration);
-						toast.show();
-			    	}
-			    break;
-				case 2:
 						Intent sendIntent = new Intent(Intent.ACTION_SEND);
 				    	sendIntent.setType("plain/text");
 						sendIntent .putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
-						sendIntent .putExtra(android.content.Intent.EXTRA_TEXT, description);
+						sendIntent .putExtra(android.content.Intent.EXTRA_TEXT, Formatage.html2text(description));
 						context.startActivity(Intent.createChooser( sendIntent, "Envoyer un mail..."));
 				break;
-				case 3:
+				case 2:
 						Intent sendIntentSMS = new Intent(Intent.ACTION_VIEW);
-						sendIntentSMS.putExtra("sms_body", titre+" : "+description); 
+						sendIntentSMS.putExtra("sms_body", titre+" : "+Formatage.html2text(description)); 
 						sendIntentSMS.setType("vnd.android-dir/mms-sms");
 						context.startActivity(sendIntentSMS);
 				break;
-				case 4:
+				case 3:
 						Intent sendIntentG = new Intent(Intent.ACTION_SEND);
 				    	sendIntentG.setType("text/plain");
 						sendIntentG.putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
-						sendIntentG.putExtra(android.content.Intent.EXTRA_TEXT, description);
+						sendIntentG.putExtra(android.content.Intent.EXTRA_TEXT, Formatage.html2text(description));
 						sendIntentG.setPackage("com.google.android.apps.plus"); 
 						context.startActivity(Intent.createChooser( sendIntentG, "Partager sur Google+"));
 				break;
@@ -195,19 +196,19 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 			
 			@Override
 			public void onAuthSucceed() {
-				Log.w("auth", "succes");
+				
 				publishMessage(titre, comment, image);
 				
 			}
 
 			@Override
 			public void onAuthFail(final String error) {
-				Log.w("auth", "fail");
+				
 				final String message = "Echec de login : " + error;
 				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			}
 		};
-		Log.w("auth", "return");
+		
 		return authListener;
 	}
 	
@@ -223,7 +224,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 		@Override
 		public void onSuccess(String response) {
 
-			Log.w("publish", "succes");
+			
 			cancelDialog();
 			((Activity) context).runOnUiThread(new Runnable() {
 				@Override
@@ -236,7 +237,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 
 		@Override
 		public void onError(final Throwable t) {
-			Log.w("publish", "error");
+			
 			((Activity) context).runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
