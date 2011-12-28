@@ -101,10 +101,10 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 					FacebookFunctions.initialize(context);
 					SessionEvents.addAuthListener(returnAuthListener(titre, description, image));
 					if (!FacebookFunctions.isConnected()) {
-						Log.w("connect", "non");
+						
 						FacebookFunctions.login(((Activity)context), FacebookFunctions.FACEBOOK_REQUEST_CODE);
 					} else {
-						Log.w("connect", "yes");
+						
 						publishMessage(titre, description, image);
 					}
 					
@@ -195,19 +195,19 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 			
 			@Override
 			public void onAuthSucceed() {
-				Log.w("auth", "succes");
+				
 				publishMessage(titre, comment, image);
 				
 			}
 
 			@Override
 			public void onAuthFail(final String error) {
-				Log.w("auth", "fail");
+				
 				final String message = "Echec de login : " + error;
 				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			}
 		};
-		Log.w("auth", "return");
+		
 		return authListener;
 	}
 	
@@ -223,7 +223,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 		@Override
 		public void onSuccess(String response) {
 
-			Log.w("publish", "succes");
+			
 			cancelDialog();
 			((Activity) context).runOnUiThread(new Runnable() {
 				@Override
@@ -236,7 +236,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 
 		@Override
 		public void onError(final Throwable t) {
-			Log.w("publish", "error");
+			
 			((Activity) context).runOnUiThread(new Runnable() {
 				@Override
 				public void run() {

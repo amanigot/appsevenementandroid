@@ -38,7 +38,7 @@ public class DetailEventsController implements OnClickListener {
 	}
 
 	public CharSequence getTitreEvenement() {
-		return evenement.getTitre();
+		return evenement.getTitre().toUpperCase();
 	}
 
 	public CharSequence getDateEvenement() {

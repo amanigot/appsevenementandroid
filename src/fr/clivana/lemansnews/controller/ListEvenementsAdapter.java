@@ -52,7 +52,7 @@ public class ListEvenementsAdapter extends BaseAdapter {
 		convertView = inflater.inflate(R.layout.eventitem, null);
 		titre = (TextView) convertView
 				.findViewById(R.id.textViewTitreEvent);
-		titre.setText(events.get(position).getTitre());
+		titre.setText(events.get(position).getTitre().toUpperCase());
 		date = (TextView) convertView
 				.findViewById(R.id.textViewDateEvent);
 		date.setText(events.get(position).getDateHeureEvenement());

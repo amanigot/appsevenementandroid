@@ -134,6 +134,9 @@ public class FacebookFunctions {
 		if(!image.equals("")){
 			parameters.putString(GP_PICTURE_PARAM_FEED, ANDROID_IMAGE_URL+image); 
 		}
+		if(image.equals("logoLeMans")){
+//			parameters.putString(GP_PICTURE_PARAM_FEED, Params.BASE_SERVEUR+"public/images/"); 
+		}
 		parameters.putString(GP_DESCRIPTION_PARAM_FEED, comment);		
 		mAsyncFacebookRunner.request(GP_ME_FEED_URI, parameters, GP_POST_REQUEST, requestListener, null);	
 	}

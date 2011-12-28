@@ -52,7 +52,7 @@ public class ListNewsAdapter extends BaseAdapter{
 		ll.setVisibility(View.GONE);
 		TextView titre = (TextView) convertView
 				.findViewById(R.id.textViewTitreEvent);
-		titre.setText(articles.get(position).getTitre());
+		titre.setText(articles.get(position).getTitre().toUpperCase());
 		tfLight=Typeface.createFromAsset(ctx.getAssets(), "fonts/helveticalight.otf");
 		titre.setTypeface(tfLight);
 		TextView date = (TextView) convertView

@@ -74,7 +74,7 @@ public class DetailEvenementActivity extends Activity {
 		tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
 		tfLight = Typeface.createFromAsset(getAssets(), "fonts/helveticalight.otf");
 		titreApplication.setTypeface(tfRoman);
-		titreEvenement.setText(detailEventsController.getTitreEvenement());
+		titreEvenement.setText(detailEventsController.getTitreEvenement().toString().toUpperCase());
 		dateEvenement.setText(detailEventsController.getDateEvenement());
 		lieuEvenement.setText(detailEventsController.getLieuEvenement());
 		titreEvenement.setTypeface(tfLight);

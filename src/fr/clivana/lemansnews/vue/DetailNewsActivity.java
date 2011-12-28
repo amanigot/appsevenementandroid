@@ -85,7 +85,7 @@ public class DetailNewsActivity extends Activity{
         tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
         tfLight = Typeface.createFromAsset(getAssets(), "fonts/helveticalight.otf");
 		titreApplication.setTypeface(tfRoman);
-        titreNews.setText(detailNewsController.getTitreNews());
+        titreNews.setText(detailNewsController.getTitreNews().toString().toUpperCase());
         titreNews.setTypeface(tfLight);
        
         dateAuteur.setText(detailNewsController.initDateAuteur());
