@@ -26,7 +26,9 @@ public class ImageSingleton {
 			return cache.get(nom);
 		}else{
 			Bitmap bitmap = Reseau.chargementImage(nom);
-			cache.put(nom, bitmap);
+			if (bitmap != null){
+				cache.put(nom, bitmap);
+			}
 			return bitmap;
 		}
 	}
