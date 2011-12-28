@@ -36,7 +36,7 @@ public class VuePrincipaleActivity extends Activity{
 	Button boutonActualiser;
 	Button boutonFavoris;
 	CategoriesDialog dialog;
-	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
+	String[] items={"Facebook", "Mail", "SMS", "Google+"};
 	GoogleAnalyticsTracker tracker;
 	Facebook facebook;
 	ImageView suivant;

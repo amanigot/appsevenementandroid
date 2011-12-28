@@ -114,36 +114,36 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 //					Intent fb = new Intent(context, FacebookActivity.class);
 //					context.startActivity(fb);
 				break;
+//				case 1:
+//					Intent TwitterIntent = findTwitterClient();
+//			    	if(TwitterIntent != null)
+//			    	{
+//			    		TwitterIntent.putExtra(android.content.Intent.EXTRA_TEXT, titre+" : "+description);
+//			    		context.startActivity(Intent.createChooser(TwitterIntent, "Partager..."));
+//			    	}
+//			    	else
+//			    	{
+//			    		Toast toast=new Toast(context);
+//						CharSequence text = "Vous devez d'abord telecharger une application Twitter.";
+//						int duration = Toast.LENGTH_SHORT;
+//						toast = Toast.makeText(context, text, duration);
+//						toast.show();
+//			    	}
+//			    break;
 				case 1:
-					Intent TwitterIntent = findTwitterClient();
-			    	if(TwitterIntent != null)
-			    	{
-			    		TwitterIntent.putExtra(android.content.Intent.EXTRA_TEXT, titre+" : "+description);
-			    		context.startActivity(Intent.createChooser(TwitterIntent, "Partager..."));
-			    	}
-			    	else
-			    	{
-			    		Toast toast=new Toast(context);
-						CharSequence text = "Vous devez d'abord telecharger une application Twitter.";
-						int duration = Toast.LENGTH_SHORT;
-						toast = Toast.makeText(context, text, duration);
-						toast.show();
-			    	}
-			    break;
-				case 2:
 						Intent sendIntent = new Intent(Intent.ACTION_SEND);
 				    	sendIntent.setType("plain/text");
 						sendIntent .putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
 						sendIntent .putExtra(android.content.Intent.EXTRA_TEXT, description);
 						context.startActivity(Intent.createChooser( sendIntent, "Envoyer un mail..."));
 				break;
-				case 3:
+				case 2:
 						Intent sendIntentSMS = new Intent(Intent.ACTION_VIEW);
 						sendIntentSMS.putExtra("sms_body", titre+" : "+description); 
 						sendIntentSMS.setType("vnd.android-dir/mms-sms");
 						context.startActivity(sendIntentSMS);
 				break;
-				case 4:
+				case 3:
 						Intent sendIntentG = new Intent(Intent.ACTION_SEND);
 				    	sendIntentG.setType("text/plain");
 						sendIntentG.putExtra(android.content.Intent.EXTRA_SUBJECT, titre);

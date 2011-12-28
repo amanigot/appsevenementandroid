@@ -19,7 +19,7 @@
         android:verticalSpacing="0dp"
         android:horizontalSpacing="0dp"
         android:drawSelectorOnTop="true"
-        android:listSelector="@null">
+        android:listSelector="@drawable/selectoractus">
 
     </GridView>
 

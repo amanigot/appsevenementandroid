@@ -23,7 +23,7 @@ public class DetailNewsController implements OnClickListener {
 	Article article;
 	long idArticle;
 	String categorie;
-	String[] items={"Facebook", "Twitter", "Mail", "SMS", "Google+"};
+	String[] items={"Facebook", "Mail", "SMS", "Google+"};
 	CategoriesDialog dialog;
 	GoogleAnalyticsTracker tracker;
 	AsyncTaskImage asyncTask;
