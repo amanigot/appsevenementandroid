@@ -19,6 +19,7 @@ import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 
+import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.Params;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
 
@@ -51,10 +52,13 @@ public class FacebookFunctions {
 	private static final String GP_LINK_PARAM_FEED = "link";	
 	/** link name param */
 	private static final String GP_NAME_PARAM_FEED = "name";
+	
+	private static final String GP_CAPTION_PARAM_FEED = "caption";
+	
 	/** texte name param */
 	private static final String GP_DESCRIPTION_PARAM_FEED = "description";	
 	/** Url du site web keoli */
-	private static final String ANDROID_URL = "";
+	private static final String ANDROID_URL = "http://www.clivana.com";
 	/** Android image */
 	private static final String ANDROID_IMAGE_URL = Params.BASE_SERVEUR+Reseau.URL_IMAGES;
 	/** Activity qui sert à certaines opérations */
@@ -132,11 +136,14 @@ public class FacebookFunctions {
 		parameters.putString(GP_LINK_PARAM_FEED, ANDROID_URL);
 		parameters.putString(GP_NAME_PARAM_FEED, name);
 		if(!image.equals("")){
+			
 			parameters.putString(GP_PICTURE_PARAM_FEED, ANDROID_IMAGE_URL+image); 
+			//Log.w("image", parameters.get(GP_PICTURE_PARAM_FEED)+"");
 		}
 		if(image.equals("logoLeMans")){
 //			parameters.putString(GP_PICTURE_PARAM_FEED, Params.BASE_SERVEUR+"public/images/"); 
 		}
+		parameters.putString(GP_CAPTION_PARAM_FEED, "Le Mans News & Evenements");
 		parameters.putString(GP_DESCRIPTION_PARAM_FEED, comment);		
 		mAsyncFacebookRunner.request(GP_ME_FEED_URI, parameters, GP_POST_REQUEST, requestListener, null);	
 	}

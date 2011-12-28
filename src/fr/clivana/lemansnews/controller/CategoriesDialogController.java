@@ -15,6 +15,7 @@ import android.widget.Toast;
 import fr.clivana.lemansnews.async.AsyncTaskAddCategorie;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions.PocRequestListener;
 import fr.clivana.lemansnews.utils.facebook.SessionEvents;
@@ -99,13 +100,13 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 				switch(idElementAppuye){
 				case 0:
 					FacebookFunctions.initialize(context);
-					SessionEvents.addAuthListener(returnAuthListener(titre, description, image));
+					SessionEvents.addAuthListener(returnAuthListener(titre, Formatage.html2text(description), image));
 					if (!FacebookFunctions.isConnected()) {
 						
 						FacebookFunctions.login(((Activity)context), FacebookFunctions.FACEBOOK_REQUEST_CODE);
 					} else {
 						
-						publishMessage(titre, description, image);
+						publishMessage(titre, Formatage.html2text(description), image);
 					}
 					
 //					findFacebookClient();
@@ -134,12 +135,12 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 						Intent sendIntent = new Intent(Intent.ACTION_SEND);
 				    	sendIntent.setType("plain/text");
 						sendIntent .putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
-						sendIntent .putExtra(android.content.Intent.EXTRA_TEXT, description);
+						sendIntent .putExtra(android.content.Intent.EXTRA_TEXT, Formatage.html2text(description));
 						context.startActivity(Intent.createChooser( sendIntent, "Envoyer un mail..."));
 				break;
 				case 2:
 						Intent sendIntentSMS = new Intent(Intent.ACTION_VIEW);
-						sendIntentSMS.putExtra("sms_body", titre+" : "+description); 
+						sendIntentSMS.putExtra("sms_body", titre+" : "+Formatage.html2text(description)); 
 						sendIntentSMS.setType("vnd.android-dir/mms-sms");
 						context.startActivity(sendIntentSMS);
 				break;
@@ -147,7 +148,7 @@ public class CategoriesDialogController implements DialogInterface.OnClickListen
 						Intent sendIntentG = new Intent(Intent.ACTION_SEND);
 				    	sendIntentG.setType("text/plain");
 						sendIntentG.putExtra(android.content.Intent.EXTRA_SUBJECT, titre);
-						sendIntentG.putExtra(android.content.Intent.EXTRA_TEXT, description);
+						sendIntentG.putExtra(android.content.Intent.EXTRA_TEXT, Formatage.html2text(description));
 						sendIntentG.setPackage("com.google.android.apps.plus"); 
 						context.startActivity(Intent.createChooser( sendIntentG, "Partager sur Google+"));
 				break;

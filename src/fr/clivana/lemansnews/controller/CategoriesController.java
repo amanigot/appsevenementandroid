@@ -7,12 +7,16 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager.LayoutParams;
+
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
+
 import android.widget.Toast;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
@@ -40,6 +44,7 @@ public class CategoriesController implements OnClickListener,
 	NewsDAO newsDao;
 	AsyncTaskCategories asyncTask;
 	GoogleAnalyticsTracker tracker;
+	LayoutParams layoutParams;
 	
 	Dialog dialog;
 	
@@ -79,12 +84,21 @@ public class CategoriesController implements OnClickListener,
 		}
 		if(v.getId() == R.id.buttonInfo){
 			
-			ImageView iv=new ImageView(context);
-			iv.setImageResource(R.drawable.illustaidecategorieactu);
+			ImageView imageViewAideCategorie=new ImageView(context);
+			imageViewAideCategorie.setImageResource(R.drawable.illustaidecategorieactu);
 		    
-		    dialog = new Dialog(context, android.R.style.Theme_Panel);
-		    dialog.setContentView(iv);
-		    iv.setOnClickListener(new OnClickListener() { public void onClick(View v) { dialog.dismiss(); } });
+			dialog = new Dialog(context, android.R.style.Theme_Panel);
+			dialog.setContentView(imageViewAideCategorie);
+			
+			layoutParams = dialog.getWindow().getAttributes();
+			
+			layoutParams.gravity=Gravity.TOP;
+			layoutParams.y=55;
+			
+			dialog.getWindow().setAttributes(layoutParams);
+			
+		    
+		    imageViewAideCategorie.setOnClickListener(new OnClickListener() { public void onClick(View v) { dialog.dismiss(); } });
 		    dialog.show();
 		}
 	}
@@ -103,6 +117,7 @@ public class CategoriesController implements OnClickListener,
 					Intent intentNews = new Intent(context, GridNewsActivity.class);
 				 	intentNews.putExtra("categorie", categoriesAffichees.get(position).getNom());
 				 	categoriesAffichees.get(position).setDateConsult(Formatage.datePourPlay(new Date()));
+				 	categoriesAffichees.get(position).setCount(0);
 				 	categoriesDao.updateCategorie(categoriesAffichees.get(position) );
 				 	context.startActivity(intentNews);
 				 }else{
