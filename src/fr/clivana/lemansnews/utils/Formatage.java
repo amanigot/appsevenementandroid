@@ -55,6 +55,11 @@ public class Formatage {
 		return texte;
 	}
 
+	public static String suppressionEspace(String texte){
+		texte = replace(texte, " ", "%20");
+		return texte;
+	}
+	
 	private static String replace(String s, String replaced, String replacing) {
 		StringBuffer tmp = new StringBuffer(s);
 		int i = 0, debut, fin;

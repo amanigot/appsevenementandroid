@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.widget.ImageView;
 import fr.clivana.lemansnews.utils.ImageSingleton;
 
-public class AsyncTaskImage extends AsyncTask<Void, Void, Void> {
+public class AsyncTaskImage extends AsyncTaskEx<Void, Void, Void> {
 
 	String nomImage;
 	Bitmap bitmapRecu;
