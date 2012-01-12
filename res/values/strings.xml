@@ -11,4 +11,5 @@
 	<string name="paragraphe2">Elle permet à tous de suivre l\'actualité du Mans, mais aussi de l\'actualité en général. Elle informe également des différents événements qui auront lieu sur Le Mans et sa périphérie.</string>
 	<string name="favoris">" . . ."</string>
 	<string name="favoris2">Vos favoris</string>
+	<string name="evenements">LES EVENEMENTS</string>
 </resources>

@@ -18,6 +18,7 @@ import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.Params;
 
 import android.content.Context;
@@ -88,7 +89,7 @@ public class Reseau {
 		if (numPage == 0){
 			numPage = 1;
 		}
-		String url = Params.BASE_SERVEUR + URL_LIST_NEWS + motClef + "/" + numPage + "/" + quantite;
+		String url = Params.BASE_SERVEUR + URL_LIST_NEWS + Formatage.suppressionEspace(motClef) + "/" + numPage + "/" + quantite;
 		DeSerializer<ListArticles> deserialize = new DeSerializer<ListArticles>();
 		ListArticles listArticle = new ListArticles();
 		listArticle = deserialize.deJson(requeteWeb(url),listArticle);
@@ -146,7 +147,7 @@ public class Reseau {
 		if (nomCategorie.equals("")|| nomCategorie.equals(" ")){
 			nomCategorie = "all";
 		}
-		String url = Params.BASE_SERVEUR + URL_COUNT_CATEGORIES + nomCategorie + "/" + dateDernierClick;
+		String url = Params.BASE_SERVEUR + URL_COUNT_CATEGORIES + Formatage.suppressionEspace(nomCategorie) + "/" + dateDernierClick;
 		DeSerializer<Categorie> deserialize = new DeSerializer<Categorie>();
 		Categorie categorie = new Categorie();
 		categorie = deserialize.deJson(requeteWeb(url), categorie);

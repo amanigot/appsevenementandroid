@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/EasyTracker.jar"/>
 	<classpathentry kind="lib" path="lib/libGoogleAnalytics.jar"/>
 	<classpathentry kind="lib" path="lib/jsoup-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/android-support-v4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
