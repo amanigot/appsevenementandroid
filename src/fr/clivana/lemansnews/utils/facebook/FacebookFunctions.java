@@ -19,7 +19,6 @@ import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 
-import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.Params;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
 

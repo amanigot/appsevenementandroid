@@ -1,8 +1,5 @@
 package fr.clivana.lemansnews.vue;
 
-import com.facebook.android.Facebook;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -12,6 +9,9 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.DetailNewsController;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
