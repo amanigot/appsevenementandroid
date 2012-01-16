@@ -1,15 +1,21 @@
 package fr.clivana.lemansnews.vue;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.android.Facebook;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
@@ -42,10 +48,12 @@ public class VuePrincipaleActivity extends Activity{
 	ImageView suivant;
 	ImageView precedent;
 	
+	public final static String AUTH = "authentication";
+	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+		register();
 		tracker = GoogleAnalyticsTracker.getInstance();
 		tracker.startNewSession("UA-27914218-1",1, this);
 		tracker.setAnonymizeIp(true);
@@ -147,5 +155,21 @@ public class VuePrincipaleActivity extends Activity{
 		if(requestCode==FacebookFunctions.FACEBOOK_REQUEST_CODE){
 			FacebookFunctions.handleLoginResult(resultCode, data);
 		}
+	}
+	
+	public void register() {
+		Intent intent = new Intent("com.google.android.c2dm.intent.REGISTER");
+		intent.putExtra("app",PendingIntent.getBroadcast(this, 0, new Intent(), 0));
+		intent.putExtra("sender", "clivanadev@gmail.com");
+		startService(intent);
+	}
+	
+	public void showRegistrationId() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		String string = prefs.getString(AUTH, "n/a");
+		Toast.makeText(this, string, Toast.LENGTH_LONG).show();
+		Log.d("C2DM RegId", string);
+
 	}
 }
