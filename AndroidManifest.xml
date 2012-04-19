@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.clivana.lemansnews"
-    android:versionCode="9"
-    android:versionName="1.0.1" >
+    android:versionCode="12"
+    android:versionName="1.0.3" >
 
     <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="8"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -20,7 +20,7 @@
         android:label="@string/app_name" >
         
     
-     	<activity android:name=".vue.VuePrincipaleActivity" 
+     	<activity android:name=".view.VuePrincipaleActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.ListeNewsFavorisActivity" 
+     	<activity android:name=".view.ListeNewsFavorisActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.ListeEvenementsFavorisActivity" 
+     	<activity android:name=".view.ListeEvenementsFavorisActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.SplashActivity" 
+     	<activity android:name=".view.SplashActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.CategoriesActivity" 
+     	<activity android:name=".view.CategoriesActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -65,7 +65,7 @@
             </intent-filter>
         </activity>
      	
-     	<activity android:name=".vue.GridNewsActivity" 
+     	<activity android:name=".view.GridNewsActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -74,7 +74,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.DetailNewsActivity" 
+     	<activity android:name=".view.DetailNewsActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -83,7 +83,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.ListeEvenementsActivity" 
+     	<activity android:name=".view.ListeEvenementsActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -92,7 +92,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.DetailEvenementActivity" 
+     	<activity android:name=".view.DetailEvenementActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -101,7 +101,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.InfoActivity" 
+     	<activity android:name=".view.InfoActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -110,7 +110,7 @@
             </intent-filter>
         </activity>
         
-     	<activity android:name=".vue.FavorisActivity" 
+     	<activity android:name=".view.FavorisActivity" 
        		android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait">
             <intent-filter>
@@ -141,7 +141,7 @@
      	
      	<activity android:name="RegistrationResultActivity" >
         </activity>
-        <activity android:name="MessageReceivedActivity" >
+        <activity android:name=".MessageReceivedActivity" >
         </activity>
      	
 	 </application>

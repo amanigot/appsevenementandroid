@@ -1,4 +1,4 @@
-package fr.clivana.lemansnews.vue;
+package fr.clivana.lemansnews.view;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -25,16 +25,26 @@ import fr.clivana.lemansnews.controller.GalleryOneByOne;
 import fr.clivana.lemansnews.controller.VuePrincipaleController;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
 
+//pullToReefresh
+import com.markupartist.android.widget.PullToRefreshListView;
+import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
+
 public class VuePrincipaleActivity extends Activity{
 
-	VuePrincipaleController controller;
+	
+	//Un lien sur le controlleur qui gère les évènements
+	VuePrincipaleController vuePrincipaleController;
+	
+	//les attributs de classe pour la vue
 	TextView titreApplication;
 	TextView titreActualite;
 	TextView titreSuite;
 	TextView titreEvenement;
-	TextView derniereMaj;
+	TextView derniereMaj;	
+	//Lien de la gallerie en haut et au milieu
 	GalleryOneByOne galleryEvents;
-	GridView gridViewNewsPrincipale;
+	PullToRefreshListView pullToRefreshListView;
+	//Les boutons de la vue Principale
 	Button boutonALaUne;
 	Button boutonNews;
 	Button boutonEvents;
@@ -42,9 +52,13 @@ public class VuePrincipaleActivity extends Activity{
 	Button boutonActualiser;
 	Button boutonFavoris;
 	CategoriesDialog dialog;
+	//Tableau de données
 	String[] items={"Facebook", "Mail", "SMS", "Google+"};
+	//lien sur l'api de google analytics
 	GoogleAnalyticsTracker tracker;
+	//Lien sur l'api de facebook
 	Facebook facebook;
+	//Une image
 	ImageView suivant;
 	ImageView precedent;
 	
@@ -52,53 +66,66 @@ public class VuePrincipaleActivity extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		//désiarilisation de la vue dans l'activity
 		setContentView(R.layout.main);
+		//Appel de la méthode pour s'enregistrer sur google analytics 
 		register();
+		//Apper de l'api de google analytics
 		tracker = GoogleAnalyticsTracker.getInstance();
 		tracker.startNewSession("UA-27914218-1",1, this);
 		tracker.setAnonymizeIp(true);
-		
+		//page tracker via google analytics
 		tracker.trackPageView("/index");
+		
+		//On récupère depuis le fichier main.xml la vue
 		galleryEvents = (GalleryOneByOne)findViewById(R.id.galleryEvents);
-		controller = new VuePrincipaleController(this, galleryEvents);
+		vuePrincipaleController = new VuePrincipaleController(this, galleryEvents);
 		titreApplication =(TextView)findViewById(R.id.textViewTitreApplication);
 		titreActualite = (TextView)findViewById(R.id.titreActualite);
 		titreSuite = (TextView)findViewById(R.id.titreActualiteSuite);
 		derniereMaj = (TextView)findViewById(R.id.textViewDateMAJ);
-		
-		gridViewNewsPrincipale = (GridView)findViewById(R.id.gridViewNewsPrincipal);
+		pullToRefreshListView = (PullToRefreshListView)findViewById(R.id.pullToRefreshListView);
 		boutonALaUne = (Button)findViewById(R.id.buttonALaUne);
 		boutonNews = (Button)findViewById(R.id.buttonNews);
 		boutonEvents = (Button)findViewById(R.id.buttonEvents);
 		boutonInfo = (Button)findViewById(R.id.buttonInfo);
 		boutonActualiser = (Button)findViewById(R.id.buttonActualiser);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
+		//désrialisation des boutons
 		
 		
-		
+		//Un background dans la barre de titre
 		titreApplication.setBackgroundResource(R.drawable.titreapplication);
 		
-		
-		controller.miseEnPageRomanLight(titreActualite);
-		controller.miseEnPageRomanLight(titreSuite);
+		//modification de la police pour la vue principale
+		vuePrincipaleController.miseEnPageRomanLight(titreActualite);
+		vuePrincipaleController.miseEnPageRomanLight(titreSuite);
 		
 		setDate();
 		initAdapters();
 		
 		
-		
+		//bouton selection 
 		boutonALaUne.setPressed(true);
         boutonALaUne.setClickable(false);
         
-        boutonNews.setOnClickListener(controller);
-        boutonActualiser.setOnClickListener(controller);
-        boutonEvents.setOnClickListener(controller);
-        boutonInfo.setOnClickListener(controller);
-        boutonFavoris.setOnClickListener(controller);
+        //Ajout des listeners sur les boutons et envoie au controleur
+        boutonNews.setOnClickListener(vuePrincipaleController);
+        boutonActualiser.setOnClickListener(vuePrincipaleController);
+        boutonEvents.setOnClickListener(vuePrincipaleController);
+        boutonInfo.setOnClickListener(vuePrincipaleController);
+        boutonFavoris.setOnClickListener(vuePrincipaleController);
+        
+        //Ajout des évenements sur la gallerie
+        galleryEvents.setOnItemClickListener(vuePrincipaleController);
+        pullToRefreshListView.setOnItemClickListener(vuePrincipaleController);
+        
+        //Ajout de l'événements du pull to refresh
+        
+        pullToRefreshListView.setOnRefreshListener(vuePrincipaleController);
         
         
-        galleryEvents.setOnItemClickListener(controller);
-        gridViewNewsPrincipale.setOnItemClickListener(controller);
+        
 	}
 	
 	public void onResume(){
@@ -108,19 +135,22 @@ public class VuePrincipaleActivity extends Activity{
 	}
 	
 	public void initAdapters(){
-		galleryEvents.setAdapter(controller.initGalleryAdapter());
-		gridViewNewsPrincipale.setAdapter(controller.initNewsAdapter());
+		
+		//Envoie de l'evenements issue de la gallerie de la vue principale
+		galleryEvents.setAdapter(vuePrincipaleController.initGalleryAdapter());
+		pullToRefreshListView.setAdapter(vuePrincipaleController.initNewsAdapter());
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		
+		//Initialisation du layout
 		MenuInflater inflater = new MenuInflater(this);
 		inflater.inflate(R.menu.optionmenu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
+	//méthode qui permet de gérer les options clic droit sur la vue principal
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()){
@@ -133,7 +163,7 @@ public class VuePrincipaleActivity extends Activity{
 			
 		case R.id.actualiseroption:
 			tracker.trackEvent("Accueil", "option", "actualisation", 1);
-			controller.Actualisation();
+			vuePrincipaleController.Actualisation();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -149,7 +179,7 @@ public class VuePrincipaleActivity extends Activity{
 		derniereMaj.setText("Actualisé le : "+getSharedPreferences("prefs", 0).getString("date", ""));
 		
 	}
-	
+	//facebook retour de la requête envoyée a facebook
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode==FacebookFunctions.FACEBOOK_REQUEST_CODE){
@@ -171,5 +201,11 @@ public class VuePrincipaleActivity extends Activity{
 		Toast.makeText(this, string, Toast.LENGTH_LONG).show();
 		Log.d("C2DM RegId", string);
 
+	}
+	//Méthode pour rafraichir le pulltoRefresh au niveau visuel
+	public void refreshVisuActivity (){
+		
+		pullToRefreshListView.onRefreshComplete();
+		
 	}
 }

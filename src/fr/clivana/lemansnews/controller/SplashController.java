@@ -11,14 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import fr.clivana.lemansnews.async.AsyncTaskBDD;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.VuePrincipaleActivity;
+import fr.clivana.lemansnews.view.VuePrincipaleActivity;
 
 public class SplashController {
 
 	Context ctx;
 	AsyncTaskBDD asyncBdd;
 	PackageInfo versionInfo;
+	Intent vuePrincipale;
 	
+	//On initialise le constructeur de l'objet controlleur en receptionnant des données
 	public SplashController(Context context, TextView load, ProgressBar progress){
 		ctx = context;
 		asyncBdd = new AsyncTaskBDD(ctx, load, progress);
@@ -34,8 +36,8 @@ public class SplashController {
 			if(ctx.getSharedPreferences("prefs", 0).getBoolean("newuser", true)){
 				Toast.makeText(ctx, "La connexion est introuvable. Pour une première connexion, vous devez vous connecter sur Internet.", Toast.LENGTH_LONG).show();
 			}else{
-				Intent VuePrincipale = new Intent(ctx, VuePrincipaleActivity.class);
-				ctx.startActivity(VuePrincipale);
+				Intent vuePrincipale = new Intent(ctx, VuePrincipaleActivity.class);
+				ctx.startActivity(vuePrincipale);
 				((Activity) ctx).finish();
 			}
 		}

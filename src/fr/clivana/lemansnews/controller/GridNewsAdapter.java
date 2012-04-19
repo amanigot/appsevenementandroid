@@ -31,7 +31,7 @@ public class GridNewsAdapter extends BaseAdapter {
 		this.events = events;
 		this.inflater = LayoutInflater.from(context);
 		ctx = context;
-		views = new HashMap<Integer, ImageView>();
+		this.views = new HashMap<Integer, ImageView>();
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class GridNewsAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return position;
 	}
-
+	//Méthode permettant de renvoyer une vue
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 			

@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.GridNewsActivity;
+import fr.clivana.lemansnews.view.GridNewsActivity;
 
 public class AsyncTaskGridNews extends AsyncTask<Void, Void, Void> {
 

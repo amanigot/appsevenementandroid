@@ -20,7 +20,7 @@ import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions.PocRequestListener;
 import fr.clivana.lemansnews.utils.facebook.SessionEvents;
 import fr.clivana.lemansnews.utils.facebook.SessionEvents.AuthListener;
-import fr.clivana.lemansnews.vue.CategoriesActivity;
+import fr.clivana.lemansnews.view.CategoriesActivity;
 
 public class CategoriesDialogController implements DialogInterface.OnClickListener{
 

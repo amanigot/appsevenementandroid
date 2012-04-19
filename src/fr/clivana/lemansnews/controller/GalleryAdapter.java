@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,18 +20,26 @@ import fr.clivana.lemansnews.entity.Evenement;
 
 public class GalleryAdapter extends BaseAdapter {
 
+	
+	//Attributs de classe BaseAdapter
 	LayoutInflater inflater;
 	List<Evenement> events;
+	//Le controller de la vue principale qui recoit les événements
 	VuePrincipaleController controller;
+	//Le context de l'application
 	Context context;
+	//Une image
 	Bitmap bitmap=null;
-	
+	//Un asynTaskImage thread, le thread se lance en dehors de l'application
 	AsyncTaskImage asyncTask;
 	
 	public GalleryAdapter(Context context, List<Evenement> events, VuePrincipaleController vuePrincipaleController
 			) {
+		//Une liste d'événements, le texte
 		this.events = events;
+		//Construction de la vue à partir d'un xml
 		this.inflater = LayoutInflater.from(context);
+		//Initialisation du context de l'application
 		this.context=context;
 		controller = vuePrincipaleController;
 	}
@@ -61,7 +70,9 @@ public class GalleryAdapter extends BaseAdapter {
 		l1.setVisibility(View.GONE);
 		l2.setVisibility(View.GONE);
 		ImageView image = (ImageView) convertView.findViewById(R.id.imageEventDetail);
-		
+		//image.setLayoutParams(new Gallery.LayoutParams(200, 200));
+		//image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+	
 		TextView titre = (TextView) convertView.findViewById(R.id.textViewTitreEvent);
 		ImageView suivant = (ImageView)convertView.findViewById(R.id.suivant);
 		ImageView precedent = (ImageView)convertView.findViewById(R.id.precedent);
@@ -86,8 +97,9 @@ public class GalleryAdapter extends BaseAdapter {
 		asyncTask = new AsyncTaskImage(events.get(position).getNomImageMobile(), image, R.drawable.illustaucuneimage480);
 		asyncTask.execute();
 		
-		
+		//Pour modifier le texte sur la gallerie d'image
 		titre.setText(events.get(position).getTitre().toString().toUpperCase());
+		//titre.setText("TOTO");
 		
 	    titre.setTypeface(tfLight);
 	    

@@ -28,8 +28,8 @@ import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.CategoriesDialog;
-import fr.clivana.lemansnews.vue.GridNewsActivity;
+import fr.clivana.lemansnews.view.CategoriesDialog;
+import fr.clivana.lemansnews.view.GridNewsActivity;
 
 
 public class CategoriesController implements OnClickListener,

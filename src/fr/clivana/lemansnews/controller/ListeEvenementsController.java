@@ -9,7 +9,7 @@ import fr.clivana.lemansnews.async.AsyncTaskListeEvenements;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.DetailEvenementActivity;
+import fr.clivana.lemansnews.view.DetailEvenementActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

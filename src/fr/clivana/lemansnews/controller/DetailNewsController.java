@@ -7,7 +7,7 @@ import fr.clivana.lemansnews.async.AsyncTaskImage;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.utils.Formatage;
-import fr.clivana.lemansnews.vue.CategoriesDialog;
+import fr.clivana.lemansnews.view.CategoriesDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;

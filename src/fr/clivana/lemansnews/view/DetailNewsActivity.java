@@ -1,4 +1,4 @@
-package fr.clivana.lemansnews.vue;
+package fr.clivana.lemansnews.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -72,6 +72,8 @@ public class DetailNewsActivity extends Activity{
         boutonRetour.setOnClickListener(detailNewsController);
         boutonNews.setOnClickListener(detailNewsController);
         
+        
+        
         boutonEvenement.setVisibility(View.GONE);
 		boutonALaUne.setVisibility(View.GONE);
 		boutonFavoris.setVisibility(View.GONE);
@@ -82,6 +84,10 @@ public class DetailNewsActivity extends Activity{
 		detailNewsController.setFavButton();
 		
         titreApplication.setText(detailNewsController.initTitre());
+        //titreApplication.setBackgroundResource(R.drawable.bgtitreapplication);
+
+        
+        
         tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
         tfLight = Typeface.createFromAsset(getAssets(), "fonts/helveticalight.otf");
 		titreApplication.setTypeface(tfRoman);

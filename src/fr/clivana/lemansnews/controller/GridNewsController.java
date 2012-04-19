@@ -18,7 +18,7 @@ import fr.clivana.lemansnews.async.AsyncTaskGridNews;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.DetailNewsActivity;
+import fr.clivana.lemansnews.view.DetailNewsActivity;
 
 public class GridNewsController implements OnClickListener, OnItemClickListener {
 

@@ -18,4 +18,5 @@ public class GalleryOneByOne extends Gallery {
 			float velocityY) {
 		return false;
 	}
+	
 }

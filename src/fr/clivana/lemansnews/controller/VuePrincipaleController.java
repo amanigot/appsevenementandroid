@@ -3,6 +3,7 @@ package fr.clivana.lemansnews.controller;
 import java.util.List;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,20 +16,21 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.async.AsyncTaskPullTorefreshVuPrincipale;
 import fr.clivana.lemansnews.async.AsyncTaskVuePrincipale;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Evenement;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.CategoriesActivity;
-import fr.clivana.lemansnews.vue.DetailEvenementActivity;
-import fr.clivana.lemansnews.vue.DetailNewsActivity;
-import fr.clivana.lemansnews.vue.InfoActivity;
-import fr.clivana.lemansnews.vue.ListeEvenementsActivity;
-import fr.clivana.lemansnews.vue.FavorisActivity;
+import fr.clivana.lemansnews.view.CategoriesActivity;
+import fr.clivana.lemansnews.view.DetailEvenementActivity;
+import fr.clivana.lemansnews.view.DetailNewsActivity;
+import fr.clivana.lemansnews.view.FavorisActivity;
+import fr.clivana.lemansnews.view.InfoActivity;
+import fr.clivana.lemansnews.view.ListeEvenementsActivity;
 
-public class VuePrincipaleController implements OnClickListener, OnItemClickListener{
+public class VuePrincipaleController implements OnClickListener, OnItemClickListener, OnRefreshListener{
 
 	Context ctx;
 	EventsDAO eventsDao;
@@ -38,6 +40,7 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	List<Evenement> evenements;
 	List<Article> articles;
 	AsyncTaskVuePrincipale asyncTask;
+	AsyncTaskPullTorefreshVuPrincipale asyncTaskPullTorefreshVuPrincipale;
 	GoogleAnalyticsTracker tracker;
 	GalleryOneByOne galleryAccueil;
 	MotionEvent e1, e2;
@@ -60,11 +63,13 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 	}
 	
 	public GridNewsAdapter initNewsAdapter(){
+		//Récupération des articles issue du DAO
 		articles=newsDao.getAllArticles();
+		//Initialisation de la GridNewsAdapter en envoyant le context de l'application et les articles
 		newsAdapter= new GridNewsAdapter(ctx, articles);
 		return newsAdapter;
 	}
-	
+	//méthode permettant de modifier la police
 	public void miseEnPageRoman(TextView tv){
 		tv.setText("Le Mans News & Evénements");
 		Typeface tfRoman = Typeface.createFromAsset(ctx.getAssets(), "fonts/helveticaroman.otf");
@@ -132,12 +137,24 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 			evenementIntent.putExtra("event", evenements.get(position).getId());
 			ctx.startActivity(evenementIntent);
 		}
-		if(parent.getId()==R.id.gridViewNewsPrincipal){
+		if(parent.getId()==R.id.pullToRefreshListView){
 			tracker.trackEvent("Accueil", "clic", "Article-"+articles.get(position).getId()+"-"+articles.get(position).getTitre(), 1);
 			Intent intentNews = new Intent(ctx, DetailNewsActivity.class);
-			intentNews.putExtra("article", articles.get(position).getId());
+			intentNews.putExtra("article", articles.get(position-1).getId());
 			ctx.startActivity(intentNews);
 		}
+	}
+
+	@Override
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+		if(Reseau.verifReseau(ctx)){
+			asyncTaskPullTorefreshVuPrincipale=new AsyncTaskPullTorefreshVuPrincipale(ctx);
+			asyncTaskPullTorefreshVuPrincipale.execute();
+		}else{
+			Toast.makeText(ctx, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 	
 	

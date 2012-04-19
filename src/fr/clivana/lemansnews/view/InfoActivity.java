@@ -1,4 +1,4 @@
-package fr.clivana.lemansnews.vue;
+package fr.clivana.lemansnews.view;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 

@@ -1,7 +1,7 @@
 package fr.clivana.lemansnews.async;
 
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.ListeEvenementsActivity;
+import fr.clivana.lemansnews.view.ListeEvenementsActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;

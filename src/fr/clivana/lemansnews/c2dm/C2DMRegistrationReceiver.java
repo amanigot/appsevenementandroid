@@ -27,7 +27,7 @@ import android.provider.Settings.Secure;
 import android.util.Log;
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.utils.Params;
-import fr.clivana.lemansnews.vue.RegistrationResultActivity;
+import fr.clivana.lemansnews.view.RegistrationResultActivity;
 
 public class C2DMRegistrationReceiver extends BroadcastReceiver {
 

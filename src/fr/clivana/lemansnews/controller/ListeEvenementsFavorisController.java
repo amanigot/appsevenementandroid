@@ -14,7 +14,7 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.entity.Evenement;
-import fr.clivana.lemansnews.vue.DetailEvenementActivity;
+import fr.clivana.lemansnews.view.DetailEvenementActivity;
 
 public class ListeEvenementsFavorisController implements OnItemClickListener {
 

@@ -6,7 +6,7 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import fr.clivana.lemansnews.dao.NewsDAO;
 import fr.clivana.lemansnews.entity.Article;
-import fr.clivana.lemansnews.vue.DetailNewsActivity;
+import fr.clivana.lemansnews.view.DetailNewsActivity;
 
 import android.content.Context;
 import android.content.Intent;

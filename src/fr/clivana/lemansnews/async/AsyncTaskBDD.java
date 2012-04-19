@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.VuePrincipaleActivity;
+import fr.clivana.lemansnews.view.VuePrincipaleActivity;
 
 public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 	

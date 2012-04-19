@@ -1,4 +1,4 @@
-package fr.clivana.lemansnews.vue;
+package fr.clivana.lemansnews.view;
 
 import android.app.AlertDialog;
 import android.content.Context;

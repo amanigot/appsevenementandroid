@@ -1,4 +1,4 @@
-package fr.clivana.lemansnews.vue;
+package fr.clivana.lemansnews.view;
 
 
 import fr.clivana.lemansnews.R;
@@ -13,6 +13,7 @@ public class SplashActivity extends Activity{
 	TextView version;
 	TextView load;
 	ProgressBar progress;
+	SplashController controller;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -22,7 +23,9 @@ public class SplashActivity extends Activity{
         load = (TextView)findViewById(R.id.textViewProgress);
         progress = (ProgressBar)findViewById(R.id.progressBarSplash);
         
-        SplashController controller = new SplashController(this, load, progress);
+        
+        //Envoie dans le controlleur des vues pour la gestion des données
+        controller = new SplashController(this, load, progress);
         
         version.setText(controller.getVersion());
         

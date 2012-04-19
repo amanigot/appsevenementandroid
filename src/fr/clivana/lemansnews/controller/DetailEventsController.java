@@ -6,7 +6,7 @@ import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.async.AsyncTaskImage;
 import fr.clivana.lemansnews.dao.EventsDAO;
 import fr.clivana.lemansnews.entity.Evenement;
-import fr.clivana.lemansnews.vue.CategoriesDialog;
+import fr.clivana.lemansnews.view.CategoriesDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;

@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import fr.clivana.lemansnews.R;
-import fr.clivana.lemansnews.vue.MessageReceivedActivity;
+import fr.clivana.lemansnews.view.MessageReceivedActivity;
 
 public class C2DMMessageReceiver extends BroadcastReceiver {
 

@@ -2,41 +2,46 @@ package fr.clivana.lemansnews.async;
 
 import java.util.Date;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences.Editor;
-import android.os.AsyncTask;
+import com.markupartist.android.widget.PullToRefreshListView;
+
+import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.utils.Formatage;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
 import fr.clivana.lemansnews.view.VuePrincipaleActivity;
+import android.content.Context;
+import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
 
-public class AsyncTaskVuePrincipale extends AsyncTask<Void, Void, Void> {
+
+public class AsyncTaskPullTorefreshVuPrincipale extends
+		AsyncTask<Void, Void, Void> {
 	
 	
 	Context context;
-	ProgressDialog progress;
 	
 	
-	public AsyncTaskVuePrincipale(Context context) {
+	
+	
+	public AsyncTaskPullTorefreshVuPrincipale(Context context) {
 		super();
 		this.context = context;
-		progress = new ProgressDialog(this.context);
-		progress.setMessage("Mise à jour en cours...");
-
+		
 	}
 
 	@Override
 	protected void onPreExecute() {
 		
 		super.onPreExecute();
-		progress.show();
+		
+		
 	}
 	
 	@Override
 	protected Void doInBackground(Void... params) {
-		Reseau.majEvenements(context, 0, 0);
+		
 		Reseau.majArticles(context, "all", 0, 0);
-		Reseau.majCategories(context);
+		
+		//Reseau.majCategories(context);
 		return null;
 	}
 	
@@ -44,12 +49,16 @@ public class AsyncTaskVuePrincipale extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void result) {
 		
 		super.onPostExecute(result);
+		
 		((VuePrincipaleActivity) context).initAdapters();
 		Editor editor=context.getSharedPreferences("prefs", 0).edit();
 		editor.putString("date", Formatage.dateEnTexteAvecHeure(new Date()));
 		editor.commit();
 		((VuePrincipaleActivity) context).setDate();
-		progress.dismiss();
+		((VuePrincipaleActivity) context).refreshVisuActivity();
+		
+		
+		
 	}
 	
 }

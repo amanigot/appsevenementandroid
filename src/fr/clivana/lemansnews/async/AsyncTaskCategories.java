@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 import fr.clivana.lemansnews.dao.CategoriesDAO;
 import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.utils.reseau.Reseau;
-import fr.clivana.lemansnews.vue.CategoriesActivity;
+import fr.clivana.lemansnews.view.CategoriesActivity;
 
 public class AsyncTaskCategories extends AsyncTask<Void, Void, Void> {
 
