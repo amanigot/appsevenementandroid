@@ -21,8 +21,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.25"
         android:gravity="left"
-		android:paddingLeft="40dp"
-		android:background="@drawable/btnalaunexml" />
+android:paddingLeft="40dp"
+android:background="@drawable/btnalaunexml" />
 
     <Button
         android:id="@+id/buttonNews"
@@ -30,8 +30,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.25"
         android:gravity="left"
-		android:paddingLeft="40dp"
-		android:background="@drawable/btnnewsxml"/>
+android:paddingLeft="40dp"
+android:background="@drawable/btnnewsxml"/>
     
     <Button
         android:id="@+id/buttonEvents"
@@ -39,8 +39,8 @@
         android:layout_height="match_parent"
         android:layout_weight="0.25"
         android:gravity="left"
-		android:paddingLeft="40dp"
-		android:background="@drawable/btnleseventsxml"/>
+android:paddingLeft="40dp"
+android:background="@drawable/btnleseventsxml"/>
 
     <Button
         android:id="@+id/buttonFavoris"
@@ -48,7 +48,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.25"
         android:gravity="left"
-		android:paddingLeft="40dp"
+android:paddingLeft="40dp"
         android:background="@drawable/btnfavorisxml" />
 
 </LinearLayout>

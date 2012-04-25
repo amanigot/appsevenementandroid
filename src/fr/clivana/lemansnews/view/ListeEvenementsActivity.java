@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -52,6 +53,11 @@ public class ListeEvenementsActivity extends Activity{
 		boutonActualiser.setOnClickListener(listeEvenementsController);
 		boutonRetour.setOnClickListener(listeEvenementsController);
 		boutonEvenement.setOnClickListener(listeEvenementsController);
+		
+//		Pour changer la taille des boutons dynamiquement
+//		LayoutParams b = (LayoutParams) boutonEvenement.getLayoutParams();
+//		b.width = 400;
+//		boutonEvenement.setLayoutParams(b);
 		
 		titreApplication.setText(listeEvenementsController.initTitre());
 		Typeface tfRoman = Typeface.createFromAsset(getAssets(), "fonts/helveticaroman.otf");
