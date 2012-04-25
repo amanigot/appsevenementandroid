@@ -10,24 +10,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.android.Facebook;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+import com.markupartist.android.widget.PullToRefreshListView;
 
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.GalleryOneByOne;
 import fr.clivana.lemansnews.controller.VuePrincipaleController;
 import fr.clivana.lemansnews.utils.facebook.FacebookFunctions;
-
-//pullToReefresh
-import com.markupartist.android.widget.PullToRefreshListView;
-import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
 public class VuePrincipaleActivity extends Activity{
 
@@ -143,7 +138,6 @@ public class VuePrincipaleActivity extends Activity{
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
 		//Initialisation du layout
 		MenuInflater inflater = new MenuInflater(this);
 		inflater.inflate(R.menu.optionmenu, menu);

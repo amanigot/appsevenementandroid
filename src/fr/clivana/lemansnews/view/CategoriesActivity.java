@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import fr.clivana.lemansnews.R;
-import fr.clivana.lemansnews.async.AsyncTaskCategories;
 import fr.clivana.lemansnews.controller.CategoriesController;
 
 public class CategoriesActivity extends Activity{

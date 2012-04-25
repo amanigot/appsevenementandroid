@@ -57,7 +57,6 @@ public class Reseau {
 	
 // requete web
 	public static InputStream requeteWeb(String url){
-		Log.w("url", url);
 		HttpParams params = new BasicHttpParams();
 		params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 		DefaultHttpClient client = new DefaultHttpClient(params);

@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.utils.database.DatabaseLeMansNews;
 import fr.clivana.lemansnews.utils.database.NomsSQL;
@@ -173,7 +172,6 @@ public class CategoriesDAO {
 			categorie.setCount(newsDAO.countArticlesWithMotsclefsFromDate(categorie.getNom(), categorie.getDateConsult()));
 			updateCategorie(categorie);
 		}
-		Log.w("countCategorie", categorie.getCount()+" "+categorie.getNom());
 	}
 	
 // conversion du cursor en liste d'articles

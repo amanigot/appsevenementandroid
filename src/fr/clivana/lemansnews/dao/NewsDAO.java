@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import fr.clivana.lemansnews.entity.Article;
 import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.utils.Params;
@@ -110,7 +109,7 @@ public class NewsDAO {
 				NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " >= " + date, 
 				null, null, null, 
                 NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " DESC", 
-				Params.QTE_MAX_ARTICLES+"");
+				null);
 		if (c.getCount() == 0){
 			close();
 			return 0;
@@ -139,7 +138,6 @@ public class NewsDAO {
 		if (date == null){
 			date = "00000000000000";
 		}
-		Log.w("date", date);
 		open();
 		Cursor c;
 		if (motClef.equals("all")){
@@ -151,7 +149,7 @@ public class NewsDAO {
 					NomsSQL.COLONNE_ARTICLE_MOTSCLEFS + " LIKE '%" + motClef + "%' AND "
 						+ NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " >= " + date, 
 					null, null, null, NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " DESC", 
-					Params.QTE_MAX_ARTICLES + "");
+					null);
 			if (c.getCount() == 0){
 				close();
 				return 0;

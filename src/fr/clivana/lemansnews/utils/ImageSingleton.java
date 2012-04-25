@@ -3,11 +3,9 @@ package fr.clivana.lemansnews.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.clivana.lemansnews.utils.reseau.Reseau;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
+import fr.clivana.lemansnews.utils.reseau.Reseau;
 
 public class ImageSingleton {
 
