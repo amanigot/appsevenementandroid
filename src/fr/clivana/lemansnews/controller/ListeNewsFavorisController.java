@@ -2,19 +2,18 @@ package fr.clivana.lemansnews.controller;
 
 import java.util.List;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
-import fr.clivana.lemansnews.dao.NewsDAO;
-import fr.clivana.lemansnews.entity.Article;
-import fr.clivana.lemansnews.view.DetailNewsActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
+import fr.clivana.lemansnews.dao.NewsDAO;
+import fr.clivana.lemansnews.entity.Article;
+import fr.clivana.lemansnews.view.DetailNewsActivity;
 
 public class ListeNewsFavorisController implements OnItemClickListener {
 

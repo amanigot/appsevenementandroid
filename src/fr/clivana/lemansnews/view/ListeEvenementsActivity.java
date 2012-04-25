@@ -1,17 +1,17 @@
 package fr.clivana.lemansnews.view;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
-import fr.clivana.lemansnews.R;
-import fr.clivana.lemansnews.controller.ListeEvenementsController;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
+import fr.clivana.lemansnews.R;
+import fr.clivana.lemansnews.controller.ListeEvenementsController;
 
 public class ListeEvenementsActivity extends Activity{
 	

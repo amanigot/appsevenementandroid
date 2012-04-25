@@ -15,6 +15,7 @@ public class AsyncTaskVuePrincipale extends AsyncTask<Void, Void, Void> {
 	
 	Context context;
 	ProgressDialog progress;
+	private Date dateMAJ;
 	
 	
 	public AsyncTaskVuePrincipale(Context context) {
@@ -27,6 +28,7 @@ public class AsyncTaskVuePrincipale extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected void onPreExecute() {
+		dateMAJ = new Date();
 		
 		super.onPreExecute();
 		progress.show();
@@ -35,8 +37,9 @@ public class AsyncTaskVuePrincipale extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 		Reseau.majEvenements(context, 0, 0);
-		Reseau.majArticles(context, "all", 0, 0);
+//		Reseau.majArticles(context, "all", 0, 0); //recuperé avec les categories
 		Reseau.majCategories(context);
+		Reseau.synchroSuppression(context);
 		return null;
 	}
 	
@@ -46,7 +49,9 @@ public class AsyncTaskVuePrincipale extends AsyncTask<Void, Void, Void> {
 		super.onPostExecute(result);
 		((VuePrincipaleActivity) context).initAdapters();
 		Editor editor=context.getSharedPreferences("prefs", 0).edit();
-		editor.putString("date", Formatage.dateEnTexteAvecHeure(new Date()));
+		editor.putString("date", Formatage.dateEnTexteAvecHeure(dateMAJ));
+		editor.putString("datePlay", Formatage.datePourPlay(dateMAJ));
+		editor.putString("dateGlobalPlay", Formatage.datePourPlay(dateMAJ));
 		editor.commit();
 		((VuePrincipaleActivity) context).setDate();
 		progress.dismiss();

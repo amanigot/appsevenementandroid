@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.util.Log;
 import android.widget.Toast;
 import fr.clivana.lemansnews.async.AsyncTaskAddCategorie;
 import fr.clivana.lemansnews.dao.CategoriesDAO;

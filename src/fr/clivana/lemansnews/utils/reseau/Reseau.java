@@ -3,7 +3,6 @@ package fr.clivana.lemansnews.utils.reseau;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -14,13 +13,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
 
-import fr.clivana.lemansnews.dao.CategoriesDAO;
-import fr.clivana.lemansnews.dao.EventsDAO;
-import fr.clivana.lemansnews.dao.NewsDAO;
-import fr.clivana.lemansnews.entity.Categorie;
-import fr.clivana.lemansnews.utils.Formatage;
-import fr.clivana.lemansnews.utils.Params;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,14 +20,24 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import fr.clivana.lemansnews.dao.CategoriesDAO;
+import fr.clivana.lemansnews.dao.EventsDAO;
+import fr.clivana.lemansnews.dao.NewsDAO;
+import fr.clivana.lemansnews.entity.Categorie;
+import fr.clivana.lemansnews.entity.SuppressionMobile;
+import fr.clivana.lemansnews.utils.Formatage;
+import fr.clivana.lemansnews.utils.Params;
 
 public class Reseau {
 
-	private final static String URL_LIST_NEWS = "/m/news/list/"; // /m/news/list/{motClef}/{numPage}/qte
-	private final static String URL_LIST_EVENTS = "/m/events/list/all/"; // /m/events/list/{motClef}/{numPage}/qte
+//	private final static String URL_LIST_NEWS = "/m/news/list/"; // /m/news/list/{motClef}/{numPage}/qte
+//	private final static String URL_LIST_EVENTS = "/m/events/list/all/"; // /m/events/list/{motClef}/{numPage}/qte
 	private final static String URL_LIST_CATEGORIES = "/m/categories/list"; // pas de parametres
 	private final static String URL_COUNT_CATEGORIES = "/m/categories/count/";// /m/categories/count/{nom}/{date}
 	public final static String URL_IMAGES = "/data/images/"; // /data/images/{nom}
+	private final static String URL_SYNCHRO_SUPPRESSION = "/m/listDelete/";// /m/listDelete/{date} 
+	private final static String URL_MAJ_NEWS = "/m/news/synchro/"; // /m/news/synchro/{motClef}/{date} 
+	private final static String URL_MAJ_EVENTS = "/m/events/synchro/"; // /m/events/synchro/{motClef}/{date}  
 	
 // verification du reseau
 	public static boolean verifReseau(Context context) {
@@ -89,15 +91,17 @@ public class Reseau {
 		if (numPage == 0){
 			numPage = 1;
 		}
-		String url = Params.BASE_SERVEUR + URL_LIST_NEWS + Formatage.suppressionEspace(motClef) + "/" + numPage + "/" + quantite;
+		String dateMaj = context.getSharedPreferences("prefs", 0).getString("datePlay", "20000101010101");
+//		String url = Params.BASE_SERVEUR + URL_LIST_NEWS + Formatage.suppressionEspace(motClef) + "/" + numPage + "/" + quantite;
+		String url = Params.BASE_SERVEUR + URL_MAJ_NEWS + Formatage.suppressionEspace(motClef) + "/" + dateMaj;
 		DeSerializer<ListArticles> deserialize = new DeSerializer<ListArticles>();
 		ListArticles listArticle = new ListArticles();
 		listArticle = deserialize.deJson(requeteWeb(url),listArticle);
 		if (listArticle != null && listArticle.size() != 0){
 			NewsDAO newsDao = new NewsDAO(context);
 			newsDao.setArticles(listArticle);
-		}else{
-			Log.w("Reseau","liste Articles vide pour : " + motClef + "-" + numPage + "-" + quantite);
+//		}else{
+//			Log.w("Reseau","liste Articles vide pour : " + motClef + "-" + numPage + "-" + quantite);
 		}
 	}
 	
@@ -115,20 +119,23 @@ public class Reseau {
 		if (numPage == 0){
 			numPage = 1;
 		}
-		String url = Params.BASE_SERVEUR + URL_LIST_EVENTS + numPage + "/" + quantite;
+		String dateMaj = context.getSharedPreferences("prefs", 0).getString("dateGlobalPlay", "20000101010101");
+//		String url = Params.BASE_SERVEUR + URL_LIST_EVENTS + numPage + "/" + quantite;
+		String url = Params.BASE_SERVEUR + URL_MAJ_EVENTS + "all/" + dateMaj;
 		DeSerializer<ListEvents> deserialize = new DeSerializer<ListEvents>();
 		ListEvents listEvents = new ListEvents();
 		listEvents = deserialize.deJson(requeteWeb(url),listEvents);
 		if (listEvents != null && listEvents.size() != 0){
 			EventsDAO eventsDao = new EventsDAO(context);
 			eventsDao.setEvents(listEvents);
-		}else{
-			Log.w("Reseau","liste Evenements vide pour : all-" + numPage + "-" + quantite);
+//		}else{
+//			Log.w("Reseau","liste Evenements vide pour : all-" + numPage + "-" + quantite);
 		}
 	}
 	
 // recuperation de toutes les categories
 	public static void majCategories(Context context){
+		majArticles(context, "all", 0, 0);
 		String url = Params.BASE_SERVEUR + URL_LIST_CATEGORIES;
 		DeSerializer<ListCategorie> deserialize = new DeSerializer<ListCategorie>();
 		ListCategorie listCategorie = new ListCategorie();
@@ -139,7 +146,7 @@ public class Reseau {
 		}else{
 			Log.e("Reseau", "la liste des categories n'a pas pu être chargée");
 		}
-		comptageAllCategorie(context);
+//		comptageAllCategorie(context);
 	}
 	
 //récuperation d'une categorie avec son comptage
@@ -162,17 +169,44 @@ public class Reseau {
 		}
 	}
 	
-	private static void comptageAllCategorie(Context context){
-		CategoriesDAO dao = new CategoriesDAO(context);
-		List<Categorie> categories = dao.getSelectedCategories();
-		Iterator<Categorie> iter = categories.iterator();
-		Categorie categorie;
-		while (iter.hasNext()){
-			categorie = iter.next();
-			countCategorie(context, categorie.getNom(), categorie.getDateConsult());
-		}
-	}
+//	private static void comptageAllCategorie(Context context){
+//		CategoriesDAO dao = new CategoriesDAO(context);
+//		List<Categorie> categories = dao.getSelectedCategories();
+//		Iterator<Categorie> iter = categories.iterator();
+//		Categorie categorie;
+//		while (iter.hasNext()){
+//			categorie = iter.next();
+//			countCategorie(context, categorie.getNom(), categorie.getDateConsult());
+//		}
+//	}
 	public static Bitmap chargementImage(String nom){
 		return BitmapFactory.decodeStream(requeteWeb(Params.BASE_SERVEUR + URL_IMAGES + nom));
+	}
+	
+	public static void synchroSuppression(Context context){
+		String dateMaj = context.getSharedPreferences("prefs", 0).getString("dateGlobalPlay", "20000101010101");
+		String url = Params.BASE_SERVEUR + URL_SYNCHRO_SUPPRESSION + dateMaj;
+		DeSerializer<ListSuppressions> deserialize = new DeSerializer<ListSuppressions>();
+		ListSuppressions suppressions = new ListSuppressions();
+		suppressions = deserialize.deJson(requeteWeb(url), suppressions);
+		if (suppressions != null && suppressions.size() != 0){
+			Iterator<SuppressionMobile> iter = suppressions.iterator();
+			SuppressionMobile suppression;
+			CategoriesDAO catDAO = new CategoriesDAO(context);
+			EventsDAO eventDAO = new EventsDAO(context);
+			NewsDAO newsDAO = new NewsDAO(context);
+			while(iter.hasNext()){
+				suppression = iter.next();
+				if(suppression.getTypeObjet().equals("Categorie")){
+					catDAO.deleteCategorie(suppression.getIdObjet());
+				}
+				if(suppression.getTypeObjet().equals("Evenement")){
+					eventDAO.deleteEvent(suppression.getIdObjet());
+				}
+				if(suppression.getTypeObjet().equals("Article")){
+					newsDAO.deleteNews(suppression.getIdObjet());
+				}
+			}
+		}
 	}
 }

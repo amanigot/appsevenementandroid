@@ -1,7 +1,6 @@
 package fr.clivana.lemansnews.async;
 
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.widget.ImageView;
 import fr.clivana.lemansnews.utils.ImageSingleton;
 

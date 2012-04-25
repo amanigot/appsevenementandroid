@@ -51,6 +51,15 @@ public class NewsDAO {
 		close();
 		return del;
 	}
+	public void deleteNews(long id){
+		open();
+		dbClivana.delete(
+				NomsSQL.TABLE_ARTICLE, 
+				NomsSQL.COLONNE_ARTICLE_ID + " = " + id, 
+				null);
+		close();
+		
+	}
 	
 // update un article
 	public boolean updateNews(Article article){
@@ -92,6 +101,22 @@ public class NewsDAO {
 				Params.QTE_MAX_ARTICLES+"");
 		return cursorToArticleTab(c);
 	}
+	public int countAllArticlesFromDate(String date){
+		open();
+		Cursor c = dbClivana.query(
+				NomsSQL.TABLE_ARTICLE, 
+				null,
+				NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " >= " + date, 
+				null, null, null, 
+                NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " DESC", 
+				null);
+		if (c.getCount() == 0){
+			close();
+			return 0;
+		}else{
+			return cursorToArticleTab(c).size();
+		}
+	}
 	
 // récuperation d'un liste d'article selon son mot clé, triée par date (décroissante) et limitée à Params.QTE_MAX_ARTICLES articles
 	public List<Article> getArticlesWithMotsclefs(String motClef){
@@ -109,7 +134,30 @@ public class NewsDAO {
 			return cursorToArticleTab(c);
 		}
 	}
-	
+	public int countArticlesWithMotsclefsFromDate(String motClef, String date){
+		if (date == null){
+			date = "00000000000000";
+		}
+		open();
+		Cursor c;
+		if (motClef.equals("all")){
+			return countAllArticlesFromDate(date);
+		}else{
+			c = dbClivana.query(
+					NomsSQL.TABLE_ARTICLE, 
+					null, 
+					NomsSQL.COLONNE_ARTICLE_MOTSCLEFS + " LIKE '%" + motClef + "%' AND "
+						+ NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " >= " + date, 
+					null, null, null, NomsSQL.COLONNE_ARTICLE_DATEPARUTION + " DESC", 
+					null);
+			if (c.getCount() == 0){
+				close();
+				return 0;
+			}else{
+				return cursorToArticleTab(c).size();
+			}
+		}
+	}
 // retourne la liste d'article selon le mot clé de la catégorie
 	public List<Article> getArticlesFromCategorie(Categorie categorie){
 		return getArticlesWithMotsclefs(categorie.getNom());
