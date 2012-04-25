@@ -57,12 +57,18 @@ public class DetailNewsActivity extends Activity{
         imageNews=(ImageView)findViewById(R.id.imageViewNewsEvents);
         detailNews=(WebView)findViewById(R.id.descriptionNews);
         partager=(ImageView)findViewById(R.id.imageViewPartager);
+        
+        
+        //Bouton en bas
         boutonRetour=(Button)findViewById(R.id.buttonRetour);
+        
         boutonNews=(Button)findViewById(R.id.buttonNews);
 		boutonEvenement=(Button)findViewById(R.id.buttonEvents);
 		boutonALaUne=(Button)findViewById(R.id.buttonALaUne);
 		boutonFavoris = (Button)findViewById(R.id.buttonFavoris);
 		boutonInfo=(Button)findViewById(R.id.buttonInfo);
+		
+		//bouton en haut
 		boutonActualiser=(Button)findViewById(R.id.buttonActualiser);
 		
         detailNewsController.setImage(imageNews);
