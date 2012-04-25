@@ -53,6 +53,15 @@ public class EventsDAO {
 		close();
 		return del;
 	}
+	public void deleteEvent(long id){
+		open();
+		dbClivana.delete(
+				NomsSQL.TABLE_EVENEMENT, 
+				NomsSQL.COLONNE_EVENEMENT_ID + " = " + id, 
+				null);
+		close();
+		
+	}
 	
 // update
 	public boolean updateEvent(Evenement event){

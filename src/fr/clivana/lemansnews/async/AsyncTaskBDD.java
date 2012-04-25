@@ -18,6 +18,7 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 	private Context context;
 	private TextView loading;
 	private ProgressBar progression;
+	private Date dateMAJ;
 	
 	public AsyncTaskBDD(Context context, TextView load, ProgressBar progress) {
 		super();
@@ -29,6 +30,7 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 	@Override
 	protected void onPreExecute() {
 		progression.setIndeterminate(true);
+		dateMAJ = new Date();
 		//progression.startAnimation( AnimationUtils.loadAnimation(context, R.anim.rotateindefinitely));;
 	}
 	
@@ -38,6 +40,7 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 		Reseau.majEvenements(context, 0, 0);
 		publishProgress("Chargement des actualités..."); //inscrit sur la textview chargement des actus
 		Reseau.majCategories(context);
+		Reseau.synchroSuppression(context);
 		return null;
 	}
 	
@@ -52,7 +55,9 @@ public class AsyncTaskBDD extends AsyncTask<Void, String, Void>{
 	protected void onPostExecute(Void params){
 
 		Editor editor=context.getSharedPreferences("prefs", 0).edit();
-		editor.putString("date", Formatage.dateEnTexteAvecHeure(new Date()));
+		editor.putString("date", Formatage.dateEnTexteAvecHeure(dateMAJ));
+		editor.putString("datePlay", Formatage.datePourPlay(dateMAJ));
+		editor.putString("dateGlobalPlay", Formatage.datePourPlay(dateMAJ));
 		editor.putBoolean("newuser", false);
 		editor.commit();
 		

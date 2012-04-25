@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import fr.clivana.lemansnews.entity.Categorie;
 import fr.clivana.lemansnews.utils.database.DatabaseLeMansNews;
 import fr.clivana.lemansnews.utils.database.NomsSQL;
@@ -16,11 +17,13 @@ public class CategoriesDAO {
 	
 	private SQLiteDatabase dbClivana;
 	private DatabaseLeMansNews dbClivanaHelper;
+	private Context context;
 	
 // constructeur
 	public CategoriesDAO(Context context) {
 		super();
-		dbClivanaHelper = new DatabaseLeMansNews(context, NomsSQL.BASE_NOM, null, NomsSQL.BASE_VERSION);
+		this.context = context;
+		dbClivanaHelper = new DatabaseLeMansNews(this.context, NomsSQL.BASE_NOM, null, NomsSQL.BASE_VERSION);
 	}
 	
 //open close
@@ -52,6 +55,14 @@ public class CategoriesDAO {
 				null) > 0;
 		close();
 		return del;
+	}
+	public void deleteCategorie(long id){
+		open();
+		dbClivana.delete(
+				NomsSQL.TABLE_CATEGORIE, 
+				NomsSQL.COLONNE_CATEGORIE_ID + " = " + id, 
+				null);
+		close();
 	}
 	
 // update un article
@@ -152,12 +163,17 @@ public class CategoriesDAO {
 	public void setCategorie(Categorie categorie){
 		Categorie oldCategorie = getCategorie(categorie.getId());
 		if (oldCategorie == null){
+			NewsDAO newsDAO = new NewsDAO(context);
+			categorie.setCount(newsDAO.countArticlesWithMotsclefsFromDate(categorie.getNom(), categorie.getDateConsult()));
 			insertCategorie(categorie);
 		}else{
 			categorie.setSelected(oldCategorie.isSelected());
 			categorie.setDateConsult(oldCategorie.getDateConsult());
+			NewsDAO newsDAO = new NewsDAO(context);
+			categorie.setCount(newsDAO.countArticlesWithMotsclefsFromDate(categorie.getNom(), categorie.getDateConsult()));
 			updateCategorie(categorie);
 		}
+		Log.w("countCategorie", categorie.getCount()+" "+categorie.getNom());
 	}
 	
 // conversion du cursor en liste d'articles
