@@ -3,7 +3,7 @@ package fr.clivana.lemansnews.controller;
 import java.util.List;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
+//import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +30,7 @@ import fr.clivana.lemansnews.view.FavorisActivity;
 import fr.clivana.lemansnews.view.InfoActivity;
 import fr.clivana.lemansnews.view.ListeEvenementsActivity;
 
-public class VuePrincipaleController implements OnClickListener, OnItemClickListener, OnRefreshListener{
+public class VuePrincipaleController implements OnClickListener, OnItemClickListener{
 
 	Context ctx;
 	EventsDAO eventsDao;
@@ -145,17 +145,17 @@ public class VuePrincipaleController implements OnClickListener, OnItemClickList
 		}
 	}
 
-	@Override
-	public void onRefresh() {
-		// TODO Auto-generated method stub
-		if(Reseau.verifReseau(ctx)){
-			asyncTaskPullTorefreshVuPrincipale=new AsyncTaskPullTorefreshVuPrincipale(ctx);
-			asyncTaskPullTorefreshVuPrincipale.execute();
-		}else{
-			Toast.makeText(ctx, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
-		}
-		
-	}
+	//@Override
+//	public void onRefresh() {
+//		// TODO Auto-generated method stub
+//		if(Reseau.verifReseau(ctx)){
+//			asyncTaskPullTorefreshVuPrincipale=new AsyncTaskPullTorefreshVuPrincipale(ctx);
+//			asyncTaskPullTorefreshVuPrincipale.execute();
+//		}else{
+//			Toast.makeText(ctx, "Problème de connexion réseau. Actualisation impossible.", Toast.LENGTH_SHORT).show();
+//		}
+//		
+//	}
 	
 	
 }

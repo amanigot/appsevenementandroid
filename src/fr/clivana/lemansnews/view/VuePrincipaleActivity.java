@@ -10,14 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.facebook.android.Facebook;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import com.markupartist.android.widget.PullToRefreshListView;
+//import com.markupartist.android.widget.PullToRefreshListView;
 
 import fr.clivana.lemansnews.R;
 import fr.clivana.lemansnews.controller.GalleryOneByOne;
@@ -38,7 +35,8 @@ public class VuePrincipaleActivity extends Activity{
 	TextView derniereMaj;	
 	//Lien de la gallerie en haut et au milieu
 	GalleryOneByOne galleryEvents;
-	PullToRefreshListView pullToRefreshListView;
+	//PullToRefreshListView pullToRefreshListView;
+    ListView listview;
 	//Les boutons de la vue Principale
 	Button boutonALaUne;
 	Button boutonNews;
@@ -79,7 +77,8 @@ public class VuePrincipaleActivity extends Activity{
 		titreActualite = (TextView)findViewById(R.id.titreActualite);
 		titreSuite = (TextView)findViewById(R.id.titreActualiteSuite);
 		derniereMaj = (TextView)findViewById(R.id.textViewDateMAJ);
-		pullToRefreshListView = (PullToRefreshListView)findViewById(R.id.pullToRefreshListView);
+		//pullToRefreshListView = (PullToRefreshListView)findViewById(R.id.pullToRefreshListView);
+        listview = (ListView)findViewById(R.id.pullToRefreshListView);
 		boutonALaUne = (Button)findViewById(R.id.buttonALaUne);
 		boutonNews = (Button)findViewById(R.id.buttonNews);
 		boutonEvents = (Button)findViewById(R.id.buttonEvents);
@@ -113,11 +112,11 @@ public class VuePrincipaleActivity extends Activity{
         
         //Ajout des évenements sur la gallerie
         galleryEvents.setOnItemClickListener(vuePrincipaleController);
-        pullToRefreshListView.setOnItemClickListener(vuePrincipaleController);
+        listview.setOnItemClickListener(vuePrincipaleController);
         
         //Ajout de l'événements du pull to refresh
         
-        pullToRefreshListView.setOnRefreshListener(vuePrincipaleController);
+        //pullToRefreshListView.setOnRefreshListener(vuePrincipaleController);
         
         
         
@@ -133,7 +132,7 @@ public class VuePrincipaleActivity extends Activity{
 		
 		//Envoie de l'evenements issue de la gallerie de la vue principale
 		galleryEvents.setAdapter(vuePrincipaleController.initGalleryAdapter());
-		pullToRefreshListView.setAdapter(vuePrincipaleController.initNewsAdapter());
+        listview.setAdapter(vuePrincipaleController.initNewsAdapter());
 	}
 	
 	@Override
@@ -197,9 +196,9 @@ public class VuePrincipaleActivity extends Activity{
 
 	}
 	//Méthode pour rafraichir le pulltoRefresh au niveau visuel
-	public void refreshVisuActivity (){
-		
-		pullToRefreshListView.onRefreshComplete();
-		
-	}
+//	public void refreshVisuActivity (){
+//
+//		pullToRefreshListView.onRefreshComplete();
+//
+//	}
 }

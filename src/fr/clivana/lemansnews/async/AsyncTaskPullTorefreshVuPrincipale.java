@@ -53,7 +53,7 @@ public class AsyncTaskPullTorefreshVuPrincipale extends
 		editor.putString("datePlay", Formatage.datePourPlay(dateMAJ));
 		editor.commit();
 		((VuePrincipaleActivity) context).setDate();
-		((VuePrincipaleActivity) context).refreshVisuActivity();
+		//((VuePrincipaleActivity) context).refreshVisuActivity();
 		
 		
 		
